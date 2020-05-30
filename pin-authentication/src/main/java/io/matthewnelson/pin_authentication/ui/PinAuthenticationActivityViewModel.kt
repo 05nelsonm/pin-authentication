@@ -53,10 +53,10 @@ class PinAuthenticationActivityViewModel @Inject constructor(
             }
         }
 
-        fun clear() {
+        fun clear(clearPinEntryCompare: Boolean = true) {
             pin = ""
             paViewData.setPinLength(0)
-            if (isPinEntryCompareSet() && pinEntryCompare.isNotEmpty()) {
+            if (clearPinEntryCompare && isPinEntryCompareSet() && pinEntryCompare.isNotEmpty()) {
                 pinEntryCompare = ""
             }
         }
@@ -207,9 +207,9 @@ class PinAuthenticationActivityViewModel @Inject constructor(
                 paViewData.setPinEntryState(PAPinEntryState.IDLE)
             } else {
                 paActivityAP.showToast(paViewData.getPinDoesNotMatchMessage(), paViewColors.getTextColor())
+                pinEntry.clear(clearPinEntryCompare = false)
                 pinHintContainerShakeAnimation()
             }
-            pinEntry.clear()
         }
     }
 
