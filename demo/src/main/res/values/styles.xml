@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+    </style>
+
+    <style name="OnApplicationStartTheme" parent="AppTheme">
+        <item name="android:colorBackground">@color/primaryColor</item>
+    </style>
+
+    <style name="PostInitialLoginTheme" parent="AppTheme">
+        <item name="android:colorBackground">@color/PostInitialLoginBackgroundColor</item>
+    </style>
+
+    <!-- Change background color here, _not_ in the Theme -->
+    <item name="PostInitialLoginBackgroundColor" type="color">@color/pa_white</item>
+
+</resources>

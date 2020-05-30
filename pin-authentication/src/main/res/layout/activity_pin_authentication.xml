@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="io.matthewnelson.pin_authentication.ui.PinAuthenticationActivityViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_constraint_pin_authentication_container"
+        paSetBackgroundColor="@{viewModel.getScreenBackgroundColor()}"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@color/pa_deep_sea_blue"
+        tools:context=".ui.PinAuthenticationActivity">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pa_pin_help_info_height"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlHardcoded,UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_reset_help"
+                paGoneUnless="@{!viewModel.getShowSetPinHelpInfo().isEmpty()}"
+                paSetTint="@{viewModel.getPinResetInfoImageColor()}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/pa_layout_margins"
+                android:src="@drawable/ic_dialpad_white_40dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <TextView
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@{viewModel.getShowSetPinHelpInfo()}"
+                android:textSize="@dimen/pa_text_size"
+                tools:text="minimum: 4\nmaximum: 14"
+                tools:textColor="@color/pa_white" />
+
+        </LinearLayout>
+
+        <TextView
+            paSetTextColor="@{viewModel.getTextColor()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/pa_layout_margins"
+            android:text="@{viewModel.getHeaderText()}"
+            android:textSize="@dimen/pa_header_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/layout_linear_pin_authentication_pin_hint"
+            app:layout_constraintEnd_toEndOf="@id/layout_grid_pin_authentication_upper"
+            app:layout_constraintStart_toStartOf="@id/layout_grid_pin_authentication_upper"
+            tools:text="Enter PIN"
+            tools:textColor="@color/pa_white" />
+
+        <LinearLayout
+            android:id="@+id/layout_linear_pin_authentication_pin_hint"
+            paSetBackgroundTint="@{viewModel.getPinHintContainerColor()}"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/pa_pin_hint_container_height"
+            android:layout_margin="@dimen/pa_layout_margins"
+            android:background="@drawable/rounded_rectangle"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/pa_pin_hint_container_padding"
+            app:layout_constraintBottom_toTopOf="@+id/layout_grid_pin_authentication_upper"
+            app:layout_constraintEnd_toEndOf="@id/layout_grid_pin_authentication_upper"
+            app:layout_constraintStart_toStartOf="@+id/layout_grid_pin_authentication_upper"
+            tools:backgroundTint="@color/pa_sea_blue">
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot1"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 0}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot2"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 1}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot3"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 2}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot4"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 3}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot5"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 4}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot6"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 5}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot7"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 6}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot8"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 7}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot9"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 8}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot10"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 9}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot11"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 10}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot12"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 11}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot13"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 12}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+            <ImageView
+                android:id="@+id/image_view_pin_authentication_dot14"
+                style="@style/PinHintImageView"
+                paGoneUnless="@{viewModel.getPinLength() > 13}"
+                paSetTint="@{viewModel.getPinHintImageColor()}"
+                android:src="@drawable/ic_fiber_manual_record_white_24dp"
+                tools:ignore="ContentDescription"
+                tools:tint="@color/pa_white" />
+
+        </LinearLayout>
+
+        <GridLayout
+            android:id="@+id/layout_grid_pin_authentication_upper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/button_pin_authentication_num1"
+                style="@style/PinPadButton"
+                paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:background="@drawable/rounded_rectangle"
+                android:onClick="@{() -> viewModel.onNumPress(viewModel.getPinPadIntegers()[1])}"
+                android:text="@{viewModel.getPinPadIntegers()[1].toString()}"
+                tools:backgroundTint="@color/pa_sea_blue"
+                tools:textColor="@color/pa_white" />
+
+            <Button
+                android:id="@+id/button_pin_authentication_num2"
+                style="@style/PinPadButton"
+                paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:background="@drawable/rounded_rectangle"
+                android:onClick="@{() -> viewModel.onNumPress(viewModel.getPinPadIntegers()[2])}"
+                android:text="@{viewModel.getPinPadIntegers()[2].toString()}"
+                tools:backgroundTint="@color/pa_sea_blue"
+                tools:textColor="@color/pa_white" />
+
+            <Button
+                android:id="@+id/button_pin_authentication_num3"
+                style="@style/PinPadButton"
+                paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:background="@drawable/rounded_rectangle"
+                android:onClick="@{() -> viewModel.onNumPress(viewModel.getPinPadIntegers()[3])}"
+                android:text="@{viewModel.getPinPadIntegers()[3].toString()}"
+                tools:backgroundTint="@color/pa_sea_blue"
+                tools:textColor="@color/pa_white" />
+
+            <Button
+                android:id="@+id/button_pin_authentication_num4"
+                style="@style/PinPadButton"
+                paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:background="@drawable/rounded_rectangle"
+                android:onClick="@{() -> viewModel.onNumPress(viewModel.getPinPadIntegers()[4])}"
+                android:text="@{viewModel.getPinPadIntegers()[4].toString()}"
+                tools:backgroundTint="@color/pa_sea_blue"
+                tools:textColor="@color/pa_white" />
+
+            <Button
+                android:id="@+id/button_pin_authentication_num5"
+                style="@style/PinPadButton"
+                paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:background="@drawable/rounded_rectangle"
+                android:onClick="@{() -> viewModel.onNumPress(viewModel.getPinPadIntegers()[5])}"
+                android:text="@{viewModel.getPinPadIntegers()[5].toString()}"
+                tools:backgroundTint="@color/pa_sea_blue"
+                tools:textColor="@color/pa_white" />
+
+            <Button
+                android:id="@+id/button_pin_authentication_num6"
+                style="@style/PinPadButton"
+                paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:background="@drawable/rounded_rectangle"
+                android:onClick="@{() -> viewModel.onNumPress(viewModel.getPinPadIntegers()[6])}"
+                android:text="@{viewModel.getPinPadIntegers()[6].toString()}"
+                tools:backgroundTint="@color/pa_sea_blue"
+                tools:textColor="@color/pa_white" />
+
+            <Button
+                android:id="@+id/button_pin_authentication_num7"
+                style="@style/PinPadButton"
+                paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:background="@drawable/rounded_rectangle"
+                android:onClick="@{() -> viewModel.onNumPress(viewModel.getPinPadIntegers()[7])}"
+                android:text="@{viewModel.getPinPadIntegers()[7].toString()}"
+                tools:backgroundTint="@color/pa_sea_blue"
+                tools:textColor="@color/pa_white" />
+
+            <Button
+                android:id="@+id/button_pin_authentication_num8"
+                style="@style/PinPadButton"
+                paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:background="@drawable/rounded_rectangle"
+                android:onClick="@{() -> viewModel.onNumPress(viewModel.getPinPadIntegers()[8])}"
+                android:text="@{viewModel.getPinPadIntegers()[8].toString()}"
+                tools:backgroundTint="@color/pa_sea_blue"
+                tools:textColor="@color/pa_white" />
+
+            <Button
+                android:id="@+id/button_pin_authentication_num9"
+                style="@style/PinPadButton"
+                paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:background="@drawable/rounded_rectangle"
+                android:onClick="@{() -> viewModel.onNumPress(viewModel.getPinPadIntegers()[9])}"
+                android:text="@{viewModel.getPinPadIntegers()[9].toString()}"
+                tools:backgroundTint="@color/pa_sea_blue"
+                tools:textColor="@color/pa_white" />
+
+        </GridLayout>
+
+        <GridLayout
+            android:id="@+id/layout_grid_pin_authentication_lower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/layout_grid_pin_authentication_upper"
+            app:layout_constraintStart_toStartOf="@id/layout_grid_pin_authentication_upper"
+            app:layout_constraintTop_toBottomOf="@+id/layout_grid_pin_authentication_upper">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/button_pin_authentication_backspace"
+                    style="@style/PinPadButton"
+                    paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                    paSetTint="@{viewModel.getBackspaceButtonImageColor()}"
+                    android:background="@drawable/rounded_rectangle"
+                    android:onClick="@{() -> viewModel.onBackspacePress()}"
+                    android:paddingEnd="8dp"
+                    android:src="@drawable/ic_backspace_white_32dp"
+                    tools:backgroundTint="@color/pa_sea_blue"
+                    tools:ignore="ContentDescription,RtlSymmetry"
+                    tools:textColor="@color/pa_white"
+                    tools:tint="@color/pa_white" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_pin_authentication_num0"
+                style="@style/PinPadButton"
+                paSetBackgroundTint="@{viewModel.getPinPadButtonBackgroundColor()}"
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:background="@drawable/rounded_rectangle"
+                android:onClick="@{() -> viewModel.onNumPress(viewModel.getPinPadIntegers()[0])}"
+                android:text="@{viewModel.getPinPadIntegers()[0].toString()}"
+                tools:backgroundTint="@color/pa_sea_blue"
+                tools:textColor="@color/pa_white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/button_pin_authentication_confirm"
+                    style="@style/PinPadButton"
+                    paInvisibleUnless="@{viewModel.getPinLength() > viewModel.getMinPinLength() - 1}"
+                    paSetBackgroundTint="@{viewModel.getConfirmButtonBackgroundColor()}"
+                    paSetTint="@{viewModel.getConfirmButtonImageColor()}"
+                    android:background="@drawable/rounded_rectangle"
+                    android:onClick="@{() -> viewModel.onConfirmPress()}"
+                    android:src="@drawable/ic_check_white_h48dp_w32dp"
+                    tools:backgroundTint="@color/pa_super_green"
+                    tools:ignore="ContentDescription"
+                    tools:textColor="@color/pa_white"
+                    tools:tint="@color/pa_white" />
+
+            </LinearLayout>
+
+        </GridLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_linear_pin_authentication_wrong_pin_lockout"
+            paGoneUnless="@{!viewModel.getWrongPinLockoutTime().isEmpty()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_grid_pin_authentication_lower">
+
+            <TextView
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pa_lockout_time_remaining"
+                android:textSize="@dimen/pa_text_size"
+                tools:textColor="@color/pa_white" />
+
+            <TextView
+                paSetTextColor="@{viewModel.getTextColor()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{viewModel.getWrongPinLockoutTime()}"
+                android:textSize="@dimen/pa_text_size"
+                tools:text="15s"
+                tools:textColor="@color/pa_white" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

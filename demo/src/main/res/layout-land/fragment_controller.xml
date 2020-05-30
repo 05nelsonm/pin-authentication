@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/layout_motion_controller"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/controller_scene"
+        tools:background="@color/PostInitialLoginBackgroundColor"
+        tools:context=".ui.ControllerFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_line_controller_land_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_line_controller_land_mid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_line_controller_land_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".75" />
+
+        <Space
+            android:id="@+id/space_controller_divider"
+            android:layout_width="16dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_view_controller_drag_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:contentDescription="@string/description_image_view_drag_handle"
+            android:rotation="90"
+            android:src="@drawable/ic_drag_handle_white_w56dp_h24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/space_controller_divider"
+            app:layout_constraintEnd_toStartOf="@+id/space_controller_divider"
+            app:layout_constraintStart_toEndOf="@+id/space_controller_divider"
+            app:layout_constraintTop_toTopOf="@+id/space_controller_divider" />
+
+        <!-- Width gets set programmatically to match phone width/2 - 24dp -->
+        <ScrollView
+            android:id="@+id/scroll_view_controller_features"
+            android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:fadeScrollbars="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/space_controller_divider"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_view_controller_features"
+                android:textIsSelectable="true"
+                android:textSize="12sp" />
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/layout_linear_controller_interactions"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guide_line_controller_land_right"
+            app:layout_constraintStart_toStartOf="@+id/guide_line_controller_land_left"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button_controller_confirm_pin_ex1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_controller_confirm_pin_example_1"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/button_controller_confirm_pin_ex2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_controller_confirm_pin_example_2"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</layout>

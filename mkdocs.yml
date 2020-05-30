@@ -1,0 +1,76 @@
+extra:
+  pin_authentication:
+    release: '1.0.0-alpha01'
+    next_release: '1.0.0-alpha02'
+  social:
+    - icon: material/earth
+      link: https://matthewnelson.io
+    - icon: material/email
+      link: https://github.com/05nelsonm/contact/blob/master/README.md
+    - icon: material/github
+      link: https://github.com/05nelsonm
+    - icon: material/twitter
+      link: https://twitter.com/05nelsonm_dev
+    - icon: material/linkedin
+      link: https://linkeding.com/in/nelson-matthew
+    - icon: fontawesome/brands/medium
+      link: https://medium.com/@matthewnelson.io
+
+site_name: PinAuthentication
+site_url: https://05nelsonm.github.io/pin-authentication
+repo_name: PinAuthentication
+repo_url: https://github.com/05nelsonm/pin-authentication
+site_description: "An Android library to provide local PIN authentication for your application."
+site_author: Matthew Nelson
+remote_branch: gh-pages
+
+copyright: 'Copyright &copy; 2020 Matthew Nelson'
+
+theme:
+  name: 'material'
+  icon:
+    repo: material/git
+  palette:
+    scheme: 'default'
+    primary: 'blue'
+    accent: 'teal'
+  font: false
+  features:
+    - tabs
+
+markdown_extensions:
+  - smarty
+  - codehilite:
+      guess_lang: false
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - tables
+  - admonition
+
+plugins:
+  - search
+  - markdownextradata: {}
+
+nav:
+  - 'Overview': index.md
+  - 'Get Started': get_started.md
+  - 'Help & Community':
+      - 'Contributing':
+          - 'Releasing': releasing.md
+  - 'PinAuthentication APIs':
+    - 'Builder': pin-authentication/io.matthewnelson.pin_authentication.service/-pin-authentication/-builder/index.md
+    - 'Controller': pin-authentication/io.matthewnelson.pin_authentication.service/-pin-authentication/-controller/index.md
+    - 'Settings': pin-authentication/io.matthewnelson.pin_authentication.service/-pin-authentication/-settings/index.md
+  - 'Change Log': changelog.md

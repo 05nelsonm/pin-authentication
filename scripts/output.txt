@@ -1,0 +1,317 @@
+------ class Controller ------
+
+
+\n//////////// PinAuthentication Data ////////////\n
+
+\n/**
+\n* Clears data associated with [PinAuthentication] from
+\n* SharedPreferences, and EncryptedSharedPreferences.
+\n*
+\n* Would suggest restarting the application afterwards
+\n* to avoid unintended operation.
+\n* */
+\nfun clearPinAuthenticationData()\n\n
+
+\n//////////// Application On-board Process ////////////\n
+
+\n/**
+\n* Declares the on-board process as being complete,
+\n* and if Pin Security is:
+\n*
+\n*   - ENABLED: Immediately prompts the user to set
+\n*            their PIN before continuing.
+\n*
+\n*   **OR**
+\n*
+\n*   - DISABLED: Sets [PAInitialAppLogin.initialApplicationLoginSatisfied]
+\n*             to true.
+\n*
+\n* Declaring the on-board process as completed is saved
+\n* to SharedPreferences such that henceforth,
+\n* [PinAuthentication] will immediately request a
+\n* PIN to login at application start (if pin security
+\n* is enabled).
+\n*
+\n* @see [PAAppLockObserver.hijackApp]
+\n*
+\n* */
+\nfun completeOnBoardProcess()\n\n
+
+\n/**
+\n* Returns TRUE if:
+\n*
+\n*   - You declared that your application has an on-board
+\n*   process via
+\n*   [PinAuthentication.Builder.PABuilder.applicationHasOnBoardProcess]
+\n*   and the on-board process has been marked **complete**.
+\n*
+\n*   **OR**
+\n*
+\n*   - You did **not** declare that your application has an
+\n*   on-board process.
+\n*
+\n* Returns FALSE if:
+\n*
+\n*   - You declared that your application has an on-board
+\n*   process via
+\n*   [PinAuthentication.Builder.PABuilder.applicationHasOnBoardProcess],
+\n*   but the on-board process has **not** been marked complete.
+\n*
+\n* @return Boolean
+\n*
+\n* */
+\nfun hasOnBoardProcessBeenSatisfied()\n\n
+
+\n//////////// Confirm Pin To Proceed ////////////\n
+
+\n/**
+\n* See [registerPinConfirmationToProceedRequestKey] sample code.
+\n*
+\n* @return Boolean
+\n* */
+\nfun isPinSecurityEnabled()\n\n
+
+\n/**
+\n* Register request keys.
+\n* */
+\nfun registerPinConfirmationToProceedRequestKey(
+\n    activity: Activity,
+\n    requestKey: String
+\n)\n\n
+
+\n/**
+\n* Adds a requestKey to [PAConfirmPinToProceed.mapRequestKeys]
+\n* and returns LiveData associated with it which will change
+\n* after calling [Controller.requestPinConfirmationToProceed]
+\n* depending on whether or not the User enters the correct pin.
+\n*
+\n* - TRUE -> Pin was confirmed
+\n* - FALSE -> Pin has not been confirmed
+\n*
+\n* If the [requestKey] is already registered, it will **not**
+\n* overwrite the current value.
+\n*
+\n* @param [activity] Activity **OR**
+\n* @param [fragment] Fragment
+\n* @param [requestKey] String
+\n*
+\n* @return LiveData<![CDATA[<Boolean>]]>?
+\n*
+\n* */
+\nfun registerPinConfirmationToProceedRequestKey(
+\n    fragment: Fragment,
+\n    requestKey: String
+\n)\n\n
+
+\n/**
+\n* To be used after registering the [requestKey] via
+\n* [Controller.registerPinConfirmationToProceedRequestKey].
+\n*
+\n* This will launch [PinAuthenticationActivity] in
+\n* [PAPinEntryState.CONFIRM_PIN] configuration. If the
+\n* [requestKey] is not registered, it does nothing.
+\n*
+\n* @param [requestKey] String
+\n*
+\n* */
+\nfun requestPinConfirmationToProceed(requestKey: String)\n\n
+
+\n/**
+\n* Reset the boolean value associated with the [requestKey]
+\n* to false to proc the observer that is setup on the
+\n* [Controller.registerPinConfirmationToProceedRequestKey]
+\n* method.
+\n*
+\n* If the [requestKey] is not registered or if PinSecurity
+\n* is DISABLED, it does nothing.
+\n*
+\n* @param [requestKey] String
+\n*
+\n* */
+\nfun resetPinConfirmationToProceedRequestKey(requestKey: String)\n\n
+
+\n/**
+\n* Remove registered request key.
+\n* */
+\nfun unregisterPinConfirmationToProceedRequestKey(requestKey: String)\n\n
+
+\n/**
+\n* Removes the requestKey and LiveData values from the Map
+\n* contained in [PAConfirmPinToProceed.mapRequestKeys].
+\n*
+\n* To be implemented in an Activity\'s onDestroy() or a
+\n* Fragments onDestroyView(), **after** the super call.
+\n*
+\n* @see [PAConfirmPinToProceed.unregisterRequestKey]
+\n*
+\n* @param [requestKey] String **OR**
+\n* @param [requestKeys] Array<![CDATA[<String>]]>
+\n*
+\n* */
+\nfun unregisterPinConfirmationToProceedRequestKey(requestKeys: Array<![CDATA[<String>]]>)\n\n
+
+\n//////////// Initial Application Login ////////////\n
+
+\n/**
+\n* Returns a boolean value that will change from
+\n* false to true, and stay true until the
+\n* application is terminated.
+\n*
+\n* This boolean value gets changed when the user
+\n* opens the application and:
+\n*
+\n*   - If pin security is ENABLED and they
+\n*   successfully log in.
+\n*
+\n*   **OR**
+\n*
+\n*   - If pin security was DISABLED and the
+\n*   application on-board process has been
+\n*   satisfied when this method is called for the
+\n*   first time.
+\n*
+\n* Primary use case for this is to hold application
+\n* processes until authentication has been had, for
+\n* example, on your landing Activity/Fragment.
+\n*
+\n* @return LiveData<![CDATA[<Boolean>]]>
+\n*
+\n* */
+\nfun hasInitialAppLoginBeenSatisfied()\n\n
+
+\n/**
+\n* Check if your startup process has previously
+\n* been started.
+\n*
+\n* This is needed so that when observing the
+\n* returned LiveData from
+\n* [Controller.hasInitialAppLoginBeenSatisfied],
+\n* so your startup processes only get executed once.
+\n*
+\n* @see PAInitialAppLogin.hasPostLoginProcessBeenStarted
+\n*
+\n* @return Boolean
+\n*
+\n* */
+\nfun hasPostLoginProcessBeenStarted()\n\n
+
+\n/**
+\n* After [Controller.hasPostLoginProcessBeenStarted]
+\n* returns false and your one-time processes start,
+\n* use this method to set the value to true so that
+\n* your post login processes won\'t be executed again
+\n* if the observer on
+\n* [Controller.hasInitialAppLoginBeenSatisfied] gets
+\n* proc\'d again.
+\n*
+\n* */
+\nfun postLoginProcessStarted()\n\n
+
+
+
+------ class Settings ------
+
+\n//////////// Colors ////////////\n
+
+\n/**
+\n* Will clear currently applied colors and set them back
+\n* to colors defined in the Application onCreate()\'s
+\n* initialization of
+\n* [PinAuthentication.Builder.PABuilder.setCustomColors],
+\n* if they were specified. Otherwise it will fall back to
+\n* [PinAuthentication]\'s default colors.
+\n*
+\n* @see [PAViewColors.resetColorsToApplicationDefaults]
+\n*
+\n* */
+\nfun resetColorsToApplicationDefaults()\n\n
+
+\n/**
+\n* Change the colors of [PinAuthenticationActivity]
+\n* on the fly. These settings get saved to
+\n* [PinAuthentication]\'s SharedPreferences and loaded
+\n* at startup **after** custom colors that may have been
+\n* specified in the Application onCreate()\'s
+\n* [PinAuthentication.Builder.PABuilder.setCustomColors].
+\n*
+\n* @return [Builder.PAColorsBuilder]
+\n*
+\n* */
+\nfun setCustomColors()\n\n
+
+\n//////////// Haptic Feedback ////////////\n
+
+\n/**
+\n* ENABLE/DISABLE haptic feedback on interactions with
+\n* [PinAuthenticationActivity].
+\n*
+\n* @param [enable] Boolean (`true` = ENABLE, `false` = DISABLE)
+\n*
+\n* */
+\nfun enableHapticFeedback(enable: Boolean)\n\n
+
+\n/**
+\n* Checks if haptic feedback is enabled.
+\n*
+\n* @return Boolean
+\n*
+\n* */
+\nfun isHapticFeedbackEnabled()\n\n
+
+\n//////////// PIN Reset ////////////\n
+
+\n/**
+\n* Launches [PinAuthenticationActivity] in
+\n* [PAPinEntryState.RESET_PIN] configuration for
+\n* the user to reset their PIN.
+\n*
+\n* @see [PAAppLockObserver.hijackApp]
+\n*
+\n* */
+\nfun resetPin()\n\n
+
+\n//////////// PIN Security ////////////\n
+
+\n/**
+\n* Starts the process for ENABLING/DISABLING pin security.
+\n*
+\n* Going from:
+\n*
+\n*   - DISABLED -> ENABLED:
+\n*       - Will prompt the user to set a pin.
+\n*   - ENABLED -> DISABLED:
+\n*       - Will prompt the user to confirm their pin.
+\n*
+\n* @see [PAPinSecurity]
+\n*
+\n* @param [enable] Boolean (`true` = ENABLE, `false` = DISABLE)
+\n*
+\n* */
+\nfun enablePinSecurity(enable: Boolean)\n\n
+
+\n/**
+\n* Checks if PIN security is enabled.
+\n*
+\n* @return LiveData<![CDATA[<Boolean>]]>?
+\n*
+\n* */
+\nfun isPinSecurityEnabled()\n\n
+
+\n//////////// Scrambled PIN ////////////\n
+
+\n/**
+\n* ENABLE/DISABLE scrambled pin for [PinAuthenticationActivity]
+\n*
+\n* @param [enable] Boolean (`true` = ENABLE, `false` = DISABLE)
+\n*
+\n* */
+\nfun enableScrambledPin(enable: Boolean)\n\n
+
+\n/**
+\n* Checks if scrambled pin is enabled.
+\n*
+\n* @return Boolean
+\n*
+\n* */
+\nfun isScrambledPinEnabled()\n\n
+

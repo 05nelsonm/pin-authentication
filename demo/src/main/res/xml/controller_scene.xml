@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////// Constraint Sets /////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+
+
+    <!--
+           DragHandle State: IN
+    -->
+    <ConstraintSet android:id="@+id/motion_scene_controller_drag_handle_is_in">
+
+        <Constraint android:id="@+id/space_controller_divider">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_controller_drag_handle">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/space_controller_divider"
+                app:layout_constraintEnd_toEndOf="@id/space_controller_divider"
+                app:layout_constraintStart_toStartOf="@+id/space_controller_divider"
+                app:layout_constraintTop_toTopOf="@+id/space_controller_divider" />
+        </Constraint>
+
+    </ConstraintSet>
+
+
+    <!--
+           DragHandle State: OUT
+    -->
+    <ConstraintSet
+        android:id="@+id/motion_scene_controller_drag_handle_is_out"
+        app:deriveConstraintsFrom="@+id/motion_scene_controller_drag_handle_is_in">
+
+        <Constraint android:id="@+id/space_controller_divider">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_controller_drag_handle">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/space_controller_divider"
+                app:layout_constraintEnd_toEndOf="@id/space_controller_divider"
+                app:layout_constraintStart_toStartOf="@+id/space_controller_divider"
+                app:layout_constraintTop_toTopOf="@+id/space_controller_divider" />
+        </Constraint>
+
+    </ConstraintSet>
+
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////// Transitions /////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+
+
+    <!--
+           DragHandle: IN -> OUT
+    -->
+    <Transition
+        app:constraintSetEnd="@+id/motion_scene_controller_drag_handle_is_out"
+        app:constraintSetStart="@+id/motion_scene_controller_drag_handle_is_in">
+
+        <OnSwipe
+            app:dragDirection="dragDown"
+            app:touchAnchorId="@+id/image_view_controller_drag_handle"
+            app:touchAnchorSide="top"
+            app:touchRegionId="@+id/image_view_controller_drag_handle" />
+
+    </Transition>
+
+</MotionScene>

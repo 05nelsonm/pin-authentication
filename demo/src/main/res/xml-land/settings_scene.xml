@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////// Constraint Sets /////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+
+
+    <!--
+           DragHandle State: IN
+    -->
+    <ConstraintSet android:id="@+id/motion_scene_settings_drag_handle_is_in">
+
+        <Constraint android:id="@+id/space_settings_divider">
+            <Layout
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_settings_drag_handle">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/space_settings_divider"
+                app:layout_constraintEnd_toStartOf="@+id/space_settings_divider"
+                app:layout_constraintStart_toEndOf="@+id/space_settings_divider"
+                app:layout_constraintTop_toTopOf="@+id/space_settings_divider" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_settings_interactions">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guide_line_settings_land_right"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_settings_land_left"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+    </ConstraintSet>
+
+
+    <!--
+           DragHandle State: OUT
+    -->
+    <ConstraintSet
+        android:id="@+id/motion_scene_settings_drag_handle_is_out"
+        app:deriveConstraintsFrom="@+id/motion_scene_settings_drag_handle_is_in">
+
+        <Constraint android:id="@+id/space_settings_divider">
+            <Layout
+                android:layout_width="8dp"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/guide_line_settings_land_mid"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_settings_drag_handle">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/space_settings_divider"
+                app:layout_constraintEnd_toStartOf="@+id/space_settings_divider"
+                app:layout_constraintStart_toEndOf="@+id/space_settings_divider"
+                app:layout_constraintTop_toTopOf="@+id/space_settings_divider" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_settings_interactions">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_settings_land_mid"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+    </ConstraintSet>
+
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////// Transitions /////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+
+
+    <!--
+           DragHandle: IN -> OUT
+    -->
+    <Transition
+        app:constraintSetEnd="@+id/motion_scene_settings_drag_handle_is_out"
+        app:constraintSetStart="@+id/motion_scene_settings_drag_handle_is_in">
+
+        <OnSwipe
+            app:dragDirection="dragRight"
+            app:touchAnchorId="@+id/image_view_settings_drag_handle"
+            app:touchAnchorSide="left"
+            app:touchRegionId="@+id/image_view_settings_drag_handle" />
+
+    </Transition>
+
+</MotionScene>

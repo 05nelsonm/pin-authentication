@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pa_deep_sea_blue">#232533</color>
+    <color name="pa_sea_blue">#313340</color>
+    <color name="pa_super_green">#3EE673</color>
+    <color name="pa_white">#FFFFFF</color>
+    <color name="pa_transparent">#00FFFFFF</color>
+</resources>

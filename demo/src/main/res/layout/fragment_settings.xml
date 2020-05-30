@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/layout_motion_settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/settings_scene"
+        tools:background="@color/PostInitialLoginBackgroundColor"
+        tools:context=".ui.SettingsFragment">
+
+        <Space
+            android:id="@+id/space_settings_divider"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_view_settings_drag_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description_image_view_drag_handle"
+            android:src="@drawable/ic_drag_handle_white_w56dp_h24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/space_settings_divider"
+            app:layout_constraintEnd_toEndOf="@id/space_settings_divider"
+            app:layout_constraintStart_toStartOf="@+id/space_settings_divider"
+            app:layout_constraintTop_toTopOf="@+id/space_settings_divider" />
+
+        <ScrollView
+            android:id="@+id/scroll_view_settings_features"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:fadeScrollbars="false"
+            app:layout_constraintBottom_toTopOf="@+id/space_settings_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_view_settings_features"
+                android:textIsSelectable="true"
+                android:textSize="12sp" />
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/layout_linear_settings_interactions"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/space_settings_divider">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/settings_switch_margins_portrait"
+                android:layout_marginEnd="@dimen/settings_switch_margins_portrait"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/switch_settings_pin_security"
+                    android:textStyle="bold" />
+
+                <Switch
+                    android:id="@+id/switch_settings_pin_security"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    tools:checked="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/settings_switch_margins_portrait"
+                android:layout_marginEnd="@dimen/settings_switch_margins_portrait"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/switch_settings_haptic_feedback"
+                    android:textStyle="bold" />
+
+                <Switch
+                    android:id="@+id/switch_settings_haptic_feedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    tools:checked="true" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/settings_switch_margins_portrait"
+                android:layout_marginEnd="@dimen/settings_switch_margins_portrait"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/switch_settings_scrambled_pin"
+                    android:textStyle="bold" />
+
+                <Switch
+                    android:id="@+id/switch_settings_scrambled_pin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    tools:checked="true" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_settings_pin_reset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button_gray"
+                android:text="@string/button_settings_reset_pin"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/button_settings_set_custom_colors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button_gray"
+                android:text="@string/button_settings_set_custom_colors"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/button_settings_reset_colors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/button_gray"
+                android:text="@string/button_settings_reset_colors"
+                android:textAllCaps="false" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</layout>

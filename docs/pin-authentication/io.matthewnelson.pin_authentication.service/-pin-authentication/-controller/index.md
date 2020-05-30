@@ -1,0 +1,30 @@
+[pin-authentication](../../../index.md) / [io.matthewnelson.pin_authentication.service](../../index.md) / [PinAuthentication](../index.md) / [Controller](./index.md)
+
+# Controller
+
+`class Controller` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L492)
+
+PUBLIC methods to be utilized by the Application that's implementing
+[PinAuthentication](../index.md) to access core features.
+
+### Constructors
+
+| Name | Summary |
+|---|---|
+| [&lt;init&gt;](-init-.md) | PUBLIC methods to be utilized by the Application that's implementing [PinAuthentication](../index.md) to access core features.`Controller()` |
+
+### Functions
+
+| Name | Summary |
+|---|---|
+| [clearPinAuthenticationData](clear-pin-authentication-data.md) | Clears data associated with [PinAuthentication](../index.md) from SharedPreferences, and EncryptedSharedPreferences.`fun clearPinAuthenticationData(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [completeOnBoardProcess](complete-on-board-process.md) | Declares the on-board process as being complete, and if Pin Security is:`fun completeOnBoardProcess(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [hasInitialAppLoginBeenSatisfied](has-initial-app-login-been-satisfied.md) | Returns a boolean value that will change from false to true, and stay true until the application is terminated.`fun hasInitialAppLoginBeenSatisfied(): LiveData<`[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`>` |
+| [hasOnBoardProcessBeenSatisfied](has-on-board-process-been-satisfied.md) | Returns TRUE if:`fun hasOnBoardProcessBeenSatisfied(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [hasPostLoginProcessBeenStarted](has-post-login-process-been-started.md) | Check if your startup process has previously been started.`fun hasPostLoginProcessBeenStarted(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [isPinSecurityEnabled](is-pin-security-enabled.md) | See [registerPinConfirmationToProceedRequestKey](register-pin-confirmation-to-proceed-request-key.md) sample code.`fun isPinSecurityEnabled(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [postLoginProcessStarted](post-login-process-started.md) | After [Controller.hasPostLoginProcessBeenStarted](has-post-login-process-been-started.md) returns false and your one-time processes start, use this method to set the value to true so that your post login processes won't be executed again if the observer on [Controller.hasInitialAppLoginBeenSatisfied](has-initial-app-login-been-satisfied.md) gets proc'd again.`fun postLoginProcessStarted(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [registerPinConfirmationToProceedRequestKey](register-pin-confirmation-to-proceed-request-key.md) | Register request keys.`fun registerPinConfirmationToProceedRequestKey(activity: `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`, requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): LiveData<`[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`>?`<br>Adds a requestKey to [PAConfirmPinToProceed.mapRequestKeys](#) and returns LiveData associated with it which will change after calling [Controller.requestPinConfirmationToProceed](request-pin-confirmation-to-proceed.md) depending on whether or not the User enters the correct pin.`fun registerPinConfirmationToProceedRequestKey(fragment: Fragment, requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): LiveData<`[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`>?` |
+| [requestPinConfirmationToProceed](request-pin-confirmation-to-proceed.md) | To be used after registering the [requestKey](request-pin-confirmation-to-proceed.md#io.matthewnelson.pin_authentication.service.PinAuthentication.Controller$requestPinConfirmationToProceed(kotlin.String)/requestKey) via [Controller.registerPinConfirmationToProceedRequestKey](register-pin-confirmation-to-proceed-request-key.md).`fun requestPinConfirmationToProceed(requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [resetPinConfirmationToProceedRequestKey](reset-pin-confirmation-to-proceed-request-key.md) | Reset the boolean value associated with the [requestKey](reset-pin-confirmation-to-proceed-request-key.md#io.matthewnelson.pin_authentication.service.PinAuthentication.Controller$resetPinConfirmationToProceedRequestKey(kotlin.String)/requestKey) to false to proc the observer that is setup on the [Controller.registerPinConfirmationToProceedRequestKey](register-pin-confirmation-to-proceed-request-key.md) method.`fun resetPinConfirmationToProceedRequestKey(requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [unregisterPinConfirmationToProceedRequestKey](unregister-pin-confirmation-to-proceed-request-key.md) | Remove registered request key.`fun unregisterPinConfirmationToProceedRequestKey(requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Removes the requestKey and LiveData values from the Map contained in [PAConfirmPinToProceed.mapRequestKeys](#).`fun unregisterPinConfirmationToProceedRequestKey(requestKeys: `[`Array`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

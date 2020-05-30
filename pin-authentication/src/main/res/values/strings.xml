@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Header TextView -->
+    <string name="pa_confirm_pin">Confirm PIN</string>
+    <string name="pa_login">Enter PIN</string>
+    <string name="pa_reset_pin">Enter Current PIN</string>
+    <string name="pa_set_pin_step_1">Enter New PIN</string>
+    <string name="pa_set_pin_step_2">Confirm New PIN</string>
+
+    <!-- Set Pin Help Info TextView -->
+    <string name="pa_min">minimum:</string>
+    <string name="pa_max">maximum: 14</string>
+
+    <!-- Wrong Pin Lockout TextView -->
+    <string name="pa_lockout_time_remaining">Lockout time remaining</string>
+
+    <!-- Toast Messages -->
+    <string name="pa_pin_does_not_match">PIN did not match</string>
+    <string name="pa_one_more_attempt">1 more attempt before being locked out</string>
+    <string name="pa_wrong_pin">Wrong PIN</string>
+    <string name="title_activity_pin_authentication">PinAuthenticationActivity</string>
+</resources>

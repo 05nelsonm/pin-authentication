@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PinPadButton" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">@dimen/pa_pin_pad_button_width</item>
+        <item name="android:layout_height">@dimen/pa_pin_pad_button_height</item>
+        <item name="android:paddingTop">@dimen/pa_pin_pad_button_padding</item>
+        <item name="android:paddingBottom">@dimen/pa_pin_pad_button_padding</item>
+        <item name="android:layout_margin">@dimen/pa_layout_margins</item>
+        <item name="android:textSize">@dimen/pa_pin_pad_button_text_size</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="PinHintImageView">
+        <item name="android:layout_width">@dimen/pa_pin_hint_dot_width</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+</resources>

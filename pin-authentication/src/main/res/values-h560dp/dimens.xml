@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Header Text Dimensions -->
+    <dimen name="pa_header_text_size">32sp</dimen>
+
+    <!-- Button Dimensions -->
+    <dimen name="pa_pin_pad_button_width">80dp</dimen>
+    <dimen name="pa_pin_pad_button_height">72dp</dimen>
+    <dimen name="pa_pin_pad_button_text_size">40sp</dimen>
+    <dimen name="pa_pin_pad_button_padding">12dp</dimen>
+
+    <!-- Pin Hint Dot Dimensions -->
+    <dimen name="pa_pin_hint_container_height">48dp</dimen>
+    <dimen name="pa_pin_hint_container_padding">8dp</dimen>
+    <dimen name="pa_pin_hint_dot_width">18dp</dimen>
+
+    <!-- Pin Help Info Dimensions -->
+    <dimen name="pa_pin_help_info_height">40dp</dimen>
+
+    <!-- General Dimensions -->
+    <dimen name="pa_layout_margins">8dp</dimen>
+    <dimen name="pa_text_size">16sp</dimen>
+
+</resources>

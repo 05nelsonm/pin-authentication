@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////// Constraint Sets /////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+
+
+    <!--
+           Set 1
+    -->
+    <ConstraintSet android:id="@+id/motion_scene_on_board_set1">
+
+        <Constraint android:id="@+id/space_on_board_drag1">
+            <Layout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/space_on_board_drag2">
+            <Layout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/space_on_board_drag3">
+            <Layout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_on_board_content1">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_on_board_content2">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/guide_line_on_board_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guide_line_on_board_top" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_on_board_content3">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/guide_line_on_board_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guide_line_on_board_top" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_on_board_content4">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/guide_line_on_board_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guide_line_on_board_top" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_1">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/space_on_board_bottom"
+                app:layout_constraintEnd_toStartOf="@id/guide_line_on_board_left"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_on_board_left"
+                app:layout_constraintTop_toTopOf="@id/space_on_board_bottom" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_2">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/space_on_board_bottom"
+                app:layout_constraintEnd_toStartOf="@id/guide_line_on_board_left_mid"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_on_board_left_mid"
+                app:layout_constraintTop_toTopOf="@id/space_on_board_bottom" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_3">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/space_on_board_bottom"
+                app:layout_constraintEnd_toStartOf="@id/guide_line_on_board_right_mid"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_on_board_right_mid"
+                app:layout_constraintTop_toTopOf="@id/space_on_board_bottom" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_4">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/space_on_board_bottom"
+                app:layout_constraintEnd_toStartOf="@id/guide_line_on_board_right"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_on_board_right"
+                app:layout_constraintTop_toTopOf="@id/space_on_board_bottom" />
+        </Constraint>
+
+        <Constraint android:id="@+id/button_on_board_next">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toTopOf="@id/space_on_board_bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+    </ConstraintSet>
+
+
+    <!--
+           Set 2
+    -->
+    <ConstraintSet
+        android:id="@+id/motion_scene_on_board_set2"
+        app:deriveConstraintsFrom="@+id/motion_scene_on_board_set1">
+
+        <Constraint android:id="@+id/space_on_board_drag1">
+            <Layout
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_on_board_content1">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/guide_line_on_board_top"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guide_line_on_board_top" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_on_board_content2">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+        <Constraint android:id="@id/image_view_on_board_nav_dot_1">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/space_on_board_bottom"
+                app:layout_constraintEnd_toEndOf="@+id/guide_line_on_board_left_mid"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_on_board_left_mid"
+                app:layout_constraintTop_toTopOf="@+id/space_on_board_bottom" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_2">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/space_on_board_bottom"
+                app:layout_constraintEnd_toEndOf="@+id/guide_line_on_board_left"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_on_board_left"
+                app:layout_constraintTop_toTopOf="@+id/space_on_board_bottom" />
+        </Constraint>
+
+    </ConstraintSet>
+
+
+    <!--
+           Set 3
+    -->
+    <ConstraintSet
+        android:id="@+id/motion_scene_on_board_set3"
+        app:deriveConstraintsFrom="@+id/motion_scene_on_board_set2">
+
+        <Constraint android:id="@+id/space_on_board_drag2">
+            <Layout
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_on_board_content2">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/guide_line_on_board_top"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guide_line_on_board_top" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_on_board_content3">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_1">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/space_on_board_bottom"
+                app:layout_constraintEnd_toEndOf="@+id/guide_line_on_board_right_mid"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_on_board_right_mid"
+                app:layout_constraintTop_toTopOf="@+id/space_on_board_bottom" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_3">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/space_on_board_bottom"
+                app:layout_constraintEnd_toEndOf="@+id/guide_line_on_board_left_mid"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_on_board_left_mid"
+                app:layout_constraintTop_toTopOf="@+id/space_on_board_bottom" />
+        </Constraint>
+
+    </ConstraintSet>
+
+
+    <!--
+           Set 4
+    -->
+    <ConstraintSet
+        android:id="@+id/motion_scene_on_board_set4"
+        app:deriveConstraintsFrom="@+id/motion_scene_on_board_set3">
+
+        <Constraint android:id="@+id/space_on_board_drag3">
+            <Layout
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_on_board_content3">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/guide_line_on_board_top"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guide_line_on_board_top" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_linear_on_board_content4">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_1">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/space_on_board_bottom"
+                app:layout_constraintEnd_toEndOf="@+id/guide_line_on_board_right"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_on_board_right"
+                app:layout_constraintTop_toTopOf="@+id/space_on_board_bottom" />
+            <PropertySet android:alpha=".5" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_2">
+            <PropertySet android:alpha=".5" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_3">
+            <PropertySet android:alpha=".5" />
+        </Constraint>
+
+        <Constraint android:id="@+id/image_view_on_board_nav_dot_4">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/space_on_board_bottom"
+                app:layout_constraintEnd_toEndOf="@+id/guide_line_on_board_right_mid"
+                app:layout_constraintStart_toStartOf="@+id/guide_line_on_board_right_mid"
+                app:layout_constraintTop_toTopOf="@+id/space_on_board_bottom" />
+            <PropertySet android:alpha=".5" />
+        </Constraint>
+
+        <Constraint android:id="@+id/button_on_board_next">
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+    </ConstraintSet>
+
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////// Transitions /////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////////-->
+
+
+    <!--
+           Set 1 >> Set 2
+    -->
+    <Transition
+        app:constraintSetEnd="@id/motion_scene_on_board_set2"
+        app:constraintSetStart="@id/motion_scene_on_board_set1">
+
+        <OnSwipe
+            app:dragDirection="dragLeft"
+            app:touchAnchorId="@id/space_on_board_drag1"
+            app:touchAnchorSide="left" />
+
+    </Transition>
+
+
+    <!--
+           Set 2 >> Set 3
+    -->
+    <Transition
+        app:constraintSetEnd="@+id/motion_scene_on_board_set3"
+        app:constraintSetStart="@id/motion_scene_on_board_set2">
+
+        <OnSwipe
+            app:dragDirection="dragLeft"
+            app:touchAnchorId="@id/space_on_board_drag2"
+            app:touchAnchorSide="left" />
+
+    </Transition>
+
+
+    <!--
+           Set 3 >> Set 4
+    -->
+    <Transition
+        app:constraintSetEnd="@+id/motion_scene_on_board_set4"
+        app:constraintSetStart="@id/motion_scene_on_board_set3">
+
+        <OnSwipe
+            app:dragDirection="dragLeft"
+            app:touchAnchorId="@id/space_on_board_drag3"
+            app:touchAnchorSide="left" />
+
+    </Transition>
+
+</MotionScene>
