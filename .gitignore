@@ -221,5 +221,5 @@ pom.xml.next
 release.properties
 
 # Mkdocs
-site
+site/
 Pipfile
