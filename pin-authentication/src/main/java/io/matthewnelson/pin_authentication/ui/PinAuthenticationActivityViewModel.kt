@@ -37,7 +37,8 @@ class PinAuthenticationActivityViewModel @Inject constructor(
 
         private lateinit var pinEntryCompare: String
 
-        fun isPinEntryCompareSet(): Boolean = ::pinEntryCompare.isInitialized
+        fun isPinEntryCompareEmpty(): Boolean =
+            if (::pinEntryCompare.isInitialized) pinEntryCompare.isEmpty() else true
 
         fun setPinEntryCompare() {
             val pinTemp = pin
@@ -45,18 +46,13 @@ class PinAuthenticationActivityViewModel @Inject constructor(
             pinEntryCompare = pinTemp
         }
 
-        fun doPinsMatch(): Boolean {
-            return if (isPinEntryCompareSet()) {
-                pin == pinEntryCompare
-            } else {
-                false
-            }
-        }
+        fun doPinsMatch(): Boolean =
+            if (::pinEntryCompare.isInitialized) pin == pinEntryCompare else false
 
         fun clear(clearPinEntryCompare: Boolean = true) {
             pin = ""
             paViewData.setPinLength(0)
-            if (clearPinEntryCompare && isPinEntryCompareSet() && pinEntryCompare.isNotEmpty()) {
+            if (clearPinEntryCompare && !isPinEntryCompareEmpty()) {
                 pinEntryCompare = ""
             }
         }
@@ -71,13 +67,11 @@ class PinAuthenticationActivityViewModel @Inject constructor(
             paViewData.setPinLength(pin.length)
         }
 
-        fun getHashedPin(pinAuthenticationSalt: String): HashedPin {
-            val pinHash = getSha256Hash(pinAuthenticationSalt) ?: "$pin$pinAuthenticationSalt"
-            return HashedPin(pinHash)
-        }
+        fun getHashedPin(pinAuthenticationSalt: String): HashedPin =
+            HashedPin(getSha256Hash(pinAuthenticationSalt) ?: "$pin$pinAuthenticationSalt")
 
-        private fun getSha256Hash(pinAuthenticationSalt: String): String? {
-            return try {
+        private fun getSha256Hash(pinAuthenticationSalt: String): String? =
+            try {
                 val digest = MessageDigest.getInstance("SHA-256")
                 digest.reset()
                 bin2hex(digest.digest("$pin$pinAuthenticationSalt".toByteArray()))
@@ -85,7 +79,6 @@ class PinAuthenticationActivityViewModel @Inject constructor(
                 e.printStackTrace()
                 null
             }
-        }
 
         private fun bin2hex(data: ByteArray): String {
             val hex = StringBuilder(data.size * 2)
@@ -195,7 +188,7 @@ class PinAuthenticationActivityViewModel @Inject constructor(
     }
 
     private fun setUsersPin(hashedPin: HashedPin) {
-        if (!pinEntry.isPinEntryCompareSet()) {
+        if (pinEntry.isPinEntryCompareEmpty()) {
             pinEntry.setPinEntryCompare()
             paViewData.setHeaderTextSetPinStep2()
 
