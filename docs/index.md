@@ -2,7 +2,7 @@
 An Android library that provides local PIN authentication for your application.
 
 <p align="center">
-<a href="https://www.youtube.com/watch?v=AyLu-6GZ52w" target="_blank"><img src="assets/vid_screenshot.png" width="350"/></a> <img src="assets/activity_screenshot.png" width="250" />
+<a href="https://www.youtube.com/watch?v=wBFvTAmbGKo" target="_blank"><img src="assets/vid_screenshot.png" width="320"/></a> <img src="assets/activity_screenshot.png" width="250" />
 </p>
 
 When your application is brought to the foreground, PinAuthentication will
