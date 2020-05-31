@@ -4,7 +4,7 @@ An Android library that provides local PIN authentication for your application.
 
 ### [05nelsonm.github.io/pin-authentication](https://05nelsonm.github.io/pin-authentication)  
 
-<a href="https://play.google.com/store/apps/details?id=io.matthewnelson.pin_authentication_demo" target="_blank"><img height=80 alt="Get it on Google Play" src="docs/assets/google_play_badge.png"/></a>
+<a href="https://play.google.com/store/apps/details?id=io.matthewnelson.pin_authentication_demo" target="_blank"><img height=80 alt="Get it on Google Play" src="docs/assets/play_store/google_play_badge.png"/></a>
 
 ## License
 
