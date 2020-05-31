@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Pin Authentication Demo</string>
     <string name="library_name">PinAuthentication Lib Demo</string>
 
     <!-- Settings Fragment -->
