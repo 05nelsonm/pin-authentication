@@ -1,8 +1,8 @@
-# PinAuthentication <a href="https://play.google.com/store/apps/details?id=io.matthewnelson.pin_authentication_demo" target="_blank"><img src="assets/google_play_badge.png" width="100"/></a>
+# PinAuthentication <a href="https://play.google.com/store/apps/details?id=io.matthewnelson.pin_authentication_demo" target="_blank"><img src="assets/play_store/google_play_badge.png" width="100"/></a>
 An Android library that provides local PIN authentication for your application.
 
 <p align="center">
-<a href="https://www.youtube.com/watch?v=wBFvTAmbGKo" target="_blank"><img src="assets/vid_screenshot.png" width="320"/></a> <img src="assets/activity_screenshot.png" width="250" />
+<a href="https://www.youtube.com/watch?v=wBFvTAmbGKo" target="_blank"><img src="assets/vid_screenshot.png" width="320"/></a> <img src="assets/play_store/screenshot_new_pin.png" width="250" />
 </p>
 
 When your application is brought to the foreground, PinAuthentication will
