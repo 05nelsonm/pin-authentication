@@ -12,7 +12,7 @@ Get Started
 
  - In your App module's `build.gradle` file, add the following to the `dependencies` block:
     ```groovy
-    implementation 'com.github.05nelsonm:pin-authentication:{{ pin_authentication.release }}'
+    implementation 'io.matthewnelson.pin-authentication:pin-authentication:{{ pin_authentication.release }}'
     ```
 
  - In your Application class' `onCreate`, implement the following Builder and customize it as desired:
@@ -58,7 +58,7 @@ Get Started
      ```
  - In your App module's `build.gradle` file, add (or modify) the following in the `dependencies` block:
      ```groovy
-     implementation 'com.github.05nelsonm:pin-authentication:{{ pin_authentication.next_release }}-SNAPSHOT'
+     implementation 'io.matthewnelson.pin-authentication:pin-authentication:{{ pin_authentication.next_release }}-SNAPSHOT'
      ```
 
     !!! Warning
