@@ -49,14 +49,14 @@ sealed class PinAuthentication {
             application: Application,
             buildConfigDebug: Boolean
         ): PABuilder {
-            val applicationComponent =
+            val paApplicationComponent =
                 DaggerPAApplicationComponent
                     .builder()
                     .bindApplication(application)
                     .build()
 
-            val amInjection = PAInjection(applicationComponent)
-            return PABuilder(applicationComponent, amInjection, buildConfigDebug)
+            val paInjection = PAInjection(paApplicationComponent)
+            return PABuilder(paApplicationComponent, paInjection, buildConfigDebug)
         }
 
         /**
@@ -65,12 +65,12 @@ sealed class PinAuthentication {
          *
          * See [Builder] for sample code.
          *
-         * @param [applicationComponent] AMApplicationComponent
-         * @param [paInjection] AMInjection
+         * @param [paApplicationComponent] [PAApplicationComponent]
+         * @param [paInjection] [PAInjection]
          * @param [buildConfigDebug] Boolean
          * */
         class PABuilder(
-            private val applicationComponent: PAApplicationComponent,
+            private val paApplicationComponent: PAApplicationComponent,
             private val paInjection: PAInjection,
             private val buildConfigDebug: Boolean
         ) {
@@ -83,7 +83,7 @@ sealed class PinAuthentication {
             private var enableWrongPinLockout = false
 
             init {
-                paApplicationComponent = applicationComponent
+                applicationComponent = paApplicationComponent
                 injected = paInjection
             }
 
@@ -291,7 +291,7 @@ sealed class PinAuthentication {
          *
          * Call [applyColors] when done.
          *
-         * @param [paBuilder] AMBuilder?
+         * @param [paBuilder] [PABuilder]?
          *
          * @sample [io.matthewnelson.pin_authentication_demo.App.initializePinAuthentication]
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.initializeSetCustomColorsButton]
@@ -457,7 +457,7 @@ sealed class PinAuthentication {
      * PRIVATE variables needed by [PinAuthentication]
      * */
     private companion object {
-        lateinit var paApplicationComponent: PAApplicationComponent
+        lateinit var applicationComponent: PAApplicationComponent
         lateinit var injected: PAInjection
     }
 
@@ -471,15 +471,15 @@ sealed class PinAuthentication {
         private val pinAuthenticationActivity: PinAuthenticationActivity
     ) {
 
-        private val paActivityComponent by lazy {
-            paApplicationComponent
+        private val activityComponent by lazy {
+            applicationComponent
                 .getPAActivityComponentBuilder()
                 .bindPinAuthenticationActivity(pinAuthenticationActivity)
                 .build()
         }
 
         fun inject() {
-            paActivityComponent.inject(pinAuthenticationActivity)
+            activityComponent.inject(pinAuthenticationActivity)
         }
 
     }
