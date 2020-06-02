@@ -94,10 +94,10 @@ signing.gnupg.keyName=0x61471B8AB3890961
 - Release to Maven Central
     - Login to Sonatype OSS Nexus: <a href="https://oss.sonatype.org/#stagingRepositories" target="_blank">oss.sonatype.org</a>
     - Click on **Staging Repositories**
-    - Scroll to the bottom, you should see an entry named `comgithub05nelsonm-XXXX`
-    - Check the box next to the `comgithub05nelsonm-XXXX` entry, click **Close** then **Confirm**
+    - Scroll to the bottom, you should see an entry named `iomatthewnelson-XXXX`
+    - Check the box next to the `iomatthewnelson-XXXX` entry, click **Close** then **Confirm**
     - Wait a bit, hit **Refresh**, until the *Status* for that column changes to *Closed*.
-    - Check the box next to the `comgithub05nelsonm-XXXX` entry, click **Release** then **Confirm**
+    - Check the box next to the `iomatthewnelson-XXXX` entry, click **Release** then **Confirm**
 
 - Merge the release branch to master
 ```
@@ -122,7 +122,7 @@ git commit -S -am "Prepare for next development iteration"
 git push
 ```
 
-- Wait for the release to become available on <a href="https://repo1.maven.org/maven2/com/github/05nelsonm/pin-authentication/" target="_blank">Maven Central</a>, then:
+- Wait for the release to become available on <a href="https://repo1.maven.org/maven2/io/matthewnelson/pin-authentication/pin-authentication/" target="_blank">Maven Central</a>, then:
     - Redeploy the docs:
         - `pipenv shell`
         - `mkdocs serve` to check locally
