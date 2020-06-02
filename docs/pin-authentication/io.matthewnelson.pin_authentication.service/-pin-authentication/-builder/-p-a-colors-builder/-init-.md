@@ -71,4 +71,4 @@ binding.buttonSettingsSetCustomColors.setOnClickListener {
 
 ### Parameters
 
-`paBuilder` - AMBuilder?
+`paBuilder` - [PABuilder](../-p-a-builder/index.md)?

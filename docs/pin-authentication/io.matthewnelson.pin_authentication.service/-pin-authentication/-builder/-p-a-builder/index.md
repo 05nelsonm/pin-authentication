@@ -11,9 +11,9 @@ See [Builder](../index.md) for sample code.
 
 ### Parameters
 
-`applicationComponent` - AMApplicationComponent
+`paApplicationComponent` - [PAApplicationComponent](#)
 
-`paInjection` - AMInjection
+`paInjection` - [PAInjection](#)
 
 `buildConfigDebug` - Boolean
 
@@ -21,7 +21,7 @@ See [Builder](../index.md) for sample code.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | Meant to only be used after calling [Builder.setApplicationAndBuildConfig](../set-application-and-build-config.md), which returns this class.`PABuilder(applicationComponent: PAApplicationComponent, paInjection: PAInjection, buildConfigDebug: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`)` |
+| [&lt;init&gt;](-init-.md) | Meant to only be used after calling [Builder.setApplicationAndBuildConfig](../set-application-and-build-config.md), which returns this class.`PABuilder(paApplicationComponent: PAApplicationComponent, paInjection: PAInjection, buildConfigDebug: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`)` |
 
 ### Functions
 
