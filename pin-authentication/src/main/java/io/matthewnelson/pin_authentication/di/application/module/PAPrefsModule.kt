@@ -15,7 +15,7 @@ import javax.inject.Named
 @Module
 object PAPrefsModule {
 
-    private const val repoName = "com.github.05nelsonm:pin-authentication"
+    private const val repoName = "io.matthewnelson.pin-authentication"
     const val ENCRYPTED_PREFS = "$repoName.ENCRYPTED_PREFS"
     const val PREFS = "$repoName.PREFS"
 
