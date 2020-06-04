@@ -367,8 +367,10 @@ class PinAuthenticationActivityViewModel @Inject constructor(
     private fun protectUserData() {
         if (currentPinEntryState == PAPinEntryState.SET_PIN && paActivityAP.isUserPinSet()) {
             paViewData.setPinEntryState(PAPinEntryState.RESET_PIN)
+            pinEntry.clear()
+        } else {
+            pinEntry.clear(clearPinEntryCompare = false)
         }
-        pinEntry.clear()
     }
 
 
