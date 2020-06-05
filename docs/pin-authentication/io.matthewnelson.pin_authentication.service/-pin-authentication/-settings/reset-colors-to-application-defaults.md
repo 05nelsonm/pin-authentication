@@ -2,12 +2,12 @@
 
 # resetColorsToApplicationDefaults
 
-`fun resetColorsToApplicationDefaults(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L822)
+`fun resetColorsToApplicationDefaults(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L815)
 
 Will clear currently applied colors and set them back
 to colors defined in the Application onCreate()'s
 initialization of
-[PinAuthentication.Builder.PABuilder.setCustomColors](../-builder/-p-a-builder/set-custom-colors.md),
+[PinAuthentication.Builder.OptionsBuilder.setCustomColors](../-builder/-options-builder/set-custom-colors.md),
 if they were specified. Otherwise it will fall back to
 [PinAuthentication](../index.md)'s default colors.
 
@@ -20,5 +20,5 @@ binding.buttonSettingsResetColors.setOnClickListener {
 
 **See Also**
 
-[PAViewColors.resetColorsToApplicationDefaults](#)
+[ViewColors.resetColorsToApplicationDefaults](#)
 

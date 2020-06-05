@@ -2,12 +2,12 @@
 
 # setApplicationAndBuildConfig
 
-`fun setApplicationAndBuildConfig(application: `[`Application`](https://developer.android.com/reference/android/app/Application.html)`, buildConfigDebug: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): PABuilder` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L48)
+`fun setApplicationAndBuildConfig(application: `[`Application`](https://developer.android.com/reference/android/app/Application.html)`, buildConfigDebug: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): OptionsBuilder` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L45)
 
 Sets the Application which is used throughout [PinAuthentication](../index.md). It initializes
-[PinAuthentication](../index.md)'s [DaggerPAApplicationComponent](#) which then is used to inject
+[PinAuthentication](../index.md)'s [DaggerApplicationComponent](#) which then is used to inject
 classes as needed.
-See [PAInjection](#)
+See [CompanionInjection](#)
 See [Companion.injected](#)
 
 It also sets the [PinAuthenticationActivity](#)'s window flag to secure for release
@@ -22,5 +22,5 @@ See [Builder](index.md) for sample code.
 `buildConfigDebug` - Boolean - (send BuildConfig.DEBUG)
 
 **Return**
-[PABuilder](-p-a-builder/index.md)
+[OptionsBuilder](-options-builder/index.md)
 

@@ -2,7 +2,7 @@
 
 # requestPinConfirmationToProceed
 
-`fun requestPinConfirmationToProceed(requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L652)
+`fun requestPinConfirmationToProceed(requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L645)
 
 To be used after registering the [requestKey](request-pin-confirmation-to-proceed.md#io.matthewnelson.pin_authentication.service.PinAuthentication.Controller$requestPinConfirmationToProceed(kotlin.String)/requestKey) via
 [Controller.registerPinConfirmationToProceedRequestKey](register-pin-confirmation-to-proceed-request-key.md).

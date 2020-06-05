@@ -2,7 +2,7 @@
 
 # hasInitialAppLoginBeenSatisfied
 
-`fun hasInitialAppLoginBeenSatisfied(): LiveData<`[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`>` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L755)
+`fun hasInitialAppLoginBeenSatisfied(): LiveData<`[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`>` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L748)
 
 Returns a boolean value that will change from
 false to true, and stay true until the

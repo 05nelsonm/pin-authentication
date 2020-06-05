@@ -2,14 +2,14 @@
 
 # setCustomColors
 
-`fun setCustomColors(): PAColorsBuilder` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L837)
+`fun setCustomColors(): ColorsBuilder` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L830)
 
 Change the colors of [PinAuthenticationActivity](#)
 on the fly. These settings get saved to
 [PinAuthentication](../index.md)'s SharedPreferences and loaded
 at startup **after** custom colors that may have been
 specified in the Application onCreate()'s
-[PinAuthentication.Builder.PABuilder.setCustomColors](../-builder/-p-a-builder/set-custom-colors.md).
+[PinAuthentication.Builder.OptionsBuilder.setCustomColors](../-builder/-options-builder/set-custom-colors.md).
 
 ``` kotlin
 binding.buttonSettingsSetCustomColors.setOnClickListener {
@@ -24,5 +24,5 @@ binding.buttonSettingsSetCustomColors.setOnClickListener {
 ```
 
 **Return**
-[Builder.PAColorsBuilder](../-builder/-p-a-colors-builder/index.md)
+[Builder.ColorsBuilder](../-builder/-colors-builder/index.md)
 
