@@ -1,13 +1,11 @@
 package io.matthewnelson.pin_authentication.service.components
 
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import kotlinx.coroutines.*
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PACoroutines(
+internal class Coroutines(
     private val dispatcherDefault: CoroutineDispatcher,
     private val dispatcherMain: CoroutineDispatcher
 ) {

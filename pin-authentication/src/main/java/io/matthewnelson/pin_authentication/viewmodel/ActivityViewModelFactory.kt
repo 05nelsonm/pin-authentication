@@ -30,7 +30,7 @@ import javax.inject.Provider
  * @suppress
  * */
 @PAActivityScope
-class PAActivityViewModelFactory @Inject constructor(
+internal class ActivityViewModelFactory @Inject constructor(
     private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ): ViewModelProvider.Factory {
 

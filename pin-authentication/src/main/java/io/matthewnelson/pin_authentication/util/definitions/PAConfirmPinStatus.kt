@@ -1,13 +1,11 @@
 package io.matthewnelson.pin_authentication.util.definitions
 
 import androidx.annotation.IntDef
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-abstract class PAConfirmPinStatus {
+internal abstract class PAConfirmPinStatus {
     @Target(AnnotationTarget.TYPE, AnnotationTarget.PROPERTY_GETTER)
     @IntDef(
         CORRECT_PIN,

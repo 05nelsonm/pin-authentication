@@ -8,13 +8,12 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.service.components.*
-import io.matthewnelson.pin_authentication.util.PAPrefsKeys
+import io.matthewnelson.pin_authentication.util.PrefsKeys
 import io.matthewnelson.pin_authentication.util.definitions.PAConfirmPinStatus
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 import io.matthewnelson.pin_authentication.model.HashedPin
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
-import io.matthewnelson.pin_authentication.util.annotations.UnsafePinHash
+import io.matthewnelson.pin_authentication.model.UnsafePinHash
 import java.math.BigInteger
 import java.security.SecureRandom
 
@@ -23,33 +22,32 @@ import java.security.SecureRandom
  * Methods utilized by [PinAuthentication]'s UI, _not_ needed by the Application
  * that's implementing [PinAuthentication]
  *
- * @param [paAppLifecycleWatcher] [PAAppLifecycleWatcher]
- * @param [paAppLockObserver] [PAAppLockObserver]
- * @param [paConfirmPinToProceed] [PAConfirmPinToProceed]
- * @param [paInitialAppLogin] [PAInitialAppLogin]
- * @param [paPinSecurity] [PAPinSecurity]
- * @param [paSettings] [PASettings]
- * @param [paWrongPinLockout] [PAWrongPinLockout]
+ * @param [appLifecycleWatcher] [AppLifecycleWatcher]
+ * @param [appLockObserver] [AppLockObserver]
+ * @param [confirmPinToProceed] [ConfirmPinToProceed]
+ * @param [initialAppLogin] [InitialAppLogin]
+ * @param [pinSecurity] [PinSecurity]
+ * @param [settings] [Settings]
+ * @param [wrongPinLockout] [WrongPinLockout]
  * @param [encryptedPrefs] [EncryptedStorage.Prefs]
  * */
-@NotForPublicConsumption
-class PAActivityAccessPoint(
-    private val paAppLifecycleWatcher: PAAppLifecycleWatcher,
-    private val paAppLockObserver: PAAppLockObserver,
-    private val paConfirmPinToProceed: PAConfirmPinToProceed,
-    private val paInitialAppLogin: PAInitialAppLogin,
-    private val paPinSecurity: PAPinSecurity,
-    private val paSettings: PASettings,
-    private val paWrongPinLockout: PAWrongPinLockout,
+internal class AuthenticationActivityAccessPoint(
+    private val appLifecycleWatcher: AppLifecycleWatcher,
+    private val appLockObserver: AppLockObserver,
+    private val confirmPinToProceed: ConfirmPinToProceed,
+    private val initialAppLogin: InitialAppLogin,
+    private val pinSecurity: PinSecurity,
+    private val settings: Settings,
+    private val wrongPinLockout: WrongPinLockout,
     private val encryptedPrefs: EncryptedStorage.Prefs
 ) {
 
     fun authProcessComplete(finishActivity: Boolean) {
-        paAppLockObserver.setAuthenticationStateNotRequired()
+        appLockObserver.setAuthenticationStateNotRequired()
         if (finishActivity) {
             finishPinAuthenticationActivity()
         }
-        paInitialAppLogin.initialAppLoginIsSatisfied()
+        initialAppLogin.initialAppLoginIsSatisfied()
     }
 
     /**
@@ -63,19 +61,19 @@ class PAActivityAccessPoint(
 
         @OptIn(UnsafePinHash::class)
         if (encryptedPrefs.read(
-                PAPrefsKeys.USER_PIN,
+                PrefsKeys.USER_PIN,
                 EncryptedStorage.Prefs.INVALID_STRING) == hashedPin.hashedPin
         ) {
 
-            if (paWrongPinLockout.isWrongPinLockoutEnabled()) {
-                paWrongPinLockout.removeLockoutData()
+            if (wrongPinLockout.isWrongPinLockoutEnabled()) {
+                wrongPinLockout.removeLockoutData()
             }
             return PAConfirmPinStatus.CORRECT_PIN
         } else {
 
-            return if (paWrongPinLockout.isWrongPinLockoutEnabled()) {
-                paWrongPinLockout.variablyDecrementAttemptsCounter()
-                paWrongPinLockout.updateDataAndGetReturnString()
+            return if (wrongPinLockout.isWrongPinLockoutEnabled()) {
+                wrongPinLockout.variablyDecrementAttemptsCounter()
+                wrongPinLockout.updateDataAndGetReturnString()
             } else {
                 PAConfirmPinStatus.WRONG_PIN
             }
@@ -88,11 +86,11 @@ class PAActivityAccessPoint(
      * user hits the back button.
      * */
     fun confirmPinToProceedFailure() {
-        paConfirmPinToProceed.setRequestKeyValueOfCurrentRequestKeyTo(
-            paPinSecurity.isCurrentRequestKeyPinSecurity()
+        confirmPinToProceed.setRequestKeyValueOfCurrentRequestKeyTo(
+            pinSecurity.isCurrentRequestKeyPinSecurity()
         )
 
-        paConfirmPinToProceed.setCurrentRequestKey("")
+        confirmPinToProceed.setCurrentRequestKey("")
     }
 
     /**
@@ -100,13 +98,13 @@ class PAActivityAccessPoint(
      * user successfully confirms their pin.
      * */
     fun confirmPinToProceedSuccess() {
-        if (paPinSecurity.isCurrentRequestKeyPinSecurity()) {
-            paPinSecurity.disablePinSecuritySuccess()
+        if (pinSecurity.isCurrentRequestKeyPinSecurity()) {
+            pinSecurity.disablePinSecuritySuccess()
         } else {
-            paConfirmPinToProceed.setRequestKeyValueOfCurrentRequestKeyTo(true)
+            confirmPinToProceed.setRequestKeyValueOfCurrentRequestKeyTo(true)
         }
 
-        paConfirmPinToProceed.setCurrentRequestKey("")
+        confirmPinToProceed.setCurrentRequestKey("")
 
         finishPinAuthenticationActivity()
     }
@@ -116,10 +114,10 @@ class PAActivityAccessPoint(
      * if the user hits the back button.
      * */
     fun enablePinSecurityFailure() =
-        paPinSecurity.enablePinSecurityFailure()
+        pinSecurity.enablePinSecurityFailure()
 
     fun getPinAuthenticationSalt(): String {
-        encryptedPrefs.read(PAPrefsKeys.PIN_AUTHENTICATION_SALT, EncryptedStorage.Prefs.INVALID_STRING).let {
+        encryptedPrefs.read(PrefsKeys.PIN_AUTHENTICATION_SALT, EncryptedStorage.Prefs.INVALID_STRING).let {
             return if (it == null || it == EncryptedStorage.Prefs.INVALID_STRING) {
                 createAuthenticationManagerSalt()
             } else {
@@ -130,33 +128,33 @@ class PAActivityAccessPoint(
 
     private fun createAuthenticationManagerSalt(): String {
         val salt = BigInteger(130, SecureRandom()).toString(32)
-        encryptedPrefs.write(PAPrefsKeys.PIN_AUTHENTICATION_SALT, salt)
+        encryptedPrefs.write(PrefsKeys.PIN_AUTHENTICATION_SALT, salt)
         return salt
     }
 
     fun getBuildConfigDebug(): Boolean =
-        paSettings.getBuildConfigDebug()
+        settings.getBuildConfigDebug()
 
     fun getLockoutDurationSeconds(): Int =
-        paWrongPinLockout.getLockoutDurationSeconds()
+        wrongPinLockout.getLockoutDurationSeconds()
 
     fun getLockoutSecondsRemaining(): Int =
-        paWrongPinLockout.getSecondsRemaining()
+        wrongPinLockout.getSecondsRemaining()
 
     fun getMinPinLength(): Int =
-        paSettings.getMinPinLength()
+        settings.getMinPinLength()
 
     fun isHapticFeedBackEnabled(): Boolean =
-        paSettings.getHapticFeedbackIsEnabled()
+        settings.getHapticFeedbackIsEnabled()
 
     fun isScrambledPinEnabled(): Boolean =
-        paSettings.getScrambledPinIsEnabled()
+        settings.getScrambledPinIsEnabled()
 
     fun isUserPinSet(): Boolean =
-        paSettings.getUserPinIsSet()
+        settings.getUserPinIsSet()
 
     fun isWrongPinLockoutEnabled(): Boolean =
-        paWrongPinLockout.isWrongPinLockoutEnabled()
+        wrongPinLockout.isWrongPinLockoutEnabled()
 
     /**
      * Sets the user's pin
@@ -166,14 +164,14 @@ class PAActivityAccessPoint(
     fun setUserPin(hashedPin: HashedPin) {
 
         @OptIn(UnsafePinHash::class)
-        encryptedPrefs.write(PAPrefsKeys.USER_PIN, hashedPin.hashedPin)
+        encryptedPrefs.write(PrefsKeys.USER_PIN, hashedPin.hashedPin)
 
-        if (!paSettings.getUserPinIsSet()) {
-            paSettings.setUserPinIsSet(true)
+        if (!settings.getUserPinIsSet()) {
+            settings.setUserPinIsSet(true)
         }
 
-        if (paPinSecurity.isCurrentRequestKeyPinSecurity()) {
-            paPinSecurity.enablePinSecuritySuccess()
+        if (pinSecurity.isCurrentRequestKeyPinSecurity()) {
+            pinSecurity.enablePinSecuritySuccess()
         }
 
     }
@@ -185,7 +183,7 @@ class PAActivityAccessPoint(
      * */
     fun showToast(message: String, textColorHex: String) {
 
-        paAppLifecycleWatcher.getCurrentActivity()?.apply {
+        appLifecycleWatcher.getCurrentActivity()?.apply {
             val backgroundColorValue = ContextCompat.getColor(this, R.color.pa_transparent)
 
             val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
@@ -205,8 +203,8 @@ class PAActivityAccessPoint(
     }
 
     private fun finishPinAuthenticationActivity() {
-        if (paAppLifecycleWatcher.isCurrentActivityPinAuthenticationActivity()) {
-            paAppLifecycleWatcher.getCurrentActivity()?.apply {
+        if (appLifecycleWatcher.isCurrentActivityPinAuthenticationActivity()) {
+            appLifecycleWatcher.getCurrentActivity()?.apply {
                 finish()
             }
         }

@@ -2,7 +2,6 @@ package io.matthewnelson.pin_authentication.service.components
 
 import android.content.Intent
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.util.definitions.PAAuthenticationState
 import io.matthewnelson.pin_authentication.util.definitions.PALockApplicationEvent
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
@@ -18,21 +17,20 @@ import kotlinx.coroutines.launch
  *
  * This class triggers events based on the LiveData being observed
  *
- * @see [PAAppLifecycleWatcher]
+ * @see [AppLifecycleWatcher]
  *
- * @param [paAppLifecycleWatcher] [PAAppLifecycleWatcher]
- * @param [paCoroutines] [PACoroutines]
- * @param [paPinSecurity] [PAPinSecurity]
- * @param [paSettings] [PASettings]
- * @param [paViewData] [PAViewData]
+ * @param [appLifecycleWatcher] [AppLifecycleWatcher]
+ * @param [coroutines] [Coroutines]
+ * @param [pinSecurity] [PinSecurity]
+ * @param [settings] [Settings]
+ * @param [viewData] [ViewData]
  * */
-@NotForPublicConsumption
-class PAAppLockObserver(
-    private val paAppLifecycleWatcher: PAAppLifecycleWatcher,
-    private val paCoroutines: PACoroutines,
-    private val paPinSecurity: PAPinSecurity,
-    private val paSettings: PASettings,
-    private val paViewData: PAViewData
+internal class AppLockObserver(
+    private val appLifecycleWatcher: AppLifecycleWatcher,
+    private val coroutines: Coroutines,
+    private val pinSecurity: PinSecurity,
+    private val settings: Settings,
+    private val viewData: ViewData
 ) {
 
     //////////////////////////
@@ -42,7 +40,7 @@ class PAAppLockObserver(
     private var backgroundLogoutTimer = 0L
 
     init {
-        paAppLifecycleWatcher.getPALockApplicationEvent().observeForever {
+        appLifecycleWatcher.getPALockApplicationEvent().observeForever {
             when (it) {
                 PALockApplicationEvent.LOCK -> {
                     if (authenticationState == PAAuthenticationState.NOT_REQUIRED) {
@@ -73,41 +71,41 @@ class PAAppLockObserver(
     fun hijackApp(pinEntryState: @PAPinEntryState.PinEntryState Int) {
 
         // Inhibit calls if the app on-board process is not satisfied.
-        if (!paSettings.hasAppOnBoardProcessBeenSatisfied()) {
+        if (!settings.hasAppOnBoardProcessBeenSatisfied()) {
             return
         }
 
         // If pin security is disabled inhibit all calls to hijackApp, other than a request
         // to enable pin security, from altering paViewData.pinEntryState LiveData.
-        if (!paPinSecurity.isPinSecurityEnabled() && !paPinSecurity.isCurrentRequestKeyPinSecurity()) {
+        if (!pinSecurity.isPinSecurityEnabled() && !pinSecurity.isCurrentRequestKeyPinSecurity()) {
             return
         }
 
         // Inhibit alteration of LiveData multiple times if configuration has already been
         // set to SET_PIN_FIRST_TIME. Will allow for a first time pass because
         // paViewData.pinEntryState resets to IDLE after completion of the Activity.
-        if (paViewData.getPinEntryState().value == PAPinEntryState.SET_PIN_FIRST_TIME) {
+        if (viewData.getPinEntryState().value == PAPinEntryState.SET_PIN_FIRST_TIME) {
             return
         }
 
         // Inhibit alteration of LiveData multiple times if configuration has already been
         // set to ENABLE_PIN_SECURITY. Will allow for a first time pass because
         // paViewData.pinEntryState resets to IDLE after completion of the Activity.
-        if (paViewData.getPinEntryState().value == PAPinEntryState.ENABLE_PIN_SECURITY) {
+        if (viewData.getPinEntryState().value == PAPinEntryState.ENABLE_PIN_SECURITY) {
             return
         }
 
         when (pinEntryState) {
             PAPinEntryState.CONFIRM_PIN -> {
-                paViewData.setPinEntryState(pinEntryState)
+                viewData.setPinEntryState(pinEntryState)
                 startPinAuthenticationActivity()
             }
             PAPinEntryState.ENABLE_PIN_SECURITY -> {
-                paViewData.setPinEntryState(pinEntryState)
+                viewData.setPinEntryState(pinEntryState)
                 startPinAuthenticationActivity()
             }
             PAPinEntryState.RESET_PIN -> {
-                paViewData.setPinEntryState(pinEntryState)
+                viewData.setPinEntryState(pinEntryState)
                 startPinAuthenticationActivity()
             }
             else -> {
@@ -119,20 +117,20 @@ class PAAppLockObserver(
                 }
 
                 val setPinEntryState =
-                    if (paSettings.getUserPinIsSet()) {
+                    if (settings.getUserPinIsSet()) {
                         PAPinEntryState.LOGIN
                     } else {
                         PAPinEntryState.SET_PIN_FIRST_TIME
                     }
-                paViewData.setPinEntryState(setPinEntryState)
+                viewData.setPinEntryState(setPinEntryState)
                 startPinAuthenticationActivity()
             }
         }
     }
 
     private fun startPinAuthenticationActivity() {
-        if (!paAppLifecycleWatcher.isCurrentActivityPinAuthenticationActivity()) {
-            paAppLifecycleWatcher.getCurrentActivity()?.apply {
+        if (!appLifecycleWatcher.isCurrentActivityPinAuthenticationActivity()) {
+            appLifecycleWatcher.getCurrentActivity()?.apply {
                 val intent = Intent(this, PinAuthenticationActivity::class.java)
                 startActivity(intent)
             }
@@ -156,7 +154,7 @@ class PAAppLockObserver(
             return
         }
 
-        authInvalidationJob = paCoroutines.getScopeUI().launch {
+        authInvalidationJob = coroutines.getScopeUI().launch {
             delay(backgroundLogoutTimer)
             authenticationState = PAAuthenticationState.REQUIRED
         }

@@ -1,13 +1,9 @@
 package io.matthewnelson.pin_authentication.util
 
-import io.matthewnelson.pin_authentication.service.PinAuthentication
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
-
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-object PAPrefsKeys {
+internal object PrefsKeys {
 
     // Settings
     const val HAPTIC_FEEDBACK_IS_ENABLED = "HAPTIC_FEEDBACK_IS_ENABLED"
@@ -32,30 +28,8 @@ object PAPrefsKeys {
 
     /**
      * Keys for EncryptedSharedPreferences
-     *
-     * If adding a key below, be sure to update the following methods:
-     * @see [PinAuthentication.EncryptedPrefs.clear]
-     * @see [PinAuthentication.EncryptedPrefs.getAll]
-     *
      * */
     const val USER_PIN = "USER_PIN"
     const val PIN_AUTHENTICATION_SALT = "PIN_AUTHENTICATION_SALT"
-
-    private val blacklistedPrefsKeys = arrayOf(USER_PIN, PIN_AUTHENTICATION_SALT)
-
-    /**
-     * @suppress
-     * Checks if methods being called contain keys used by [PinAuthentication], and will return
-     * `false`, if that is the case. Ensures that data which [PinAuthentication] needs remains
-     * in tact and unabated.
-     * @param [key] String
-     *
-     * @return Boolean
-     * */
-    fun isPrefsKeyBlacklisted(key: String): Boolean =
-        blacklistedPrefsKeys.contains(key)
-
-    fun getBlacklistedKeys(): Array<String> =
-        blacklistedPrefsKeys
 
 }

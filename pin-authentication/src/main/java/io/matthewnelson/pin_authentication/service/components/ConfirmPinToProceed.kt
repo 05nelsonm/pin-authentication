@@ -4,17 +4,15 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.util.definitions.PAScreenType
 import kotlinx.coroutines.*
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PAConfirmPinToProceed(
-    private val paAppLifecycleWatcher: PAAppLifecycleWatcher,
-    private val paCoroutines: PACoroutines
+internal class ConfirmPinToProceed(
+    private val appLifecycleWatcher: AppLifecycleWatcher,
+    private val coroutines: Coroutines
 ) {
 
     /////////////////////////////
@@ -42,7 +40,7 @@ class PAConfirmPinToProceed(
             mapRequestKeys[requestKey] =
                 RequestKeyData(
                     screenType,
-                    paAppLifecycleWatcher.getCurrentActivityName(),
+                    appLifecycleWatcher.getCurrentActivityName(),
                     fragmentClassName,
                     fragmentID,
                     MutableLiveData(value)
@@ -91,7 +89,7 @@ class PAConfirmPinToProceed(
     }
 
     private fun launchSetAllRequestKeysToJob(value: Boolean, excludeBlacklisted: Boolean) {
-        setAllRequestKeysToJob = paCoroutines.getScopeUI().launch {
+        setAllRequestKeysToJob = coroutines.getScopeUI().launch {
             setAllRequestKeys(value, excludeBlacklisted)
         }
     }
@@ -130,8 +128,8 @@ class PAConfirmPinToProceed(
             launchRequestKeyRemovalJobIfInactive()
         } else
 
-            if (!paAppLifecycleWatcher.isScreenRotationOccurring() &&
-                !paAppLifecycleWatcher.isCurrentActivityPinAuthenticationActivity()
+            if (!appLifecycleWatcher.isScreenRotationOccurring() &&
+                !appLifecycleWatcher.isCurrentActivityPinAuthenticationActivity()
             ) {
                 requestKeysToBeUnregistered.add(requestKey)
                 launchRequestKeyRemovalJobIfInactive()
@@ -142,7 +140,7 @@ class PAConfirmPinToProceed(
     private fun launchRequestKeyRemovalJobIfInactive() {
         if (!::requestKeyRemovalJob.isInitialized || !requestKeyRemovalJob.isActive) {
 
-            requestKeyRemovalJob = paCoroutines.getScopeDefault().launch {
+            requestKeyRemovalJob = coroutines.getScopeDefault().launch {
                 removeRequestKeys()
             }
         }
@@ -158,14 +156,14 @@ class PAConfirmPinToProceed(
                 PAScreenType.ACTIVITY -> {
                     val activityClassName = mapRequestKeys[requestKey]?.activityClassName
 
-                    if (activityClassName != paAppLifecycleWatcher.getCurrentActivityName()) {
+                    if (activityClassName != appLifecycleWatcher.getCurrentActivityName()) {
                         remove = true
                     }
                 }
                 PAScreenType.FRAGMENT -> {
                     val activityClassName = mapRequestKeys[requestKey]?.activityClassName
 
-                    if (activityClassName != paAppLifecycleWatcher.getCurrentActivityName()) {
+                    if (activityClassName != appLifecycleWatcher.getCurrentActivityName()) {
                         remove = true
                     } else {
                         val fragmentId = mapRequestKeys[requestKey]?.fragmentID
@@ -192,7 +190,7 @@ class PAConfirmPinToProceed(
 
     private fun isFragmentActive(@IdRes fragmentID: Int?, fragmentClassName: String?): Boolean {
         if (fragmentID != null && fragmentClassName != null) {
-            paAppLifecycleWatcher.getCurrentActivity()?.apply {
+            appLifecycleWatcher.getCurrentActivity()?.apply {
                 (this as AppCompatActivity).supportFragmentManager.findFragmentById(fragmentID)
                     ?.childFragmentManager?.fragments?.forEach { fragment ->
                     if (fragment.javaClass.name == fragmentClassName && !fragment.isDetached) {

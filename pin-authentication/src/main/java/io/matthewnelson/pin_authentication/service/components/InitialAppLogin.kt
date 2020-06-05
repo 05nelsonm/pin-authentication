@@ -2,13 +2,11 @@ package io.matthewnelson.pin_authentication.service.components
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PAInitialAppLogin {
+internal class InitialAppLogin {
 
     ///////////////////////////////
     // Initial Application Login //

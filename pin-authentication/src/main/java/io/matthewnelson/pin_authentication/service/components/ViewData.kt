@@ -5,16 +5,14 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.matthewnelson.pin_authentication.R
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PAViewData(
+internal class ViewData(
     private val context: Context,
-    private val paSettings: PASettings,
+    private val settings: Settings,
 
     // String resources
     @StringRes private val confirmPin: Int,
@@ -105,7 +103,7 @@ class PAViewData(
     fun setShowSetPinHelpInfo(show: Boolean) {
         var string = ""
         if (show) {
-            string = "${getStringResource(R.string.pa_min)} ${paSettings.getMinPinLength()}" +
+            string = "${getStringResource(R.string.pa_min)} ${settings.getMinPinLength()}" +
                     "\n${getStringResource(R.string.pa_max)}"
         }
         showSetPinHelpInfo.value = string

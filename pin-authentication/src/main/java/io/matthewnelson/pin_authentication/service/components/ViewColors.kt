@@ -4,15 +4,13 @@ import android.content.Context
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import io.matthewnelson.pin_authentication.R
-import io.matthewnelson.pin_authentication.util.PAPrefsKeys
+import io.matthewnelson.pin_authentication.util.PrefsKeys
 import io.matthewnelson.encrypted_storage.EncryptedStorage
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PAViewColors(
+internal class ViewColors(
     private val context: Context,
     private val prefs: EncryptedStorage.Prefs
 ) {
@@ -91,17 +89,17 @@ class PAViewColors(
         currentColors.screenBackground = applicationColors.screenBackground
         currentColors.text = applicationColors.text
 
-        prefs.remove(PAPrefsKeys.CUSTOM_COLORS_ARE_SET)
+        prefs.remove(PrefsKeys.CUSTOM_COLORS_ARE_SET)
 
-        prefs.remove(PAPrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR)
-        prefs.remove(PAPrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR)
-        prefs.remove(PAPrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR)
-        prefs.remove(PAPrefsKeys.PIN_HINT_CONTAINER_COLOR)
-        prefs.remove(PAPrefsKeys.PIN_HINT_IMAGE_COLOR)
-        prefs.remove(PAPrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR)
-        prefs.remove(PAPrefsKeys.PIN_RESET_INFO_IMAGE_COLOR)
-        prefs.remove(PAPrefsKeys.SCREEN_BACKGROUND_COLOR)
-        prefs.remove(PAPrefsKeys.TEXT_COLOR)
+        prefs.remove(PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR)
+        prefs.remove(PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR)
+        prefs.remove(PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR)
+        prefs.remove(PrefsKeys.PIN_HINT_CONTAINER_COLOR)
+        prefs.remove(PrefsKeys.PIN_HINT_IMAGE_COLOR)
+        prefs.remove(PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR)
+        prefs.remove(PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR)
+        prefs.remove(PrefsKeys.SCREEN_BACKGROUND_COLOR)
+        prefs.remove(PrefsKeys.TEXT_COLOR)
     }
 
     private inner class PAColors(
@@ -126,7 +124,7 @@ class PAViewColors(
         if (appColorsBeingSet) {
             applicationColors.backspaceButtonImage = colorHex
         } else {
-            prefs.write(PAPrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR, colorHex)
+            prefs.write(PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR, colorHex)
         }
 
         currentColors.backspaceButtonImage = colorHex
@@ -138,7 +136,7 @@ class PAViewColors(
         if (appColorsBeingSet) {
             applicationColors.confirmButtonBackground = colorHex
         } else {
-            prefs.write(PAPrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR, colorHex)
+            prefs.write(PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR, colorHex)
         }
 
         currentColors.confirmButtonBackground = colorHex
@@ -150,7 +148,7 @@ class PAViewColors(
         if (appColorsBeingSet) {
             applicationColors.confirmButtonImage = colorHex
         } else {
-            prefs.write(PAPrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR, colorHex)
+            prefs.write(PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR, colorHex)
         }
 
         currentColors.confirmButtonImage = colorHex
@@ -162,7 +160,7 @@ class PAViewColors(
         if (appColorsBeingSet) {
             applicationColors.pinHintContainer = colorHex
         } else {
-            prefs.write(PAPrefsKeys.PIN_HINT_CONTAINER_COLOR, colorHex)
+            prefs.write(PrefsKeys.PIN_HINT_CONTAINER_COLOR, colorHex)
         }
 
         currentColors.pinHintContainer = colorHex
@@ -174,7 +172,7 @@ class PAViewColors(
         if (appColorsBeingSet) {
             applicationColors.pinHintImage = colorHex
         } else {
-            prefs.write(PAPrefsKeys.PIN_HINT_IMAGE_COLOR, colorHex)
+            prefs.write(PrefsKeys.PIN_HINT_IMAGE_COLOR, colorHex)
         }
 
         currentColors.pinHintImage = colorHex
@@ -186,7 +184,7 @@ class PAViewColors(
         if (appColorsBeingSet) {
             applicationColors.pinPadButtonBackground = colorHex
         } else {
-            prefs.write(PAPrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR, colorHex)
+            prefs.write(PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR, colorHex)
         }
 
         currentColors.pinPadButtonBackground = colorHex
@@ -198,7 +196,7 @@ class PAViewColors(
         if (appColorsBeingSet) {
             applicationColors.pinResetInfoImage = colorHex
         } else {
-            prefs.write(PAPrefsKeys.PIN_RESET_INFO_IMAGE_COLOR, colorHex)
+            prefs.write(PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR, colorHex)
         }
 
         currentColors.pinResetInfoImage = colorHex
@@ -210,7 +208,7 @@ class PAViewColors(
         if (appColorsBeingSet) {
             applicationColors.screenBackground = colorHex
         } else {
-            prefs.write(PAPrefsKeys.SCREEN_BACKGROUND_COLOR, colorHex)
+            prefs.write(PrefsKeys.SCREEN_BACKGROUND_COLOR, colorHex)
         }
 
         currentColors.screenBackground = colorHex
@@ -222,7 +220,7 @@ class PAViewColors(
         if (appColorsBeingSet) {
             applicationColors.text = colorHex
         } else {
-            prefs.write(PAPrefsKeys.TEXT_COLOR, colorHex)
+            prefs.write(PrefsKeys.TEXT_COLOR, colorHex)
         }
 
         currentColors.text = colorHex
@@ -230,7 +228,7 @@ class PAViewColors(
 
     fun applyColors(appColorsBeingSet: Boolean) {
         if (!appColorsBeingSet) {
-            prefs.write(PAPrefsKeys.CUSTOM_COLORS_ARE_SET, true)
+            prefs.write(PrefsKeys.CUSTOM_COLORS_ARE_SET, true)
         }
     }
 
@@ -248,10 +246,10 @@ class PAViewColors(
     }
 
     private fun loadColorsFromSharedPreferences() {
-        if (prefs.contains(PAPrefsKeys.CUSTOM_COLORS_ARE_SET)) {
+        if (prefs.contains(PrefsKeys.CUSTOM_COLORS_ARE_SET)) {
 
             prefs.read(
-                PAPrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR,
+                PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR,
                 EncryptedStorage.Prefs.INVALID_STRING
             )?.let {
                 if (it != EncryptedStorage.Prefs.INVALID_STRING) {
@@ -259,7 +257,7 @@ class PAViewColors(
                 }
             }
             prefs.read(
-                PAPrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR,
+                PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR,
                 EncryptedStorage.Prefs.INVALID_STRING
             )?.let {
                 if (it != EncryptedStorage.Prefs.INVALID_STRING) {
@@ -267,7 +265,7 @@ class PAViewColors(
                 }
             }
             prefs.read(
-                PAPrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR,
+                PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR,
                 EncryptedStorage.Prefs.INVALID_STRING
             )?.let {
                 if (it != EncryptedStorage.Prefs.INVALID_STRING) {
@@ -275,7 +273,7 @@ class PAViewColors(
                 }
             }
             prefs.read(
-                PAPrefsKeys.PIN_HINT_CONTAINER_COLOR,
+                PrefsKeys.PIN_HINT_CONTAINER_COLOR,
                 EncryptedStorage.Prefs.INVALID_STRING
             )?.let {
                 if (it != EncryptedStorage.Prefs.INVALID_STRING) {
@@ -283,7 +281,7 @@ class PAViewColors(
                 }
             }
             prefs.read(
-                PAPrefsKeys.PIN_HINT_IMAGE_COLOR,
+                PrefsKeys.PIN_HINT_IMAGE_COLOR,
                 EncryptedStorage.Prefs.INVALID_STRING
             )?.let {
                 if (it != EncryptedStorage.Prefs.INVALID_STRING) {
@@ -291,7 +289,7 @@ class PAViewColors(
                 }
             }
             prefs.read(
-                PAPrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR,
+                PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR,
                 EncryptedStorage.Prefs.INVALID_STRING
             )?.let {
                 if (it != EncryptedStorage.Prefs.INVALID_STRING) {
@@ -299,7 +297,7 @@ class PAViewColors(
                 }
             }
             prefs.read(
-                PAPrefsKeys.PIN_RESET_INFO_IMAGE_COLOR,
+                PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR,
                 EncryptedStorage.Prefs.INVALID_STRING
             )?.let {
                 if (it != EncryptedStorage.Prefs.INVALID_STRING) {
@@ -307,7 +305,7 @@ class PAViewColors(
                 }
             }
             prefs.read(
-                PAPrefsKeys.SCREEN_BACKGROUND_COLOR,
+                PrefsKeys.SCREEN_BACKGROUND_COLOR,
                 EncryptedStorage.Prefs.INVALID_STRING
             )?.let {
                 if (it != EncryptedStorage.Prefs.INVALID_STRING) {
@@ -315,7 +313,7 @@ class PAViewColors(
                 }
             }
             prefs.read(
-                PAPrefsKeys.TEXT_COLOR,
+                PrefsKeys.TEXT_COLOR,
                 EncryptedStorage.Prefs.INVALID_STRING
             )?.let {
                 if (it != EncryptedStorage.Prefs.INVALID_STRING) {
