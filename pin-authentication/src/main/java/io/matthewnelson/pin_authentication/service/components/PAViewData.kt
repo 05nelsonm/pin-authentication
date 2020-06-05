@@ -5,14 +5,12 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.matthewnelson.pin_authentication.R
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PAViewData(
+internal class PAViewData(
     private val context: Context,
     private val paSettings: PASettings,
 

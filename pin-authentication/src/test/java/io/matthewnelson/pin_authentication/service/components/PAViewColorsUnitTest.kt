@@ -7,7 +7,6 @@ import androidx.test.core.app.ApplicationProvider
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.util.PAPrefsKeys
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,7 +15,6 @@ import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
-@OptIn(NotForPublicConsumption::class)
 @Config(minSdk = 23, maxSdk = 28)
 @RunWith(RobolectricTestRunner::class)
 class PAViewColorsUnitTest {

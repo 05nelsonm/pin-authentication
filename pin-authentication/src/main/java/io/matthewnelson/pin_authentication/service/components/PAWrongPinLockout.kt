@@ -4,13 +4,11 @@ import io.matthewnelson.pin_authentication.util.PAPrefsKeys
 import io.matthewnelson.pin_authentication.util.definitions.PAConfirmPinStatus
 import io.matthewnelson.pin_authentication.service.PinAuthentication
 import io.matthewnelson.encrypted_storage.EncryptedStorage
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PAWrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
+internal class PAWrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
 
     ///////////////////////
     // Wrong Pin Lockout //

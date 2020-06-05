@@ -3,7 +3,6 @@ package io.matthewnelson.pin_authentication.service.components
 import androidx.lifecycle.LiveData
 import io.matthewnelson.pin_authentication.util.PAPrefsKeys
 import io.matthewnelson.encrypted_storage.EncryptedStorage
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
 /**
  * @suppress
@@ -14,8 +13,7 @@ import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumpt
  * @param [encryptedPrefs] [EncryptedStorage.Prefs]
  * @param [prefs] [EncryptedStorage.Prefs]
  * */
-@NotForPublicConsumption
-class PAPinSecurity(
+internal class PAPinSecurity(
     private val paConfirmPinToProceed: PAConfirmPinToProceed,
     private val paSettings: PASettings,
     private val encryptedPrefs: EncryptedStorage.Prefs,

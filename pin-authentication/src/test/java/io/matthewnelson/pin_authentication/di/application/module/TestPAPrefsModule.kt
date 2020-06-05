@@ -5,10 +5,8 @@ import dagger.Module
 import dagger.Provides
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 import io.matthewnelson.pin_authentication.di.application.PAApplicationScope
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import javax.inject.Named
 
-@OptIn(NotForPublicConsumption::class)
 @Module
 object TestPAPrefsModule {
 

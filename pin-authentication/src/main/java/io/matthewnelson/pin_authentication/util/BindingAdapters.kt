@@ -11,7 +11,7 @@ import androidx.databinding.BindingAdapter
 /**
  * @suppress
  * */
-object BindingAdapters {
+internal object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("paGoneUnless")

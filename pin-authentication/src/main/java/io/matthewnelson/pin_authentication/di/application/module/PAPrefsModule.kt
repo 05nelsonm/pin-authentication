@@ -5,15 +5,13 @@ import dagger.Module
 import dagger.Provides
 import io.matthewnelson.pin_authentication.di.application.PAApplicationScope
 import io.matthewnelson.encrypted_storage.EncryptedStorage
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import javax.inject.Named
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
 @Module
-object PAPrefsModule {
+internal object PAPrefsModule {
 
     private const val repoName = "io.matthewnelson.pin-authentication"
     const val ENCRYPTED_PREFS = "$repoName.ENCRYPTED_PREFS"

@@ -7,15 +7,13 @@ import io.matthewnelson.pin_authentication.di.activity.PAActivityScope
 import io.matthewnelson.pin_authentication.di.application.module.PAPrefsModule
 import io.matthewnelson.pin_authentication.service.PAActivityAccessPoint
 import io.matthewnelson.pin_authentication.service.components.*
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import javax.inject.Named
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
 @Module
-object PAActivityModule {
+internal object PAActivityModule {
 
     @PAActivityScope
     @Provides

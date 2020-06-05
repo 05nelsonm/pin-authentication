@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.databinding.ActivityPinAuthenticationBinding
 import io.matthewnelson.pin_authentication.service.PinAuthentication
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
 import io.matthewnelson.pin_authentication.viewmodel.PAActivityViewModelFactory
 import javax.inject.Inject
@@ -19,8 +18,7 @@ import javax.inject.Inject
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PinAuthenticationActivity : AppCompatActivity() {
+internal class PinAuthenticationActivity : AppCompatActivity() {
 
     private fun injectPinAuthenticationActivity() {
         PinAuthentication.PinAuthenticationActivityInjection(this).inject()

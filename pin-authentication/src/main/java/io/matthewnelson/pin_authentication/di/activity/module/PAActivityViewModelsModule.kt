@@ -8,15 +8,13 @@ import dagger.multibindings.IntoMap
 import io.matthewnelson.pin_authentication.di.activity.PAActivityScope
 import io.matthewnelson.pin_authentication.di.activity.PAActivityViewModelKey
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivityViewModel
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.viewmodel.PAActivityViewModelFactory
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
 @Module
-abstract class PAActivityViewModelsModule {
+internal abstract class PAActivityViewModelsModule {
 
     @PAActivityScope
     @Binds

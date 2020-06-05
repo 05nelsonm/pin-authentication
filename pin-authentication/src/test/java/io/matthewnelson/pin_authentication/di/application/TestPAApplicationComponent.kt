@@ -8,9 +8,7 @@ import io.matthewnelson.pin_authentication.di.activity.TestPAActivityComponent
 import io.matthewnelson.pin_authentication.di.application.module.PAApplicationModule
 import io.matthewnelson.pin_authentication.di.application.module.PACoroutineDispatchersModule
 import io.matthewnelson.pin_authentication.di.application.module.TestPAPrefsModule
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
-@OptIn(NotForPublicConsumption::class)
 @PAApplicationScope
 @Component(
     modules = [
@@ -19,7 +17,7 @@ import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumpt
         TestPAPrefsModule::class
     ]
 )
-interface TestPAApplicationComponent: PAApplicationComponent {
+internal interface TestPAApplicationComponent: PAApplicationComponent {
 
     override fun getPAActivityComponentBuilder(): TestPAActivityComponent.Builder
 

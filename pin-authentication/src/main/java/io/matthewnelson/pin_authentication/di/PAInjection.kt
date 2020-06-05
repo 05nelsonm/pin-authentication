@@ -5,7 +5,6 @@ import io.matthewnelson.pin_authentication.di.application.module.PAPrefsModule
 import io.matthewnelson.pin_authentication.service.components.*
 import io.matthewnelson.pin_authentication.service.PinAuthentication
 import io.matthewnelson.encrypted_storage.EncryptedStorage
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -17,8 +16,7 @@ import javax.inject.Named
  *
  * @param [paApplicationComponent] [PAApplicationComponent]
  * */
-@NotForPublicConsumption
-class PAInjection(private val paApplicationComponent: PAApplicationComponent) {
+internal class PAInjection(private val paApplicationComponent: PAApplicationComponent) {
 
     init {
         paApplicationComponent.inject(this)

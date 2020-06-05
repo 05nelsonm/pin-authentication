@@ -8,12 +8,10 @@ import io.matthewnelson.pin_authentication.di.activity.PAActivityComponent
 import io.matthewnelson.pin_authentication.di.application.module.PAApplicationModule
 import io.matthewnelson.pin_authentication.di.application.module.PACoroutineDispatchersModule
 import io.matthewnelson.pin_authentication.di.application.module.PAPrefsModule
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
 @PAApplicationScope
 @Component(
     modules = [
@@ -21,7 +19,7 @@ import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumpt
         PACoroutineDispatchersModule::class,
         PAPrefsModule::class
     ])
-interface PAApplicationComponent {
+internal interface PAApplicationComponent {
 
     fun getPAActivityComponentBuilder(): PAActivityComponent.Builder
 
@@ -34,6 +32,5 @@ interface PAApplicationComponent {
         fun build(): PAApplicationComponent
     }
 
-    @OptIn(NotForPublicConsumption::class)
     fun inject(paInjection: PAInjection)
 }

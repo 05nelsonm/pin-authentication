@@ -6,13 +6,11 @@ import androidx.core.content.ContextCompat
 import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.util.PAPrefsKeys
 import io.matthewnelson.encrypted_storage.EncryptedStorage
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PAViewColors(
+internal class PAViewColors(
     private val context: Context,
     private val prefs: EncryptedStorage.Prefs
 ) {

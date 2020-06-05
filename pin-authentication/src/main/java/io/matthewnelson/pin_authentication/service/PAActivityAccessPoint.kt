@@ -13,8 +13,7 @@ import io.matthewnelson.pin_authentication.util.definitions.PAConfirmPinStatus
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 import io.matthewnelson.pin_authentication.model.HashedPin
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
-import io.matthewnelson.pin_authentication.util.annotations.UnsafePinHash
+import io.matthewnelson.pin_authentication.model.UnsafePinHash
 import java.math.BigInteger
 import java.security.SecureRandom
 
@@ -32,8 +31,7 @@ import java.security.SecureRandom
  * @param [paWrongPinLockout] [PAWrongPinLockout]
  * @param [encryptedPrefs] [EncryptedStorage.Prefs]
  * */
-@NotForPublicConsumption
-class PAActivityAccessPoint(
+internal class PAActivityAccessPoint(
     private val paAppLifecycleWatcher: PAAppLifecycleWatcher,
     private val paAppLockObserver: PAAppLockObserver,
     private val paConfirmPinToProceed: PAConfirmPinToProceed,

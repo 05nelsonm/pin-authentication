@@ -5,7 +5,6 @@ import androidx.test.core.app.ApplicationProvider
 import io.matthewnelson.pin_authentication.BuildConfig
 import io.matthewnelson.pin_authentication.di.application.DaggerTestPAApplicationComponent
 import io.matthewnelson.pin_authentication.di.PAInjection
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -13,7 +12,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 
-@OptIn(NotForPublicConsumption::class)
 @Config(minSdk = 23, maxSdk = 23)
 @RunWith(RobolectricTestRunner::class)
 class PinAuthenticationUnitTest {
@@ -38,7 +36,7 @@ class PinAuthenticationUnitTest {
             .build()
 
         paInjection = PAInjection(component)
-        paBuilder = PinAuthentication.Builder.PABuilder(component, paInjection, BuildConfig.DEBUG)
+        paBuilder = PinAuthentication.Builder().testing(component, paInjection, BuildConfig.DEBUG)
     }
 
     @Test

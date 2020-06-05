@@ -4,15 +4,13 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.util.definitions.PAScreenType
 import kotlinx.coroutines.*
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PAConfirmPinToProceed(
+internal class PAConfirmPinToProceed(
     private val paAppLifecycleWatcher: PAAppLifecycleWatcher,
     private val paCoroutines: PACoroutines
 ) {

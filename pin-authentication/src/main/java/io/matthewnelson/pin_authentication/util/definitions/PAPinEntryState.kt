@@ -1,13 +1,11 @@
 package io.matthewnelson.pin_authentication.util.definitions
 
 import androidx.annotation.IntDef
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-abstract class PAPinEntryState {
+internal abstract class PAPinEntryState {
     @Target(AnnotationTarget.TYPE, AnnotationTarget.PROPERTY_GETTER)
     @IntDef(
         CONFIRM_PIN,

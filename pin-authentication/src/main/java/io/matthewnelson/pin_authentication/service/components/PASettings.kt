@@ -2,13 +2,11 @@ package io.matthewnelson.pin_authentication.service.components
 
 import io.matthewnelson.pin_authentication.util.PAPrefsKeys
 import io.matthewnelson.encrypted_storage.EncryptedStorage
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PASettings(private val prefs: EncryptedStorage.Prefs) {
+internal class PASettings(private val prefs: EncryptedStorage.Prefs) {
 
     //////////////
     // Settings //

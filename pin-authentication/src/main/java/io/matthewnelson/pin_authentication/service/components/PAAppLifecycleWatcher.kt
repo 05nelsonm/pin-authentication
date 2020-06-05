@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.PowerManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.util.definitions.PALockApplicationEvent
 
 /**
@@ -20,8 +19,7 @@ import io.matthewnelson.pin_authentication.util.definitions.PALockApplicationEve
  *
  * @param [app] Application
  * */
-@NotForPublicConsumption
-class PAAppLifecycleWatcher(
+internal class PAAppLifecycleWatcher(
     private val app: Application
 ) : Application.ActivityLifecycleCallbacks, ComponentCallbacks2 {
 

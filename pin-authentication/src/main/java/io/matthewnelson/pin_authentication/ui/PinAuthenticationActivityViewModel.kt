@@ -10,7 +10,6 @@ import io.matthewnelson.pin_authentication.service.PinAuthentication
 import io.matthewnelson.pin_authentication.service.components.PACoroutines
 import io.matthewnelson.pin_authentication.service.components.PAViewColors
 import io.matthewnelson.pin_authentication.service.components.PAViewData
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.util.definitions.PAConfirmPinStatus
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
 import kotlinx.coroutines.Job
@@ -23,8 +22,7 @@ import javax.inject.Inject
 /**
  * @suppress
  * */
-@NotForPublicConsumption
-class PinAuthenticationActivityViewModel @Inject constructor(
+internal class PinAuthenticationActivityViewModel @Inject constructor(
     private val paActivityAP: PAActivityAccessPoint,
     private val paViewColors: PAViewColors,
     private val paViewData: PAViewData,

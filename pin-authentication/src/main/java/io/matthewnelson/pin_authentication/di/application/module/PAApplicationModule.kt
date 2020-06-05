@@ -7,16 +7,14 @@ import io.matthewnelson.encrypted_storage.EncryptedStorage
 import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.di.application.PAApplicationScope
 import io.matthewnelson.pin_authentication.service.components.*
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Named
 
 /**
  * @suppress
  * */
-@NotForPublicConsumption
 @Module
-object PAApplicationModule {
+internal object PAApplicationModule {
 
     @PAApplicationScope
     @Provides

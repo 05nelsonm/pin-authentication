@@ -11,14 +11,11 @@ import io.matthewnelson.pin_authentication.di.PAInjection
 import io.matthewnelson.pin_authentication.di.application.PAApplicationComponent
 import io.matthewnelson.pin_authentication.service.components.*
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
-import io.matthewnelson.pin_authentication.util.PAPrefsKeys
 import io.matthewnelson.pin_authentication.util.BindingAdapters
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
 import io.matthewnelson.pin_authentication.util.definitions.PAScreenType
 import io.matthewnelson.pin_authentication.di.application.DaggerPAApplicationComponent
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 
-@OptIn(NotForPublicConsumption::class)
 sealed class PinAuthentication {
 
     /**
@@ -49,14 +46,24 @@ sealed class PinAuthentication {
             application: Application,
             buildConfigDebug: Boolean
         ): PABuilder {
-            val paApplicationComponent =
+            applicationComponent =
                 DaggerPAApplicationComponent
                     .builder()
                     .bindApplication(application)
                     .build()
 
-            val paInjection = PAInjection(paApplicationComponent)
-            return PABuilder(paApplicationComponent, paInjection, buildConfigDebug)
+            injected = PAInjection(applicationComponent)
+            return PABuilder(buildConfigDebug)
+        }
+
+        internal fun testing(
+            paApplicationComponent: PAApplicationComponent,
+            paInjection: PAInjection,
+            buildConfigDebug: Boolean
+        ): PABuilder {
+            applicationComponent = paApplicationComponent
+            injected = paInjection
+            return PABuilder(buildConfigDebug)
         }
 
         /**
@@ -65,15 +72,9 @@ sealed class PinAuthentication {
          *
          * See [Builder] for sample code.
          *
-         * @param [paApplicationComponent] [PAApplicationComponent]
-         * @param [paInjection] [PAInjection]
          * @param [buildConfigDebug] Boolean
          * */
-        class PABuilder(
-            private val paApplicationComponent: PAApplicationComponent,
-            private val paInjection: PAInjection,
-            private val buildConfigDebug: Boolean
-        ) {
+        class PABuilder(private val buildConfigDebug: Boolean) {
             private var appHasOnBoardProcessInitValue = false
             private var backgroundLogoutTimerInitValue = 0L
             private var hapticFeedbackIsEnabledInitValue = false
@@ -81,11 +82,6 @@ sealed class PinAuthentication {
             private var scrambledPinIsEnabledInitValue = false
 
             private var enableWrongPinLockout = false
-
-            init {
-                applicationComponent = paApplicationComponent
-                injected = paInjection
-            }
 
             /**
              * By default, application has on-board process is DISABLED.
@@ -464,10 +460,9 @@ sealed class PinAuthentication {
 
     /**
      * @suppress
-     * PUBLIC methods needed for [PinAuthenticationActivity] to access dependency injection.
+     * Methods needed for [PinAuthenticationActivity] to access dependency injection.
      * */
-    @NotForPublicConsumption
-    class PinAuthenticationActivityInjection(
+    internal class PinAuthenticationActivityInjection(
         private val pinAuthenticationActivity: PinAuthenticationActivity
     ) {
 
@@ -500,9 +495,7 @@ sealed class PinAuthentication {
          * */
         fun clearPinAuthenticationData() {
             injected.prefs.clear()
-            PAPrefsKeys.getBlacklistedKeys().forEach {
-                injected.encryptedPrefs.remove(it)
-            }
+            injected.encryptedPrefs.clear()
         }
 
         //////////////////////////////////

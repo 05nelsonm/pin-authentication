@@ -2,7 +2,6 @@ package io.matthewnelson.pin_authentication.service.components
 
 import android.content.Intent
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.util.definitions.PAAuthenticationState
 import io.matthewnelson.pin_authentication.util.definitions.PALockApplicationEvent
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
@@ -26,8 +25,7 @@ import kotlinx.coroutines.launch
  * @param [paSettings] [PASettings]
  * @param [paViewData] [PAViewData]
  * */
-@NotForPublicConsumption
-class PAAppLockObserver(
+internal class PAAppLockObserver(
     private val paAppLifecycleWatcher: PAAppLifecycleWatcher,
     private val paCoroutines: PACoroutines,
     private val paPinSecurity: PAPinSecurity,

@@ -8,7 +8,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.PowerManager
 import androidx.test.core.app.ApplicationProvider
-import io.matthewnelson.pin_authentication.util.annotations.NotForPublicConsumption
 import io.matthewnelson.pin_authentication.util.definitions.PALockApplicationEvent
 import org.junit.Before
 import org.junit.FixMethodOrder
@@ -23,7 +22,6 @@ import org.robolectric.shadows.ShadowPowerManager
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
-@OptIn(NotForPublicConsumption::class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @Config(minSdk = 23, maxSdk = 28)
 @RunWith(RobolectricTestRunner::class)
