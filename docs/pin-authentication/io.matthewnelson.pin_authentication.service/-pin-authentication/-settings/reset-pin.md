@@ -2,7 +2,7 @@
 
 # resetPin
 
-`fun resetPin(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L878)
+`fun resetPin(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L871)
 
 Launches [PinAuthenticationActivity](#) in
 [PAPinEntryState.RESET_PIN](#) configuration for
@@ -16,5 +16,5 @@ binding.buttonSettingsPinReset.setOnClickListener {
 
 **See Also**
 
-[PAAppLockObserver.hijackApp](#)
+[AppLockObserver.hijackApp](#)
 

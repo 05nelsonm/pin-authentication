@@ -2,7 +2,7 @@
 
 # completeOnBoardProcess
 
-`fun completeOnBoardProcess(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L533)
+`fun completeOnBoardProcess(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L526)
 
 Declares the on-board process as being complete,
 and if Pin Security is:
@@ -12,7 +12,7 @@ and if Pin Security is:
 
 **OR**
 
-* DISABLED: Sets [PAInitialAppLogin.initialApplicationLoginSatisfied](#)
+* DISABLED: Sets [InitialAppLogin.initialApplicationLoginSatisfied](#)
     to true.
 
 Declaring the on-board process as completed is saved
@@ -30,5 +30,5 @@ binding.buttonOnBoardNext.setOnClickListener {
 
 **See Also**
 
-[PAAppLockObserver.hijackApp](#)
+[AppLockObserver.hijackApp](#)
 

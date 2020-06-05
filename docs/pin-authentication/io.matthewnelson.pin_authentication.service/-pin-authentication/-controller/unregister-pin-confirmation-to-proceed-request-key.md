@@ -2,14 +2,14 @@
 
 # unregisterPinConfirmationToProceedRequestKey
 
-`fun unregisterPinConfirmationToProceedRequestKey(requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L695)
+`fun unregisterPinConfirmationToProceedRequestKey(requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L688)
 
 Remove registered request key.
 
-`fun unregisterPinConfirmationToProceedRequestKey(requestKeys: `[`Array`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L712)
+`fun unregisterPinConfirmationToProceedRequestKey(requestKeys: `[`Array`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html)`<`[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L705)
 
 Removes the requestKey and LiveData values from the Map
-contained in [PAConfirmPinToProceed.mapRequestKeys](#).
+contained in [ConfirmPinToProceed.mapRequestKeys](#).
 
 To be implemented in an Activity's onDestroy() or a
 Fragments onDestroyView(), **after** the super call.
@@ -31,5 +31,5 @@ paController.unregisterPinConfirmationToProceedRequestKey(
 
 **See Also**
 
-[PAConfirmPinToProceed.unregisterRequestKey](#)
+[ConfirmPinToProceed.unregisterRequestKey](#)
 

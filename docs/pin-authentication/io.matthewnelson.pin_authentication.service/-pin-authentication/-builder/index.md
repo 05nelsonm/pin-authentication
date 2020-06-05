@@ -2,7 +2,7 @@
 
 # Builder
 
-`class Builder` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L29)
+`class Builder` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L26)
 
 Call from the Application's onCreate() to implement
 
@@ -27,8 +27,8 @@ PinAuthentication.Builder()
      * method, and also reset back to the colors chosen here by utilizing the
      * [PinAuthentication.Settings.resetColorsToApplicationDefaults] method.
      *
-     * @see [PinAuthentication.Builder.PABuilder.setCustomColors]
-     * @see [PinAuthentication.Builder.PAColorsBuilder]
+     * @see [PinAuthentication.Builder.OptionsBuilder.setCustomColors]
+     * @see [PinAuthentication.Builder.ColorsBuilder]
      * */
     .setCustomColors()
     .set2_ConfirmButtonBackgroundColor(R.color.secondaryLightColor)
@@ -40,7 +40,7 @@ PinAuthentication.Builder()
      * Calling applyColors from within the Builder will **NOT** return null. null is only
      * returned if calling [PinAuthentication.Settings.setCustomColors].
      *
-     * @see [PinAuthentication.Builder.PAColorsBuilder.applyColors]
+     * @see [PinAuthentication.Builder.ColorsBuilder.applyColors]
      * */
     .applyColors()!!
 
@@ -51,8 +51,8 @@ PinAuthentication.Builder()
 
 | Name | Summary |
 |---|---|
-| [PABuilder](-p-a-builder/index.md) | Meant to only be used after calling [Builder.setApplicationAndBuildConfig](set-application-and-build-config.md), which returns this class.`class PABuilder` |
-| [PAColorsBuilder](-p-a-colors-builder/index.md) | Customize [PinAuthenticationActivity](#)'s colors.`class PAColorsBuilder` |
+| [ColorsBuilder](-colors-builder/index.md) | Customize [PinAuthenticationActivity](#)'s colors.`class ColorsBuilder` |
+| [OptionsBuilder](-options-builder/index.md) | Meant to only be used after calling [Builder.setApplicationAndBuildConfig](set-application-and-build-config.md), which returns this class.`class OptionsBuilder` |
 
 ### Constructors
 
@@ -64,4 +64,4 @@ PinAuthentication.Builder()
 
 | Name | Summary |
 |---|---|
-| [setApplicationAndBuildConfig](set-application-and-build-config.md) | Sets the Application which is used throughout [PinAuthentication](../index.md). It initializes [PinAuthentication](../index.md)'s [DaggerPAApplicationComponent](#) which then is used to inject classes as needed. See [PAInjection](#) See [Companion.injected](#)`fun setApplicationAndBuildConfig(application: `[`Application`](https://developer.android.com/reference/android/app/Application.html)`, buildConfigDebug: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): PABuilder` |
+| [setApplicationAndBuildConfig](set-application-and-build-config.md) | Sets the Application which is used throughout [PinAuthentication](../index.md). It initializes [PinAuthentication](../index.md)'s [DaggerApplicationComponent](#) which then is used to inject classes as needed. See [CompanionInjection](#) See [Companion.injected](#)`fun setApplicationAndBuildConfig(application: `[`Application`](https://developer.android.com/reference/android/app/Application.html)`, buildConfigDebug: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): OptionsBuilder` |

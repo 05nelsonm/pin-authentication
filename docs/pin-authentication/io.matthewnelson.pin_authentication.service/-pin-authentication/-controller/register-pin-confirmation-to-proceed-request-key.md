@@ -2,13 +2,13 @@
 
 # registerPinConfirmationToProceedRequestKey
 
-`fun registerPinConfirmationToProceedRequestKey(activity: `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`, requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): LiveData<`[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`>?` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L581)
+`fun registerPinConfirmationToProceedRequestKey(activity: `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`, requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): LiveData<`[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`>?` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L574)
 
 Register request keys.
 
-`fun registerPinConfirmationToProceedRequestKey(fragment: Fragment, requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): LiveData<`[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`>?` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L608)
+`fun registerPinConfirmationToProceedRequestKey(fragment: Fragment, requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): LiveData<`[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`>?` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L601)
 
-Adds a requestKey to [PAConfirmPinToProceed.mapRequestKeys](#)
+Adds a requestKey to [ConfirmPinToProceed.mapRequestKeys](#)
 and returns LiveData associated with it which will change
 after calling [Controller.requestPinConfirmationToProceed](request-pin-confirmation-to-proceed.md)
 depending on whether or not the User enters the correct pin.

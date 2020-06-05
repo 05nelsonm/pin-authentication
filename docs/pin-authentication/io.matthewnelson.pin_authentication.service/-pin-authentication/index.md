@@ -2,7 +2,7 @@
 
 # PinAuthentication
 
-`sealed class PinAuthentication` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L22)
+`sealed class PinAuthentication` [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L19)
 
 ### Types
 

@@ -27,8 +27,8 @@ PinAuthentication.Builder()
      * method, and also reset back to the colors chosen here by utilizing the
      * [PinAuthentication.Settings.resetColorsToApplicationDefaults] method.
      *
-     * @see [PinAuthentication.Builder.PABuilder.setCustomColors]
-     * @see [PinAuthentication.Builder.PAColorsBuilder]
+     * @see [PinAuthentication.Builder.OptionsBuilder.setCustomColors]
+     * @see [PinAuthentication.Builder.ColorsBuilder]
      * */
     .setCustomColors()
     .set2_ConfirmButtonBackgroundColor(R.color.secondaryLightColor)
@@ -40,7 +40,7 @@ PinAuthentication.Builder()
      * Calling applyColors from within the Builder will **NOT** return null. null is only
      * returned if calling [PinAuthentication.Settings.setCustomColors].
      *
-     * @see [PinAuthentication.Builder.PAColorsBuilder.applyColors]
+     * @see [PinAuthentication.Builder.ColorsBuilder.applyColors]
      * */
     .applyColors()!!
 

@@ -1,14 +1,14 @@
-[pin-authentication](../../../../index.md) / [io.matthewnelson.pin_authentication.service](../../../index.md) / [PinAuthentication](../../index.md) / [Builder](../index.md) / [PAColorsBuilder](index.md) / [&lt;init&gt;](./-init-.md)
+[pin-authentication](../../../../index.md) / [io.matthewnelson.pin_authentication.service](../../../index.md) / [PinAuthentication](../../index.md) / [Builder](../index.md) / [ColorsBuilder](index.md) / [&lt;init&gt;](./-init-.md)
 
 # &lt;init&gt;
 
-`PAColorsBuilder(paBuilder: PABuilder?)`
+`ColorsBuilder(optionsBuilder: OptionsBuilder?)`
 
 Customize [PinAuthenticationActivity](#)'s colors.
 
 This Builder is used in 2 ways. Via:
 
-* [PABuilder.setCustomColors](../-p-a-builder/set-custom-colors.md) method being called which "unlocks" these options
+* [OptionsBuilder.setCustomColors](../-options-builder/set-custom-colors.md) method being called which "unlocks" these options
 while initializing [PinAuthentication.Builder](../index.md).
 
 * [Settings.setCustomColors](../../-settings/set-custom-colors.md) method for modifying colors after
@@ -37,8 +37,8 @@ PinAuthentication.Builder()
      * method, and also reset back to the colors chosen here by utilizing the
      * [PinAuthentication.Settings.resetColorsToApplicationDefaults] method.
      *
-     * @see [PinAuthentication.Builder.PABuilder.setCustomColors]
-     * @see [PinAuthentication.Builder.PAColorsBuilder]
+     * @see [PinAuthentication.Builder.OptionsBuilder.setCustomColors]
+     * @see [PinAuthentication.Builder.ColorsBuilder]
      * */
     .setCustomColors()
     .set2_ConfirmButtonBackgroundColor(R.color.secondaryLightColor)
@@ -50,7 +50,7 @@ PinAuthentication.Builder()
      * Calling applyColors from within the Builder will **NOT** return null. null is only
      * returned if calling [PinAuthentication.Settings.setCustomColors].
      *
-     * @see [PinAuthentication.Builder.PAColorsBuilder.applyColors]
+     * @see [PinAuthentication.Builder.ColorsBuilder.applyColors]
      * */
     .applyColors()!!
 
@@ -71,4 +71,4 @@ binding.buttonSettingsSetCustomColors.setOnClickListener {
 
 ### Parameters
 
-`paBuilder` - [PABuilder](../-p-a-builder/index.md)?
+`optionsBuilder` - [OptionsBuilder](../-options-builder/index.md)?

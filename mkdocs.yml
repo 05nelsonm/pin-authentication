@@ -1,7 +1,7 @@
 extra:
   pin_authentication:
-    release: '1.0.0-alpha02'
-    next_release: '1.0.0-beta01'
+    release: '1.0.0-beta01'
+    next_release: '1.0.0-beta02'
   social:
     - icon: material/earth
       link: https://matthewnelson.io

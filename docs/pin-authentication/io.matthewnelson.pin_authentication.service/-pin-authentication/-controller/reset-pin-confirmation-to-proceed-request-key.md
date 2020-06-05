@@ -2,7 +2,7 @@
 
 # resetPinConfirmationToProceedRequestKey
 
-`fun resetPinConfirmationToProceedRequestKey(requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L682)
+`fun resetPinConfirmationToProceedRequestKey(requestKey: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L675)
 
 Reset the boolean value associated with the [requestKey](reset-pin-confirmation-to-proceed-request-key.md#io.matthewnelson.pin_authentication.service.PinAuthentication.Controller$resetPinConfirmationToProceedRequestKey(kotlin.String)/requestKey)
 to false to proc the observer that is setup on the

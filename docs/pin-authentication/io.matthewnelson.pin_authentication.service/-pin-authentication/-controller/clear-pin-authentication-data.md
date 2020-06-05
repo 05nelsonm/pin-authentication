@@ -2,7 +2,7 @@
 
 # clearPinAuthenticationData
 
-`fun clearPinAuthenticationData(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L501)
+`fun clearPinAuthenticationData(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L496)
 
 Clears data associated with [PinAuthentication](../index.md) from
 SharedPreferences, and EncryptedSharedPreferences.
