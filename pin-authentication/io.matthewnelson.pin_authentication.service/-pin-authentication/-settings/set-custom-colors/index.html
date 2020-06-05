@@ -448,13 +448,13 @@
                 
                 <p><a href="../../../../">pin-authentication</a> / <a href="../../../">io.matthewnelson.pin_authentication.service</a> / <a href="../../">PinAuthentication</a> / <a href="../">Settings</a> / <a href="./">setCustomColors</a></p>
 <h1 id="setcustomcolors">setCustomColors<a class="headerlink" href="#setcustomcolors" title="Permanent link">&para;</a></h1>
-<p><code>fun setCustomColors(): PAColorsBuilder</code> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L837">(source)</a></p>
+<p><code>fun setCustomColors(): ColorsBuilder</code> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L830">(source)</a></p>
 <p>Change the colors of <a href="#">PinAuthenticationActivity</a>
 on the fly. These settings get saved to
 <a href="../../">PinAuthentication</a>&lsquo;s SharedPreferences and loaded
 at startup <strong>after</strong> custom colors that may have been
 specified in the Application onCreate()&rsquo;s
-<a href="../../-builder/-p-a-builder/set-custom-colors/">PinAuthentication.Builder.PABuilder.setCustomColors</a>.</p>
+<a href="../../-builder/-options-builder/set-custom-colors/">PinAuthentication.Builder.OptionsBuilder.setCustomColors</a>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">binding</span><span class="p">.</span><span class="n">buttonSettingsSetCustomColors</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
     <span class="n">paSettings</span><span class="p">.</span><span class="n">setCustomColors</span><span class="p">()</span>
         <span class="p">.</span><span class="n">set2_ConfirmButtonBackgroundColor</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">color</span><span class="p">.</span><span class="n">pa_super_green</span><span class="p">)</span>
@@ -467,7 +467,7 @@ specified in the Application onCreate()&rsquo;s
 </code></pre></div>
 
 <p><strong>Return</strong>
-<a href="../../-builder/-p-a-colors-builder/">Builder.PAColorsBuilder</a></p>
+<a href="../../-builder/-colors-builder/">Builder.ColorsBuilder</a></p>
                 
               
               

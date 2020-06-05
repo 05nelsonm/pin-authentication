@@ -539,7 +539,7 @@
                 
                 <p><a href="../../../">pin-authentication</a> / <a href="../../">io.matthewnelson.pin_authentication.service</a> / <a href="../">PinAuthentication</a> / <a href="./">Builder</a></p>
 <h1 id="builder">Builder<a class="headerlink" href="#builder" title="Permanent link">&para;</a></h1>
-<p><code>class Builder</code> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L29">(source)</a></p>
+<p><code>class Builder</code> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L26">(source)</a></p>
 <p>Call from the Application&rsquo;s onCreate() to implement</p>
 <div class="highlight"><pre><span></span><code><span class="n">PinAuthentication</span><span class="p">.</span><span class="n">Builder</span><span class="p">()</span>
     <span class="p">.</span><span class="n">setApplicationAndBuildConfig</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">BuildConfig</span><span class="p">.</span><span class="n">DEBUG</span><span class="p">)</span>
@@ -561,8 +561,8 @@
 <span class="cm">     * method, and also reset back to the colors chosen here by utilizing the</span>
 <span class="cm">     * [PinAuthentication.Settings.resetColorsToApplicationDefaults] method.</span>
 <span class="cm">     *</span>
-<span class="cm">     * @see [PinAuthentication.Builder.PABuilder.setCustomColors]</span>
-<span class="cm">     * @see [PinAuthentication.Builder.PAColorsBuilder]</span>
+<span class="cm">     * @see [PinAuthentication.Builder.OptionsBuilder.setCustomColors]</span>
+<span class="cm">     * @see [PinAuthentication.Builder.ColorsBuilder]</span>
 <span class="cm">     * */</span>
     <span class="p">.</span><span class="n">setCustomColors</span><span class="p">()</span>
     <span class="p">.</span><span class="n">set2_ConfirmButtonBackgroundColor</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">color</span><span class="p">.</span><span class="n">secondaryLightColor</span><span class="p">)</span>
@@ -574,7 +574,7 @@
 <span class="cm">     * Calling applyColors from within the Builder will **NOT** return null. null is only</span>
 <span class="cm">     * returned if calling [PinAuthentication.Settings.setCustomColors].</span>
 <span class="cm">     *</span>
-<span class="cm">     * @see [PinAuthentication.Builder.PAColorsBuilder.applyColors]</span>
+<span class="cm">     * @see [PinAuthentication.Builder.ColorsBuilder.applyColors]</span>
 <span class="cm">     * */</span>
     <span class="p">.</span><span class="n">applyColors</span><span class="p">()</span><span class="o">!!</span>
 
@@ -591,12 +591,12 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="-p-a-builder/">PABuilder</a></td>
-<td>Meant to only be used after calling <a href="set-application-and-build-config/">Builder.setApplicationAndBuildConfig</a>, which returns this class.<code>class PABuilder</code></td>
+<td><a href="-colors-builder/">ColorsBuilder</a></td>
+<td>Customize <a href="#">PinAuthenticationActivity</a>&lsquo;s colors.<code>class ColorsBuilder</code></td>
 </tr>
 <tr>
-<td><a href="-p-a-colors-builder/">PAColorsBuilder</a></td>
-<td>Customize <a href="#">PinAuthenticationActivity</a>&lsquo;s colors.<code>class PAColorsBuilder</code></td>
+<td><a href="-options-builder/">OptionsBuilder</a></td>
+<td>Meant to only be used after calling <a href="set-application-and-build-config/">Builder.setApplicationAndBuildConfig</a>, which returns this class.<code>class OptionsBuilder</code></td>
 </tr>
 </tbody>
 </table>
@@ -626,7 +626,7 @@
 <tbody>
 <tr>
 <td><a href="set-application-and-build-config/">setApplicationAndBuildConfig</a></td>
-<td>Sets the Application which is used throughout <a href="../">PinAuthentication</a>. It initializes <a href="../">PinAuthentication</a>&lsquo;s <a href="#">DaggerPAApplicationComponent</a> which then is used to inject classes as needed. See <a href="#">PAInjection</a> See <a href="#">Companion.injected</a><code>fun setApplicationAndBuildConfig(application:</code><a href="https://developer.android.com/reference/android/app/Application.html"><code>Application</code></a><code>, buildConfigDebug:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><code>Boolean</code></a><code>): PABuilder</code></td>
+<td>Sets the Application which is used throughout <a href="../">PinAuthentication</a>. It initializes <a href="../">PinAuthentication</a>&lsquo;s <a href="#">DaggerApplicationComponent</a> which then is used to inject classes as needed. See <a href="#">CompanionInjection</a> See <a href="#">Companion.injected</a><code>fun setApplicationAndBuildConfig(application:</code><a href="https://developer.android.com/reference/android/app/Application.html"><code>Application</code></a><code>, buildConfigDebug:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><code>Boolean</code></a><code>): OptionsBuilder</code></td>
 </tr>
 </tbody>
 </table>

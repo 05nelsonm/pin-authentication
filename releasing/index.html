@@ -471,19 +471,19 @@
 <p>Create a local release branch from <code>master</code>
 <div class="highlight"><pre><span></span><code>git checkout master
 git pull
-git checkout -b release_1.0.0-beta01
+git checkout -b release_1.0.0-beta02
 </code></pre></div></p>
 </li>
 <li>
 <p>Update <code>VERSION_NAME</code> (remove <code>-SNAPSHOT</code>) in <code>gradle.properties</code>
-<div class="highlight"><pre><span></span><code>VERSION_NAME=1.0.0-beta01
+<div class="highlight"><pre><span></span><code>VERSION_NAME=1.0.0-beta02
 </code></pre></div></p>
 </li>
 <li>
 <p>Update the current version and next version in <code>mkdocs.yml</code>
 <div class="highlight"><pre><span></span><code>extra:
   pin_authentication:
-    release: &#39;1.0.0-beta01&#39;
+    release: &#39;1.0.0-beta02&#39;
     next_release: &#39;REPLACE_WITH_NEXT_VERSION_NUMBER&#39;
 </code></pre></div></p>
 </li>
@@ -516,7 +516,7 @@ git checkout -b release_1.0.0-beta01
 <li>
 <p>Update <code>docs/changelog.md</code> after checking out all changes:</p>
 <ul>
-<li><a href="https://github.com/05nelsonm/pin-authentication/compare/1.0.0-alpha02...master" target="_blank">compare changes</a></li>
+<li><a href="https://github.com/05nelsonm/pin-authentication/compare/1.0.0-beta01...master" target="_blank">compare changes</a></li>
 </ul>
 </li>
 <li>
@@ -526,7 +526,7 @@ git checkout -b release_1.0.0-beta01
 </li>
 <li>
 <p>Commit all local changes and PGP sign
-<div class="highlight"><pre><span></span><code>git commit -S -am &quot;Prepare 1.0.0-beta01 release&quot;
+<div class="highlight"><pre><span></span><code>git commit -S -am &quot;Prepare 1.0.0-beta02 release&quot;
 </code></pre></div></p>
 </li>
 <li>
@@ -545,8 +545,8 @@ git checkout -b release_1.0.0-beta01
 </li>
 <li>
 <p>Create a PGP signed tag, and push it
-<div class="highlight"><pre><span></span><code>git tag -s 1.0.0-beta01 -m &quot;Release v1.0.0-beta01&quot;
-git push origin 1.0.0-beta01
+<div class="highlight"><pre><span></span><code>git tag -s 1.0.0-beta02 -m &quot;Release v1.0.0-beta02&quot;
+git push origin 1.0.0-beta02
 </code></pre></div></p>
 </li>
 <li>
@@ -579,7 +579,7 @@ signing.gnupg.keyName=0x61471B8AB3890961
 <p>Merge the release branch to master
 <div class="highlight"><pre><span></span><code>git checkout master
 git pull
-git merge --no-ff -S release_1.0.0-beta01
+git merge --no-ff -S release_1.0.0-beta02
 </code></pre></div></p>
 </li>
 <li>
@@ -609,7 +609,7 @@ VERSION_CODE=INCREMENT
 </ul>
 </li>
 <li>Go to the <a href="https://github.com/05nelsonm/pin-authentication/releases/new" target="_blank">Draft a new release</a> page,
-  enter the release name (1.0.0-beta01) as tag and title, and have the description
+  enter the release name (1.0.0-beta02) as tag and title, and have the description
   point to the changelog. You can find the direct anchor URL from the
   <a href="https://05nelsonm.github.io/pin-authentication/changelog" target="_blank">Change Log</a>
   page on the doc site.</li>

@@ -525,7 +525,7 @@
                 
                 <p><a href="../../../">pin-authentication</a> / <a href="../../">io.matthewnelson.pin_authentication.service</a> / <a href="../">PinAuthentication</a> / <a href="./">Settings</a></p>
 <h1 id="settings">Settings<a class="headerlink" href="#settings" title="Permanent link">&para;</a></h1>
-<p><code>class Settings</code> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L805">(source)</a></p>
+<p><code>class Settings</code> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L798">(source)</a></p>
 <p>PUBLIC methods to be utilized by the Application that&rsquo;s
 implementing <a href="../">PinAuthentication</a> for allowing Users
 the ability to modify various settings.</p>
@@ -579,7 +579,7 @@ the ability to modify various settings.</p>
 </tr>
 <tr>
 <td><a href="reset-colors-to-application-defaults/">resetColorsToApplicationDefaults</a></td>
-<td>Will clear currently applied colors and set them back to colors defined in the Application onCreate()&rsquo;s initialization of <a href="../-builder/-p-a-builder/set-custom-colors/">PinAuthentication.Builder.PABuilder.setCustomColors</a>, if they were specified. Otherwise it will fall back to <a href="../">PinAuthentication</a>&lsquo;s default colors.<code>fun resetColorsToApplicationDefaults():</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><code>Unit</code></a></td>
+<td>Will clear currently applied colors and set them back to colors defined in the Application onCreate()&rsquo;s initialization of <a href="../-builder/-options-builder/set-custom-colors/">PinAuthentication.Builder.OptionsBuilder.setCustomColors</a>, if they were specified. Otherwise it will fall back to <a href="../">PinAuthentication</a>&lsquo;s default colors.<code>fun resetColorsToApplicationDefaults():</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><code>Unit</code></a></td>
 </tr>
 <tr>
 <td><a href="reset-pin/">resetPin</a></td>
@@ -587,7 +587,7 @@ the ability to modify various settings.</p>
 </tr>
 <tr>
 <td><a href="set-custom-colors/">setCustomColors</a></td>
-<td>Change the colors of <a href="#">PinAuthenticationActivity</a> on the fly. These settings get saved to <a href="../">PinAuthentication</a>&lsquo;s SharedPreferences and loaded at startup <strong>after</strong> custom colors that may have been specified in the Application onCreate()&rsquo;s <a href="../-builder/-p-a-builder/set-custom-colors/">PinAuthentication.Builder.PABuilder.setCustomColors</a>.<code>fun setCustomColors(): PAColorsBuilder</code></td>
+<td>Change the colors of <a href="#">PinAuthenticationActivity</a> on the fly. These settings get saved to <a href="../">PinAuthentication</a>&lsquo;s SharedPreferences and loaded at startup <strong>after</strong> custom colors that may have been specified in the Application onCreate()&rsquo;s <a href="../-builder/-options-builder/set-custom-colors/">PinAuthentication.Builder.OptionsBuilder.setCustomColors</a>.<code>fun setCustomColors(): ColorsBuilder</code></td>
 </tr>
 </tbody>
 </table>

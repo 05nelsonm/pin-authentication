@@ -465,11 +465,11 @@
                 
                 <p><a href="../../../../">pin-authentication</a> / <a href="../../../">io.matthewnelson.pin_authentication.service</a> / <a href="../../">PinAuthentication</a> / <a href="../">Builder</a> / <a href="./">setApplicationAndBuildConfig</a></p>
 <h1 id="setapplicationandbuildconfig">setApplicationAndBuildConfig<a class="headerlink" href="#setapplicationandbuildconfig" title="Permanent link">&para;</a></h1>
-<p><code>fun setApplicationAndBuildConfig(application:</code><a href="https://developer.android.com/reference/android/app/Application.html"><code>Application</code></a><code>, buildConfigDebug:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><code>Boolean</code></a><code>): PABuilder</code> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L48">(source)</a></p>
+<p><code>fun setApplicationAndBuildConfig(application:</code><a href="https://developer.android.com/reference/android/app/Application.html"><code>Application</code></a><code>, buildConfigDebug:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><code>Boolean</code></a><code>): OptionsBuilder</code> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L45">(source)</a></p>
 <p>Sets the Application which is used throughout <a href="../../">PinAuthentication</a>. It initializes
-<a href="../../">PinAuthentication</a>&lsquo;s <a href="#">DaggerPAApplicationComponent</a> which then is used to inject
+<a href="../../">PinAuthentication</a>&lsquo;s <a href="#">DaggerApplicationComponent</a> which then is used to inject
 classes as needed.
-See <a href="#">PAInjection</a>
+See <a href="#">CompanionInjection</a>
 See <a href="#">Companion.injected</a></p>
 <p>It also sets the <a href="#">PinAuthenticationActivity</a>&lsquo;s window flag to secure for release
 builds to inhibit screen capture of the user&rsquo;s PIN.</p>
@@ -478,7 +478,7 @@ builds to inhibit screen capture of the user&rsquo;s PIN.</p>
 <p><code>application</code> - Application</p>
 <p><code>buildConfigDebug</code> - Boolean - (send BuildConfig.DEBUG)</p>
 <p><strong>Return</strong>
-<a href="../-p-a-builder/">PABuilder</a></p>
+<a href="../-options-builder/">OptionsBuilder</a></p>
                 
               
               

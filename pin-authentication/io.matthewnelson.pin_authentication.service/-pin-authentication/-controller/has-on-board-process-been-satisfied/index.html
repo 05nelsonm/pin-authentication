@@ -448,11 +448,11 @@
                 
                 <p><a href="../../../../">pin-authentication</a> / <a href="../../../">io.matthewnelson.pin_authentication.service</a> / <a href="../../">PinAuthentication</a> / <a href="../">Controller</a> / <a href="./">hasOnBoardProcessBeenSatisfied</a></p>
 <h1 id="hasonboardprocessbeensatisfied">hasOnBoardProcessBeenSatisfied<a class="headerlink" href="#hasonboardprocessbeensatisfied" title="Permanent link">&para;</a></h1>
-<p><code>fun hasOnBoardProcessBeenSatisfied():</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><code>Boolean</code></a> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L563">(source)</a></p>
+<p><code>fun hasOnBoardProcessBeenSatisfied():</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><code>Boolean</code></a> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L556">(source)</a></p>
 <p>Returns TRUE if:</p>
 <ul>
 <li>You declared that your application has an on-board process via
-<a href="../../-builder/-p-a-builder/application-has-on-board-process/">PinAuthentication.Builder.PABuilder.applicationHasOnBoardProcess</a>
+<a href="../../-builder/-options-builder/application-has-on-board-process/">PinAuthentication.Builder.OptionsBuilder.applicationHasOnBoardProcess</a>
 and the on-board process has been marked <strong>complete</strong>.</li>
 </ul>
 <p><strong>OR</strong></p>
@@ -462,7 +462,7 @@ and the on-board process has been marked <strong>complete</strong>.</li>
 <p>Returns FALSE if:</p>
 <ul>
 <li>You declared that your application has an on-board process via
-<a href="../../-builder/-p-a-builder/application-has-on-board-process/">PinAuthentication.Builder.PABuilder.applicationHasOnBoardProcess</a>,
+<a href="../../-builder/-options-builder/application-has-on-board-process/">PinAuthentication.Builder.OptionsBuilder.applicationHasOnBoardProcess</a>,
 but the on-board process has <strong>not</strong> been marked complete.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(!</span><span class="n">paController</span><span class="p">.</span><span class="n">hasOnBoardProcessBeenSatisfied</span><span class="p">())</span> <span class="p">{</span>

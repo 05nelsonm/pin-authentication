@@ -465,11 +465,11 @@
                 
                 <p><a href="../../../../">pin-authentication</a> / <a href="../../../">io.matthewnelson.pin_authentication.service</a> / <a href="../../">PinAuthentication</a> / <a href="../">Controller</a> / <a href="./">unregisterPinConfirmationToProceedRequestKey</a></p>
 <h1 id="unregisterpinconfirmationtoproceedrequestkey">unregisterPinConfirmationToProceedRequestKey<a class="headerlink" href="#unregisterpinconfirmationtoproceedrequestkey" title="Permanent link">&para;</a></h1>
-<p><code>fun unregisterPinConfirmationToProceedRequestKey(requestKey:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><code>String</code></a><code>):</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><code>Unit</code></a> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L695">(source)</a></p>
+<p><code>fun unregisterPinConfirmationToProceedRequestKey(requestKey:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><code>String</code></a><code>):</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><code>Unit</code></a> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L688">(source)</a></p>
 <p>Remove registered request key.</p>
-<p><code>fun unregisterPinConfirmationToProceedRequestKey(requestKeys:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><code>Array</code></a><code>&lt;</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><code>String</code></a><code>&gt;):</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><code>Unit</code></a> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L712">(source)</a></p>
+<p><code>fun unregisterPinConfirmationToProceedRequestKey(requestKeys:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><code>Array</code></a><code>&lt;</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><code>String</code></a><code>&gt;):</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><code>Unit</code></a> <a href="https://github.com/05nelsonm/pin-authentication/blob/master/pin-authentication/src/main/java/io/matthewnelson/pin_authentication/service/PinAuthentication.kt#L705">(source)</a></p>
 <p>Removes the requestKey and LiveData values from the Map
-contained in <a href="#">PAConfirmPinToProceed.mapRequestKeys</a>.</p>
+contained in <a href="#">ConfirmPinToProceed.mapRequestKeys</a>.</p>
 <p>To be implemented in an Activity&rsquo;s onDestroy() or a
 Fragments onDestroyView(), <strong>after</strong> the super call.</p>
 <div class="highlight"><pre><span></span><code><span class="k">super</span><span class="p">.</span><span class="n">onDestroyView</span><span class="p">()</span>
@@ -484,7 +484,7 @@ Fragments onDestroyView(), <strong>after</strong> the super call.</p>
 <p><code>requestKey</code> - String <strong>OR</strong></p>
 <p><code>requestKeys</code> - Array</p>
 <p><strong>See Also</strong></p>
-<p><a href="#">PAConfirmPinToProceed.unregisterRequestKey</a></p>
+<p><a href="#">ConfirmPinToProceed.unregisterRequestKey</a></p>
                 
               
               
