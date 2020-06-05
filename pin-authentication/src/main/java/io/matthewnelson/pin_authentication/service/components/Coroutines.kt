@@ -5,7 +5,7 @@ import kotlinx.coroutines.*
 /**
  * @suppress
  * */
-internal class PACoroutines(
+internal class Coroutines(
     private val dispatcherDefault: CoroutineDispatcher,
     private val dispatcherMain: CoroutineDispatcher
 ) {

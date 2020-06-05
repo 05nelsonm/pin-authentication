@@ -10,7 +10,7 @@ import javax.inject.Named
  * @suppress
  * */
 @Module
-internal object PACoroutineDispatchersModule {
+internal object CoroutineDispatchersModule {
 
     const val MAIN = "DISPATCHERS_MAIN"
     const val DEFAULT = "DISPATCHERS_DEFAULT"

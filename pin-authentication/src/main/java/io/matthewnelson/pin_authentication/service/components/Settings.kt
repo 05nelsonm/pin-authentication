@@ -1,12 +1,12 @@
 package io.matthewnelson.pin_authentication.service.components
 
-import io.matthewnelson.pin_authentication.util.PAPrefsKeys
+import io.matthewnelson.pin_authentication.util.PrefsKeys
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 
 /**
  * @suppress
  * */
-internal class PASettings(private val prefs: EncryptedStorage.Prefs) {
+internal class Settings(private val prefs: EncryptedStorage.Prefs) {
 
     //////////////
     // Settings //
@@ -50,25 +50,25 @@ internal class PASettings(private val prefs: EncryptedStorage.Prefs) {
 
     fun setHapticFeedbackIsEnabled(enable: Boolean) {
         hapticFeedbackIsEnabled = enable
-        prefs.write(PAPrefsKeys.HAPTIC_FEEDBACK_IS_ENABLED, enable)
+        prefs.write(PrefsKeys.HAPTIC_FEEDBACK_IS_ENABLED, enable)
     }
 
     fun setOnBoardProcessIsComplete() {
         onBoardProcessIsComplete = true
-        prefs.write(PAPrefsKeys.ONBOARD_PROCESS_COMPLETE, true)
+        prefs.write(PrefsKeys.ONBOARD_PROCESS_COMPLETE, true)
     }
 
     fun setScrambledPinIsEnabled(enable: Boolean) {
         scrambledPinIsEnabled = enable
-        prefs.write(PAPrefsKeys.SCRAMBLED_PIN_IS_ENABLED, enable)
+        prefs.write(PrefsKeys.SCRAMBLED_PIN_IS_ENABLED, enable)
     }
 
     fun setUserPinIsSet(boolean: Boolean) {
         userPinIsSet = boolean
         if (boolean) {
-            prefs.write(PAPrefsKeys.USER_PIN_IS_SET, boolean)
+            prefs.write(PrefsKeys.USER_PIN_IS_SET, boolean)
         } else {
-            prefs.remove(PAPrefsKeys.USER_PIN_IS_SET)
+            prefs.remove(PrefsKeys.USER_PIN_IS_SET)
         }
     }
 
@@ -98,22 +98,22 @@ internal class PASettings(private val prefs: EncryptedStorage.Prefs) {
 
     private fun loadSettingsFromSharedPreferences() {
         // Haptic Feedback Is Enabled
-        prefs.read(PAPrefsKeys.HAPTIC_FEEDBACK_IS_ENABLED)?.let {
+        prefs.read(PrefsKeys.HAPTIC_FEEDBACK_IS_ENABLED)?.let {
             hapticFeedbackIsEnabled = it
         }
 
         // On-board Process Is Complete
-        if (appHasOnBoardProcess && prefs.contains(PAPrefsKeys.ONBOARD_PROCESS_COMPLETE)) {
+        if (appHasOnBoardProcess && prefs.contains(PrefsKeys.ONBOARD_PROCESS_COMPLETE)) {
             onBoardProcessIsComplete = true
         }
 
         // Scrambled Pin Is Enabled
-        prefs.read(PAPrefsKeys.SCRAMBLED_PIN_IS_ENABLED)?.let {
+        prefs.read(PrefsKeys.SCRAMBLED_PIN_IS_ENABLED)?.let {
             scrambledPinIsEnabled = it
         }
 
         // User Pin Is Set
-        if (prefs.contains(PAPrefsKeys.USER_PIN_IS_SET)) {
+        if (prefs.contains(PrefsKeys.USER_PIN_IS_SET)) {
             userPinIsSet = true
         }
     }

@@ -3,7 +3,7 @@ package io.matthewnelson.pin_authentication.util
 /**
  * @suppress
  * */
-internal object PAPrefsKeys {
+internal object PrefsKeys {
 
     // Settings
     const val HAPTIC_FEEDBACK_IS_ENABLED = "HAPTIC_FEEDBACK_IS_ENABLED"

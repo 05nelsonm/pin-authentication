@@ -1,6 +1,6 @@
 package io.matthewnelson.pin_authentication.service.components
 
-import io.matthewnelson.pin_authentication.util.PAPrefsKeys
+import io.matthewnelson.pin_authentication.util.PrefsKeys
 import io.matthewnelson.pin_authentication.util.definitions.PAConfirmPinStatus
 import io.matthewnelson.pin_authentication.service.PinAuthentication
 import io.matthewnelson.encrypted_storage.EncryptedStorage
@@ -8,7 +8,7 @@ import io.matthewnelson.encrypted_storage.EncryptedStorage
 /**
  * @suppress
  * */
-internal class PAWrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
+internal class WrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
 
     ///////////////////////
     // Wrong Pin Lockout //
@@ -22,7 +22,7 @@ internal class PAWrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
     /**
      * Checks for if the user is still locked out due to wrong pin attempts that
      * exceed the maximum pin attempts defined in the
-     * [PinAuthentication.Builder.PABuilder.enableWrongPinLockout] method.
+     * [PinAuthentication.Builder.OptionsBuilder.enableWrongPinLockout] method.
      *
      * @return Int
      * */
@@ -45,8 +45,8 @@ internal class PAWrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
     }
 
     fun removeLockoutData() {
-        prefs.remove(PAPrefsKeys.WRONG_PIN_ATTEMPT_COUNTER)
-        prefs.remove(PAPrefsKeys.WRONG_PIN_OCCURRENCE)
+        prefs.remove(PrefsKeys.WRONG_PIN_ATTEMPT_COUNTER)
+        prefs.remove(PrefsKeys.WRONG_PIN_OCCURRENCE)
     }
 
     fun updateDataAndGetReturnString(): Int {
@@ -105,7 +105,7 @@ internal class PAWrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
 
     private fun readNumberOfAttempts(): Int {
         var attempts = 1
-        prefs.read(PAPrefsKeys.WRONG_PIN_ATTEMPT_COUNTER, EncryptedStorage.Prefs.INVALID_INT)
+        prefs.read(PrefsKeys.WRONG_PIN_ATTEMPT_COUNTER, EncryptedStorage.Prefs.INVALID_INT)
             .let {
                 if (it != EncryptedStorage.Prefs.INVALID_INT) {
                     attempts = it
@@ -115,7 +115,7 @@ internal class PAWrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
     }
 
     private fun readTimeOfLastAttempt(): Long {
-        prefs.read(PAPrefsKeys.WRONG_PIN_OCCURRENCE, EncryptedStorage.Prefs.INVALID_LONG)
+        prefs.read(PrefsKeys.WRONG_PIN_OCCURRENCE, EncryptedStorage.Prefs.INVALID_LONG)
             .let { previousAttempt ->
                 return if (previousAttempt != EncryptedStorage.Prefs.INVALID_LONG) {
                     previousAttempt
@@ -126,10 +126,10 @@ internal class PAWrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
     }
 
     private fun writeAttemptsToPrefs(wrongPinAttempts: Int) =
-        prefs.write(PAPrefsKeys.WRONG_PIN_ATTEMPT_COUNTER, wrongPinAttempts)
+        prefs.write(PrefsKeys.WRONG_PIN_ATTEMPT_COUNTER, wrongPinAttempts)
 
     private fun writeTimeOfAttemptToPrefs() =
-        prefs.write(PAPrefsKeys.WRONG_PIN_OCCURRENCE, System.currentTimeMillis())
+        prefs.write(PrefsKeys.WRONG_PIN_OCCURRENCE, System.currentTimeMillis())
 
 
     ///////////////////////////////////////////////////

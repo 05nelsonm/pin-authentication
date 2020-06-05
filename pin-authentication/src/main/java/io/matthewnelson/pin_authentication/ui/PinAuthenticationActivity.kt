@@ -12,7 +12,7 @@ import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.databinding.ActivityPinAuthenticationBinding
 import io.matthewnelson.pin_authentication.service.PinAuthentication
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
-import io.matthewnelson.pin_authentication.viewmodel.PAActivityViewModelFactory
+import io.matthewnelson.pin_authentication.viewmodel.ActivityViewModelFactory
 import javax.inject.Inject
 
 /**
@@ -25,14 +25,14 @@ internal class PinAuthenticationActivity : AppCompatActivity() {
     }
 
     @Inject
-    lateinit var paActivityViewModelFactory: PAActivityViewModelFactory
+    lateinit var activityViewModelFactory: ActivityViewModelFactory
     private lateinit var binding: ActivityPinAuthenticationBinding
     private lateinit var viewModel: PinAuthenticationActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectPinAuthenticationActivity()
-        viewModel = ViewModelProvider(this, paActivityViewModelFactory)
+        viewModel = ViewModelProvider(this, activityViewModelFactory)
             .get(PinAuthenticationActivityViewModel::class.java)
 
         viewModel.cancelProtectUserDataJobIfNotComplete()

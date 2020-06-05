@@ -10,9 +10,9 @@ import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
 /**
  * @suppress
  * */
-internal class PAViewData(
+internal class ViewData(
     private val context: Context,
-    private val paSettings: PASettings,
+    private val settings: Settings,
 
     // String resources
     @StringRes private val confirmPin: Int,
@@ -103,7 +103,7 @@ internal class PAViewData(
     fun setShowSetPinHelpInfo(show: Boolean) {
         var string = ""
         if (show) {
-            string = "${getStringResource(R.string.pa_min)} ${paSettings.getMinPinLength()}" +
+            string = "${getStringResource(R.string.pa_min)} ${settings.getMinPinLength()}" +
                     "\n${getStringResource(R.string.pa_max)}"
         }
         showSetPinHelpInfo.value = string

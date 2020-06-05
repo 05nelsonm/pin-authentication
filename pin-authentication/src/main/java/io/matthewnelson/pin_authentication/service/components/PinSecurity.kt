@@ -1,28 +1,28 @@
 package io.matthewnelson.pin_authentication.service.components
 
 import androidx.lifecycle.LiveData
-import io.matthewnelson.pin_authentication.util.PAPrefsKeys
+import io.matthewnelson.pin_authentication.util.PrefsKeys
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 
 /**
  * @suppress
- * Wrapper class for [PAConfirmPinToProceed] that handles everything to do with PinSecurity
+ * Wrapper class for [ConfirmPinToProceed] that handles everything to do with PinSecurity
  *
- * @param [paConfirmPinToProceed] [PAConfirmPinToProceed]
- * @param [paSettings] [PASettings]
+ * @param [confirmPinToProceed] [ConfirmPinToProceed]
+ * @param [settings] [Settings]
  * @param [encryptedPrefs] [EncryptedStorage.Prefs]
  * @param [prefs] [EncryptedStorage.Prefs]
  * */
-internal class PAPinSecurity(
-    private val paConfirmPinToProceed: PAConfirmPinToProceed,
-    private val paSettings: PASettings,
+internal class PinSecurity(
+    private val confirmPinToProceed: ConfirmPinToProceed,
+    private val settings: Settings,
     private val encryptedPrefs: EncryptedStorage.Prefs,
     private val prefs: EncryptedStorage.Prefs
 ) {
 
     init {
-        paConfirmPinToProceed.registerRequestKey(
-            PAPrefsKeys.PIN_SECURITY_IS_ENABLED,
+        confirmPinToProceed.registerRequestKey(
+            PrefsKeys.PIN_SECURITY_IS_ENABLED,
             false,
             addToBlacklist = true
         )
@@ -34,43 +34,43 @@ internal class PAPinSecurity(
     /////////////////////////
 
     fun disablePinSecuritySuccess() {
-        encryptedPrefs.remove(PAPrefsKeys.USER_PIN)
-        encryptedPrefs.remove(PAPrefsKeys.PIN_AUTHENTICATION_SALT)
-        paSettings.setUserPinIsSet(false)
-        prefs.write(PAPrefsKeys.PIN_SECURITY_IS_ENABLED, false)
+        encryptedPrefs.remove(PrefsKeys.USER_PIN)
+        encryptedPrefs.remove(PrefsKeys.PIN_AUTHENTICATION_SALT)
+        settings.setUserPinIsSet(false)
+        prefs.write(PrefsKeys.PIN_SECURITY_IS_ENABLED, false)
         setPinSecurityValue(false)
-        paConfirmPinToProceed.setAllRequestKeysTo(true)
+        confirmPinToProceed.setAllRequestKeysTo(true)
     }
 
     fun enablePinSecurityFailure() {
         setPinSecurityValue(false)
-        paConfirmPinToProceed.setCurrentRequestKey("")
+        confirmPinToProceed.setCurrentRequestKey("")
     }
 
     fun enablePinSecuritySuccess() {
-        prefs.write(PAPrefsKeys.PIN_SECURITY_IS_ENABLED, true)
+        prefs.write(PrefsKeys.PIN_SECURITY_IS_ENABLED, true)
         setPinSecurityValue(true)
-        paConfirmPinToProceed.setAllRequestKeysTo(false)
-        paConfirmPinToProceed.setCurrentRequestKey("")
+        confirmPinToProceed.setAllRequestKeysTo(false)
+        confirmPinToProceed.setCurrentRequestKey("")
     }
 
     fun getPinSecurity(): LiveData<Boolean>? =
-        paConfirmPinToProceed.getValueOfRequestKey(PAPrefsKeys.PIN_SECURITY_IS_ENABLED)
+        confirmPinToProceed.getValueOfRequestKey(PrefsKeys.PIN_SECURITY_IS_ENABLED)
 
     fun isCurrentRequestKeyPinSecurity(): Boolean =
-        paConfirmPinToProceed.getCurrentRequestKey() == PAPrefsKeys.PIN_SECURITY_IS_ENABLED
+        confirmPinToProceed.getCurrentRequestKey() == PrefsKeys.PIN_SECURITY_IS_ENABLED
 
     fun isPinSecurityEnabled(): Boolean =
-        paConfirmPinToProceed.getValueOfRequestKey(
-            PAPrefsKeys.PIN_SECURITY_IS_ENABLED
+        confirmPinToProceed.getValueOfRequestKey(
+            PrefsKeys.PIN_SECURITY_IS_ENABLED
         )?.value ?: false
 
     fun setCurrentRequestKeyToPinSecurity() {
-        paConfirmPinToProceed.setCurrentRequestKey(PAPrefsKeys.PIN_SECURITY_IS_ENABLED)
+        confirmPinToProceed.setCurrentRequestKey(PrefsKeys.PIN_SECURITY_IS_ENABLED)
     }
 
     fun setPinSecurityValue(value: Boolean) {
-        paConfirmPinToProceed.setRequestKeyValueTo(PAPrefsKeys.PIN_SECURITY_IS_ENABLED, value)
+        confirmPinToProceed.setRequestKeyValueTo(PrefsKeys.PIN_SECURITY_IS_ENABLED, value)
     }
 
 
@@ -87,7 +87,7 @@ internal class PAPinSecurity(
     }
 
     private fun loadPinSecurityFromSharedPreferences() {
-        prefs.read(PAPrefsKeys.PIN_SECURITY_IS_ENABLED)?.let {
+        prefs.read(PrefsKeys.PIN_SECURITY_IS_ENABLED)?.let {
             setPinSecurityValue(it)
         }
     }

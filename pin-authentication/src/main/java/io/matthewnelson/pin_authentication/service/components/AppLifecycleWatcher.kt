@@ -15,11 +15,11 @@ import io.matthewnelson.pin_authentication.util.definitions.PALockApplicationEve
  * @suppress
  * Monitors the Application's Activity and Component life-cycles such that when the user
  * sends the application to the background, or locks their device while the app is open,
- * it will update LiveData which is being observed by [PAAppLockObserver]
+ * it will update LiveData which is being observed by [AppLockObserver]
  *
  * @param [app] Application
  * */
-internal class PAAppLifecycleWatcher(
+internal class AppLifecycleWatcher(
     private val app: Application
 ) : Application.ActivityLifecycleCallbacks, ComponentCallbacks2 {
 

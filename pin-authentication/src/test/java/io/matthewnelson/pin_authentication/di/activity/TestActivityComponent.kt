@@ -2,27 +2,27 @@ package io.matthewnelson.pin_authentication.di.activity
 
 import dagger.BindsInstance
 import dagger.Subcomponent
-import io.matthewnelson.pin_authentication.di.activity.module.PAActivityModule
-import io.matthewnelson.pin_authentication.di.activity.module.PAActivityViewModelsModule
+import io.matthewnelson.pin_authentication.di.activity.module.ActivityModule
+import io.matthewnelson.pin_authentication.di.activity.module.ActivityViewModelsModule
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
 
 @PAActivityScope
 @Subcomponent(
     modules = [
-        PAActivityModule::class,
-        PAActivityViewModelsModule::class
+        ActivityModule::class,
+        ActivityViewModelsModule::class
     ])
-internal interface TestPAActivityComponent: PAActivityComponent {
+internal interface TestActivityComponent: ActivityComponent {
 
     @Subcomponent.Builder
-    interface Builder: PAActivityComponent.Builder {
+    interface Builder: ActivityComponent.Builder {
 
         @BindsInstance
         override fun bindPinAuthenticationActivity(
             pinAuthenticationActivity: PinAuthenticationActivity
         ): Builder
 
-        override fun build(): PAActivityComponent
+        override fun build(): ActivityComponent
     }
 
     override fun inject(pinAuthenticationActivity: PinAuthenticationActivity)

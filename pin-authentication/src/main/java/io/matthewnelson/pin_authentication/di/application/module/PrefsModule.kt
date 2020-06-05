@@ -11,7 +11,7 @@ import javax.inject.Named
  * @suppress
  * */
 @Module
-internal object PAPrefsModule {
+internal object PrefsModule {
 
     private const val repoName = "io.matthewnelson.pin-authentication"
     const val ENCRYPTED_PREFS = "$repoName.ENCRYPTED_PREFS"
@@ -21,13 +21,13 @@ internal object PAPrefsModule {
     @Provides
     @Named(ENCRYPTED_PREFS)
     @JvmStatic
-    fun provideDualPrefsEncrypted(application: Application): EncryptedStorage.Prefs =
+    fun providePrefsEncrypted(application: Application): EncryptedStorage.Prefs =
         EncryptedStorage.Prefs.createEncrypted(ENCRYPTED_PREFS, application.applicationContext)
 
     @PAApplicationScope
     @Provides
     @Named(PREFS)
     @JvmStatic
-    fun provideDualPrefs(application: Application): EncryptedStorage.Prefs =
+    fun providePrefsUnencrypted(application: Application): EncryptedStorage.Prefs =
         EncryptedStorage.Prefs.createUnencrypted(PREFS, application.applicationContext)
 }

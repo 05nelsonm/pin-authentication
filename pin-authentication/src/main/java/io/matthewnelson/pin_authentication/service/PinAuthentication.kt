@@ -7,14 +7,14 @@ import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import io.matthewnelson.pin_authentication.R.id
-import io.matthewnelson.pin_authentication.di.PAInjection
-import io.matthewnelson.pin_authentication.di.application.PAApplicationComponent
+import io.matthewnelson.pin_authentication.di.CompanionInjection
+import io.matthewnelson.pin_authentication.di.application.ApplicationComponent
 import io.matthewnelson.pin_authentication.service.components.*
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
 import io.matthewnelson.pin_authentication.util.BindingAdapters
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
 import io.matthewnelson.pin_authentication.util.definitions.PAScreenType
-import io.matthewnelson.pin_authentication.di.application.DaggerPAApplicationComponent
+import io.matthewnelson.pin_authentication.di.application.DaggerApplicationComponent
 
 sealed class PinAuthentication {
 
@@ -27,9 +27,9 @@ sealed class PinAuthentication {
 
         /**
          * Sets the Application which is used throughout [PinAuthentication]. It initializes
-         * [PinAuthentication]'s [DaggerPAApplicationComponent] which then is used to inject
+         * [PinAuthentication]'s [DaggerApplicationComponent] which then is used to inject
          * classes as needed.
-         * See [PAInjection]
+         * See [CompanionInjection]
          * See [Companion.injected]
          *
          * It also sets the [PinAuthenticationActivity]'s window flag to secure for release
@@ -40,30 +40,30 @@ sealed class PinAuthentication {
          * @param [application] Application
          * @param [buildConfigDebug] Boolean - (send BuildConfig.DEBUG)
          *
-         * @return [PABuilder]
+         * @return [OptionsBuilder]
          * */
         fun setApplicationAndBuildConfig(
             application: Application,
             buildConfigDebug: Boolean
-        ): PABuilder {
+        ): OptionsBuilder {
             applicationComponent =
-                DaggerPAApplicationComponent
+                DaggerApplicationComponent
                     .builder()
                     .bindApplication(application)
                     .build()
 
-            injected = PAInjection(applicationComponent)
-            return PABuilder(buildConfigDebug)
+            injected = CompanionInjection(applicationComponent)
+            return OptionsBuilder(buildConfigDebug)
         }
 
         internal fun testing(
-            paApplicationComponent: PAApplicationComponent,
-            paInjection: PAInjection,
+            appComponent: ApplicationComponent,
+            companionInjection: CompanionInjection,
             buildConfigDebug: Boolean
-        ): PABuilder {
-            applicationComponent = paApplicationComponent
-            injected = paInjection
-            return PABuilder(buildConfigDebug)
+        ): OptionsBuilder {
+            applicationComponent = appComponent
+            injected = companionInjection
+            return OptionsBuilder(buildConfigDebug)
         }
 
         /**
@@ -74,7 +74,7 @@ sealed class PinAuthentication {
          *
          * @param [buildConfigDebug] Boolean
          * */
-        class PABuilder(private val buildConfigDebug: Boolean) {
+        class OptionsBuilder(private val buildConfigDebug: Boolean) {
             private var appHasOnBoardProcessInitValue = false
             private var backgroundLogoutTimerInitValue = 0L
             private var hapticFeedbackIsEnabledInitValue = false
@@ -93,9 +93,9 @@ sealed class PinAuthentication {
              *
              * See [Builder] for sample code.
              *
-             * @return [PABuilder]
+             * @return [OptionsBuilder]
              * */
-            fun applicationHasOnBoardProcess(): PABuilder {
+            fun applicationHasOnBoardProcess(): OptionsBuilder {
                 appHasOnBoardProcessInitValue = true
                 return this
             }
@@ -110,13 +110,13 @@ sealed class PinAuthentication {
              *
              * See [Builder] for sample code.
              *
-             * @see [PAAppLockObserver.launchAuthInvalidationJobIfInactive]
+             * @see [AppLockObserver.launchAuthInvalidationJobIfInactive]
              *
              * @param [secondsLessThan30] Int - (Set to 0 to DISABLE)
              *
-             * @return [PABuilder]
+             * @return [OptionsBuilder]
              * */
-            fun enableBackgroundLogoutTimer(secondsLessThan30: Int): PABuilder {
+            fun enableBackgroundLogoutTimer(secondsLessThan30: Int): OptionsBuilder {
                 if (secondsLessThan30 < 30) {
                     backgroundLogoutTimerInitValue = secondsLessThan30 * 1000L
                 }
@@ -134,19 +134,19 @@ sealed class PinAuthentication {
              *
              * See [Builder] for sample code.
              *
-             * @see [PAWrongPinLockout]
+             * @see [WrongPinLockout]
              *
              * @param [lockoutDurationSeconds] Int
              * @param [maxPinAttempts] Int
              *
-             * @return [PABuilder]
+             * @return [OptionsBuilder]
              * */
-            fun enableWrongPinLockout(lockoutDurationSeconds: Int, maxPinAttempts: Int): PABuilder {
+            fun enableWrongPinLockout(lockoutDurationSeconds: Int, maxPinAttempts: Int): OptionsBuilder {
                 var lockoutDurationInitValue = 10
                 if (lockoutDurationSeconds > 0) {
                     lockoutDurationInitValue = lockoutDurationSeconds
                 }
-                PAWrongPinLockout.setWrongPinLockoutValues(lockoutDurationInitValue, maxPinAttempts)
+                WrongPinLockout.setWrongPinLockoutValues(lockoutDurationInitValue, maxPinAttempts)
                 enableWrongPinLockout = true
                 return this
             }
@@ -161,9 +161,9 @@ sealed class PinAuthentication {
              *
              * See [Builder] for sample code.
              *
-             * @return [PABuilder]
+             * @return [OptionsBuilder]
              * */
-            fun enableHapticFeedbackByDefault(): PABuilder {
+            fun enableHapticFeedbackByDefault(): OptionsBuilder {
                 hapticFeedbackIsEnabledInitValue = true
                 return this
             }
@@ -178,10 +178,10 @@ sealed class PinAuthentication {
              *
              * See [Builder] for sample code.
              *
-             * @return [PABuilder]
+             * @return [OptionsBuilder]
              * */
-            fun enablePinSecurityByDefault(): PABuilder {
-                injected.paPinSecurity.setPinSecurityValue(true)
+            fun enablePinSecurityByDefault(): OptionsBuilder {
+                injected.pinSecurity.setPinSecurityValue(true)
                 return this
             }
 
@@ -195,9 +195,9 @@ sealed class PinAuthentication {
              *
              * See [Builder] for sample code.
              *
-             * @return [PABuilder]
+             * @return [OptionsBuilder]
              * */
-            fun enableScrambledPinByDefault(): PABuilder {
+            fun enableScrambledPinByDefault(): OptionsBuilder {
                 scrambledPinIsEnabledInitValue = true
                 return this
             }
@@ -217,9 +217,9 @@ sealed class PinAuthentication {
              *
              * @param [intFrom4To14] Int
              *
-             * @return [PABuilder]
+             * @return [OptionsBuilder]
              * */
-            fun setMinimumPinLength(intFrom4To14: Int): PABuilder {
+            fun setMinimumPinLength(intFrom4To14: Int): OptionsBuilder {
                 if (intFrom4To14 in 4..14) {
                     minPinLengthInitValue = intFrom4To14
                 }
@@ -230,8 +230,8 @@ sealed class PinAuthentication {
              * Calling this method will return another Builder for customizing the colors
              * of [PinAuthenticationActivity].
              *
-             * When done customizing the colors, call [PAColorsBuilder.applyColors] and it
-             * will return you to the previous [PABuilder] to continue initialization.
+             * When done customizing the colors, call [ColorsBuilder.applyColors] and it
+             * will return you to the previous [OptionsBuilder] to continue initialization.
              *
              * If this method is being called it will ensure that the Application colors
              * stay set so that, if at a later time colors are changed via
@@ -241,10 +241,10 @@ sealed class PinAuthentication {
              *
              * See [Builder] for sample code.
              *
-             * @return [PAColorsBuilder]
+             * @return [ColorsBuilder]
              * */
-            fun setCustomColors(): PAColorsBuilder {
-                return PAColorsBuilder(this)
+            fun setCustomColors(): ColorsBuilder {
+                return ColorsBuilder(this)
             }
 
             /**
@@ -253,9 +253,9 @@ sealed class PinAuthentication {
              * See [Builder] for code sample.
              * */
             fun build() {
-                injected.paPinSecurity.initializePinSecurity()
+                injected.pinSecurity.initializePinSecurity()
 
-                injected.paSettings.initializeSettings(
+                injected.settings.initializeSettings(
                     buildConfigDebug,
                     appHasOnBoardProcessInitValue,
                     hapticFeedbackIsEnabledInitValue,
@@ -263,13 +263,13 @@ sealed class PinAuthentication {
                     scrambledPinIsEnabledInitValue
                 )
 
-                injected.paViewColors.initializeViewColors()
+                injected.viewColors.initializeViewColors()
 
-                injected.paAppLockObserver.initializeAppLockObserver(
+                injected.appLockObserver.initializeAppLockObserver(
                     backgroundLogoutTimerInitValue
                 )
 
-                PAWrongPinLockout.initializeWrongPinLockout(enableWrongPinLockout)
+                WrongPinLockout.initializeWrongPinLockout(enableWrongPinLockout)
             }
 
         }
@@ -279,7 +279,7 @@ sealed class PinAuthentication {
          *
          * This Builder is used in 2 ways. Via:
          *
-         *   - [PABuilder.setCustomColors] method being called which "unlocks" these options
+         *   - [OptionsBuilder.setCustomColors] method being called which "unlocks" these options
          *   while initializing [PinAuthentication.Builder].
          *
          *   - [Settings.setCustomColors] method for modifying colors after
@@ -287,24 +287,24 @@ sealed class PinAuthentication {
          *
          * Call [applyColors] when done.
          *
-         * @param [paBuilder] [PABuilder]?
+         * @param [optionsBuilder] [OptionsBuilder]?
          *
          * @sample [io.matthewnelson.pin_authentication_demo.App.initializePinAuthentication]
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.initializeSetCustomColorsButton]
          * */
-        class PAColorsBuilder(private val paBuilder: PABuilder?) {
+        class ColorsBuilder(private val optionsBuilder: OptionsBuilder?) {
 
             /**
              * Set the color for [id.button_pin_authentication_backspace]'s image.
              *
-             * See [PAColorsBuilder] for sample code.
+             * See [ColorsBuilder] for sample code.
              *
              * @param [colorRes]
              *
-             * @return [PAColorsBuilder]
+             * @return [ColorsBuilder]
              * */
-            fun set1_BackspaceButtonImageColor(@ColorRes colorRes: Int): PAColorsBuilder {
-                injected.paViewColors.setBackspaceButtonImageColor(colorRes, paBuilder != null)
+            fun set1_BackspaceButtonImageColor(@ColorRes colorRes: Int): ColorsBuilder {
+                injected.viewColors.setBackspaceButtonImageColor(colorRes, optionsBuilder != null)
 
                 return this
             }
@@ -312,14 +312,14 @@ sealed class PinAuthentication {
             /**
              * Set the color for [id.button_pin_authentication_confirm]'s background.
              *
-             * See [PAColorsBuilder] for sample code.
+             * See [ColorsBuilder] for sample code.
              *
              * @param [colorRes]
              *
-             * @return [PAColorsBuilder]
+             * @return [ColorsBuilder]
              * */
-            fun set2_ConfirmButtonBackgroundColor(@ColorRes colorRes: Int): PAColorsBuilder {
-                injected.paViewColors.setConfirmButtonBackgroundColor(colorRes, paBuilder != null)
+            fun set2_ConfirmButtonBackgroundColor(@ColorRes colorRes: Int): ColorsBuilder {
+                injected.viewColors.setConfirmButtonBackgroundColor(colorRes, optionsBuilder != null)
 
                 return this
             }
@@ -327,14 +327,14 @@ sealed class PinAuthentication {
             /**
              * Set the color for [id.button_pin_authentication_confirm]'s image.
              *
-             * See [PAColorsBuilder] for sample code.
+             * See [ColorsBuilder] for sample code.
              *
              * @param [colorRes]
              *
-             * @return [PAColorsBuilder]
+             * @return [ColorsBuilder]
              * */
-            fun set3_ConfirmButtonImageColor(@ColorRes colorRes: Int): PAColorsBuilder {
-                injected.paViewColors.setConfirmButtonImageColor(colorRes, paBuilder != null)
+            fun set3_ConfirmButtonImageColor(@ColorRes colorRes: Int): ColorsBuilder {
+                injected.viewColors.setConfirmButtonImageColor(colorRes, optionsBuilder != null)
 
                 return this
             }
@@ -342,14 +342,14 @@ sealed class PinAuthentication {
             /**
              * Set the color for [id.layout_linear_pin_authentication_pin_hint]'s background.
              *
-             * See [PAColorsBuilder] for sample code.
+             * See [ColorsBuilder] for sample code.
              *
              * @param [colorRes]
              *
-             * @return [PAColorsBuilder]
+             * @return [ColorsBuilder]
              * */
-            fun set4_PinHintContainerColor(@ColorRes colorRes: Int): PAColorsBuilder {
-                injected.paViewColors.setPinHintContainerColor(colorRes, paBuilder != null)
+            fun set4_PinHintContainerColor(@ColorRes colorRes: Int): ColorsBuilder {
+                injected.viewColors.setPinHintContainerColor(colorRes, optionsBuilder != null)
 
                 return this
             }
@@ -358,14 +358,14 @@ sealed class PinAuthentication {
              * Set the color for [id.image_view_pin_authentication_dot1] through
              * [id.image_view_pin_authentication_dot14]'s image
              *
-             * See [PAColorsBuilder] for sample code.
+             * See [ColorsBuilder] for sample code.
              *
              * @param [colorRes]
              *
-             * @return [PAColorsBuilder]
+             * @return [ColorsBuilder]
              * */
-            fun set5_PinHintImageColor(@ColorRes colorRes: Int): PAColorsBuilder {
-                injected.paViewColors.setPinHintImageColor(colorRes, paBuilder != null)
+            fun set5_PinHintImageColor(@ColorRes colorRes: Int): ColorsBuilder {
+                injected.viewColors.setPinHintImageColor(colorRes, optionsBuilder != null)
 
                 return this
             }
@@ -373,14 +373,14 @@ sealed class PinAuthentication {
             /**
              * Set the background color for all buttons (except [id.button_pin_authentication_confirm])
              *
-             * See [PAColorsBuilder] for sample code.
+             * See [ColorsBuilder] for sample code.
              *
              * @param [colorRes]
              *
-             * @return [PAColorsBuilder]
+             * @return [ColorsBuilder]
              * */
-            fun set6_PinPadButtonBackgroundColor(@ColorRes colorRes: Int): PAColorsBuilder {
-                injected.paViewColors.setPinPadButtonBackgroundColor(colorRes, paBuilder != null)
+            fun set6_PinPadButtonBackgroundColor(@ColorRes colorRes: Int): ColorsBuilder {
+                injected.viewColors.setPinPadButtonBackgroundColor(colorRes, optionsBuilder != null)
 
                 return this
             }
@@ -388,14 +388,14 @@ sealed class PinAuthentication {
             /**
              * Set the color for [id.image_view_pin_authentication_reset_help]
              *
-             * See [PAColorsBuilder] for sample code.
+             * See [ColorsBuilder] for sample code.
              *
              * @param [colorRes]
              *
-             * @return [PAColorsBuilder]
+             * @return [ColorsBuilder]
              * */
-            fun set7_PinResetInfoImageColor(@ColorRes colorRes: Int): PAColorsBuilder {
-                injected.paViewColors.setPinResetInfoImageColor(colorRes, paBuilder != null)
+            fun set7_PinResetInfoImageColor(@ColorRes colorRes: Int): ColorsBuilder {
+                injected.viewColors.setPinResetInfoImageColor(colorRes, optionsBuilder != null)
 
                 return this
             }
@@ -403,14 +403,14 @@ sealed class PinAuthentication {
             /**
              * Set the color for [id.layout_constraint_pin_authentication_container]
              *
-             * See [PAColorsBuilder] for sample code.
+             * See [ColorsBuilder] for sample code.
              *
              * @param [colorRes]
              *
-             * @return [PAColorsBuilder]
+             * @return [ColorsBuilder]
              * */
-            fun set8_ScreenBackgroundColor(@ColorRes colorRes: Int): PAColorsBuilder {
-                injected.paViewColors.setScreenBackgroundColor(colorRes, paBuilder != null)
+            fun set8_ScreenBackgroundColor(@ColorRes colorRes: Int): ColorsBuilder {
+                injected.viewColors.setScreenBackgroundColor(colorRes, optionsBuilder != null)
 
                 return this
             }
@@ -418,32 +418,32 @@ sealed class PinAuthentication {
             /**
              * Set the color for all text
              *
-             * See [PAColorsBuilder] for sample code.
+             * See [ColorsBuilder] for sample code.
              *
              * @param [colorRes]
              *
-             * @return [PAColorsBuilder]
+             * @return [ColorsBuilder]
              * */
-            fun set9_TextColor(@ColorRes colorRes: Int): PAColorsBuilder {
-                injected.paViewColors.setTextColor(colorRes, paBuilder != null)
+            fun set9_TextColor(@ColorRes colorRes: Int): ColorsBuilder {
+                injected.viewColors.setTextColor(colorRes, optionsBuilder != null)
 
                 return this
             }
 
             /**
              * - If being used when initializing [PinAuthentication.Builder],
-             * will return [PABuilder]
+             * will return [OptionsBuilder]
              *
              * - If being used from [PinAuthentication.Settings.setCustomColors],
              * will return **`null`**.
              *
-             * See [PAColorsBuilder] for sample code.
+             * See [ColorsBuilder] for sample code.
              *
-             * @return [paBuilder]
+             * @return [optionsBuilder]
              * */
-            fun applyColors(): PABuilder? {
-                injected.paViewColors.applyColors(paBuilder != null)
-                return paBuilder
+            fun applyColors(): OptionsBuilder? {
+                injected.viewColors.applyColors(optionsBuilder != null)
+                return optionsBuilder
             }
         }
     }
@@ -453,8 +453,8 @@ sealed class PinAuthentication {
      * PRIVATE variables needed by [PinAuthentication]
      * */
     private companion object {
-        lateinit var applicationComponent: PAApplicationComponent
-        lateinit var injected: PAInjection
+        lateinit var applicationComponent: ApplicationComponent
+        lateinit var injected: CompanionInjection
     }
 
 
@@ -510,7 +510,7 @@ sealed class PinAuthentication {
          *
          *   **OR**
          *
-         *   - DISABLED: Sets [PAInitialAppLogin.initialApplicationLoginSatisfied]
+         *   - DISABLED: Sets [InitialAppLogin.initialApplicationLoginSatisfied]
          *             to true.
          *
          * Declaring the on-board process as completed is saved
@@ -519,16 +519,16 @@ sealed class PinAuthentication {
          * PIN to login at application start (if pin security
          * is enabled).
          *
-         * @see [PAAppLockObserver.hijackApp]
+         * @see [AppLockObserver.hijackApp]
          *
          * @sample [io.matthewnelson.pin_authentication_demo.ui.OnBoardFragment.initializeOnBoardFinishButton]
          * */
         fun completeOnBoardProcess() {
-            injected.paSettings.setOnBoardProcessIsComplete()
-            if (injected.paPinSecurity.isPinSecurityEnabled()) {
-                injected.paAppLockObserver.hijackApp(PAPinEntryState.LOGIN)
+            injected.settings.setOnBoardProcessIsComplete()
+            if (injected.pinSecurity.isPinSecurityEnabled()) {
+                injected.appLockObserver.hijackApp(PAPinEntryState.LOGIN)
             } else {
-                injected.paInitialAppLogin.initialAppLoginIsSatisfied()
+                injected.initialAppLogin.initialAppLoginIsSatisfied()
             }
         }
 
@@ -536,7 +536,7 @@ sealed class PinAuthentication {
          * Returns TRUE if:
          *
          *   - You declared that your application has an on-board process via
-         *   [PinAuthentication.Builder.PABuilder.applicationHasOnBoardProcess]
+         *   [PinAuthentication.Builder.OptionsBuilder.applicationHasOnBoardProcess]
          *   and the on-board process has been marked **complete**.
          *
          *   **OR**
@@ -546,7 +546,7 @@ sealed class PinAuthentication {
          * Returns FALSE if:
          *
          *   - You declared that your application has an on-board process via
-         *   [PinAuthentication.Builder.PABuilder.applicationHasOnBoardProcess],
+         *   [PinAuthentication.Builder.OptionsBuilder.applicationHasOnBoardProcess],
          *   but the on-board process has **not** been marked complete.
          *
          * @return Boolean
@@ -554,7 +554,7 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.MainActivity.doOnBoard]
          * */
         fun hasOnBoardProcessBeenSatisfied(): Boolean =
-            injected.paSettings.hasAppOnBoardProcessBeenSatisfied()
+            injected.settings.hasAppOnBoardProcessBeenSatisfied()
 
 
         ////////////////////////////
@@ -566,7 +566,7 @@ sealed class PinAuthentication {
          * @return Boolean
          * */
         fun isPinSecurityEnabled(): Boolean =
-            injected.paPinSecurity.isPinSecurityEnabled()
+            injected.pinSecurity.isPinSecurityEnabled()
 
         /**
          * Register request keys.
@@ -578,7 +578,7 @@ sealed class PinAuthentication {
             registerRequestKey(requestKey, PAScreenType.ACTIVITY)
 
         /**
-         * Adds a requestKey to [PAConfirmPinToProceed.mapRequestKeys]
+         * Adds a requestKey to [ConfirmPinToProceed.mapRequestKeys]
          * and returns LiveData associated with it which will change
          * after calling [Controller.requestPinConfirmationToProceed]
          * depending on whether or not the User enters the correct pin.
@@ -615,12 +615,12 @@ sealed class PinAuthentication {
             fragmentClassName: String? = null,
             @IdRes fragmentID: Int? = null
         ): LiveData<Boolean>? {
-            if (injected.paConfirmPinToProceed.isRequestKeyBlacklisted(requestKey)) {
+            if (injected.confirmPinToProceed.isRequestKeyBlacklisted(requestKey)) {
                 return null
             }
 
-            val pinSecurityState = injected.paPinSecurity.isPinSecurityEnabled()
-            return injected.paConfirmPinToProceed.registerRequestKey(
+            val pinSecurityState = injected.pinSecurity.isPinSecurityEnabled()
+            return injected.confirmPinToProceed.registerRequestKey(
                 requestKey,
                 !pinSecurityState,
                 screenType,
@@ -643,18 +643,18 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.ui.ControllerFragment.observePinConfirmationRequestKey2]
          * */
         fun requestPinConfirmationToProceed(requestKey: String) {
-            if (injected.paConfirmPinToProceed.isRequestKeyBlacklisted(requestKey)) {
+            if (injected.confirmPinToProceed.isRequestKeyBlacklisted(requestKey)) {
                 return
             }
 
-            if (!injected.paSettings.hasAppOnBoardProcessBeenSatisfied()) {
-                injected.paConfirmPinToProceed.setRequestKeyValueTo(requestKey, true)
+            if (!injected.settings.hasAppOnBoardProcessBeenSatisfied()) {
+                injected.confirmPinToProceed.setRequestKeyValueTo(requestKey, true)
                 return
             }
 
-            if (injected.paConfirmPinToProceed.isRequestKeyRegistered(requestKey)) {
-                injected.paConfirmPinToProceed.setCurrentRequestKey(requestKey)
-                injected.paAppLockObserver.hijackApp(PAPinEntryState.CONFIRM_PIN)
+            if (injected.confirmPinToProceed.isRequestKeyRegistered(requestKey)) {
+                injected.confirmPinToProceed.setCurrentRequestKey(requestKey)
+                injected.appLockObserver.hijackApp(PAPinEntryState.CONFIRM_PIN)
             }
         }
 
@@ -673,12 +673,12 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.ui.ControllerFragment.observePinConfirmationRequestKey2]
          * */
         fun resetPinConfirmationToProceedRequestKey(requestKey: String) {
-            if (injected.paConfirmPinToProceed.isRequestKeyBlacklisted(requestKey)) {
+            if (injected.confirmPinToProceed.isRequestKeyBlacklisted(requestKey)) {
                 return
             }
 
-            if (injected.paPinSecurity.isPinSecurityEnabled()) {
-                injected.paConfirmPinToProceed.setRequestKeyValueTo(requestKey, false)
+            if (injected.pinSecurity.isPinSecurityEnabled()) {
+                injected.confirmPinToProceed.setRequestKeyValueTo(requestKey, false)
             }
         }
 
@@ -690,12 +690,12 @@ sealed class PinAuthentication {
 
         /**
          * Removes the requestKey and LiveData values from the Map
-         * contained in [PAConfirmPinToProceed.mapRequestKeys].
+         * contained in [ConfirmPinToProceed.mapRequestKeys].
          *
          * To be implemented in an Activity's onDestroy() or a
          * Fragments onDestroyView(), **after** the super call.
          *
-         * @see [PAConfirmPinToProceed.unregisterRequestKey]
+         * @see [ConfirmPinToProceed.unregisterRequestKey]
          *
          * @param [requestKey] String **OR**
          * @param [requestKeys] Array<String>
@@ -708,11 +708,11 @@ sealed class PinAuthentication {
             }
 
         private fun unregisterRequestKey(requestKey: String) {
-            if (injected.paConfirmPinToProceed.isRequestKeyBlacklisted(requestKey)) {
+            if (injected.confirmPinToProceed.isRequestKeyBlacklisted(requestKey)) {
                 return
             }
 
-            injected.paConfirmPinToProceed.unregisterRequestKey(requestKey)
+            injected.confirmPinToProceed.unregisterRequestKey(requestKey)
         }
 
 
@@ -746,13 +746,13 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.MainActivity.observeInitialAppLogin]
          * */
         fun hasInitialAppLoginBeenSatisfied(): LiveData<Boolean> {
-            if (!injected.paPinSecurity.isPinSecurityEnabled() &&
-                injected.paSettings.hasAppOnBoardProcessBeenSatisfied()
+            if (!injected.pinSecurity.isPinSecurityEnabled() &&
+                injected.settings.hasAppOnBoardProcessBeenSatisfied()
             ) {
-                injected.paInitialAppLogin.initialAppLoginIsSatisfied()
+                injected.initialAppLogin.initialAppLoginIsSatisfied()
             }
 
-            return injected.paInitialAppLogin.hasInitialAppLoginBeenSatisfied()
+            return injected.initialAppLogin.hasInitialAppLoginBeenSatisfied()
         }
 
         /**
@@ -764,14 +764,14 @@ sealed class PinAuthentication {
          * [Controller.hasInitialAppLoginBeenSatisfied],
          * so your startup processes only get executed once.
          *
-         * @see PAInitialAppLogin.hasPostLoginProcessBeenStarted
+         * @see InitialAppLogin.hasPostLoginProcessBeenStarted
          *
          * @return Boolean
          *
          * @sample [io.matthewnelson.pin_authentication_demo.MainActivity.executePostLoginProcesses]
          * */
         fun hasPostLoginProcessBeenStarted(): Boolean =
-            injected.paInitialAppLogin.hasPostLoginProcessBeenStarted()
+            injected.initialAppLogin.hasPostLoginProcessBeenStarted()
 
         /**
          * After [Controller.hasPostLoginProcessBeenStarted]
@@ -785,7 +785,7 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.MainActivity.executePostLoginProcesses]
          * */
         fun postLoginProcessStarted() =
-            injected.paInitialAppLogin.postLoginProcessStarted()
+            injected.initialAppLogin.postLoginProcessStarted()
 
     }
 
@@ -804,16 +804,16 @@ sealed class PinAuthentication {
          * Will clear currently applied colors and set them back
          * to colors defined in the Application onCreate()'s
          * initialization of
-         * [PinAuthentication.Builder.PABuilder.setCustomColors],
+         * [PinAuthentication.Builder.OptionsBuilder.setCustomColors],
          * if they were specified. Otherwise it will fall back to
          * [PinAuthentication]'s default colors.
          *
-         * @see [PAViewColors.resetColorsToApplicationDefaults]
+         * @see [ViewColors.resetColorsToApplicationDefaults]
          *
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.initializeResetColorsButton]
          * */
         fun resetColorsToApplicationDefaults() =
-            injected.paViewColors.resetColorsToApplicationDefaults()
+            injected.viewColors.resetColorsToApplicationDefaults()
 
         /**
          * Change the colors of [PinAuthenticationActivity]
@@ -821,14 +821,14 @@ sealed class PinAuthentication {
          * [PinAuthentication]'s SharedPreferences and loaded
          * at startup **after** custom colors that may have been
          * specified in the Application onCreate()'s
-         * [PinAuthentication.Builder.PABuilder.setCustomColors].
+         * [PinAuthentication.Builder.OptionsBuilder.setCustomColors].
          *
-         * @return [Builder.PAColorsBuilder]
+         * @return [Builder.ColorsBuilder]
          *
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.initializeSetCustomColorsButton]
          * */
-        fun setCustomColors(): Builder.PAColorsBuilder =
-            Builder.PAColorsBuilder(null)
+        fun setCustomColors(): Builder.ColorsBuilder =
+            Builder.ColorsBuilder(null)
 
 
         /////////////////////
@@ -843,7 +843,7 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.initializeHapticFeedbackSwitch]
          * */
         fun enableHapticFeedback(enable: Boolean) =
-            injected.paSettings.setHapticFeedbackIsEnabled(enable)
+            injected.settings.setHapticFeedbackIsEnabled(enable)
 
         /**
          * Checks if haptic feedback is enabled.
@@ -853,7 +853,7 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.setHapticFeedbackSwitchPosition]
          * */
         fun isHapticFeedbackEnabled(): Boolean =
-            injected.paSettings.getHapticFeedbackIsEnabled()
+            injected.settings.getHapticFeedbackIsEnabled()
 
 
         ///////////////
@@ -864,12 +864,12 @@ sealed class PinAuthentication {
          * [PAPinEntryState.RESET_PIN] configuration for
          * the user to reset their PIN.
          *
-         * @see [PAAppLockObserver.hijackApp]
+         * @see [AppLockObserver.hijackApp]
          *
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.initializeResetPinButton]
          * */
         fun resetPin() =
-            injected.paAppLockObserver.hijackApp(PAPinEntryState.RESET_PIN)
+            injected.appLockObserver.hijackApp(PAPinEntryState.RESET_PIN)
 
 
         //////////////////
@@ -885,36 +885,36 @@ sealed class PinAuthentication {
          *   - ENABLED -> DISABLED:
          *       - Will prompt the user to confirm their pin.
          *
-         * @see [PAPinSecurity]
+         * @see [PinSecurity]
          *
          * @param [enable] Boolean (`true` = ENABLE, `false` = DISABLE)
          *
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.initializePinSecuritySwitch]
          * */
         fun enablePinSecurity(enable: Boolean) {
-            val pinSecurityState = injected.paPinSecurity.isPinSecurityEnabled()
+            val pinSecurityState = injected.pinSecurity.isPinSecurityEnabled()
 
             // Set the value again to proc the out-of-sync observer
             if (enable == pinSecurityState) {
-                injected.paPinSecurity.setPinSecurityValue(pinSecurityState)
+                injected.pinSecurity.setPinSecurityValue(pinSecurityState)
                 return
             }
 
-            if (!injected.paSettings.hasAppOnBoardProcessBeenSatisfied()) {
+            if (!injected.settings.hasAppOnBoardProcessBeenSatisfied()) {
                 if (enable) {
-                    injected.paPinSecurity.enablePinSecuritySuccess()
+                    injected.pinSecurity.enablePinSecuritySuccess()
                 } else {
-                    injected.paPinSecurity.disablePinSecuritySuccess()
+                    injected.pinSecurity.disablePinSecuritySuccess()
                 }
                 return
             }
 
-            injected.paPinSecurity.setCurrentRequestKeyToPinSecurity()
+            injected.pinSecurity.setCurrentRequestKeyToPinSecurity()
 
             if (enable) {
-                injected.paAppLockObserver.hijackApp(PAPinEntryState.ENABLE_PIN_SECURITY)
+                injected.appLockObserver.hijackApp(PAPinEntryState.ENABLE_PIN_SECURITY)
             } else {
-                injected.paAppLockObserver.hijackApp(PAPinEntryState.CONFIRM_PIN)
+                injected.appLockObserver.hijackApp(PAPinEntryState.CONFIRM_PIN)
             }
         }
 
@@ -926,7 +926,7 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.observePinSecurity]
          * */
         fun isPinSecurityEnabled(): LiveData<Boolean>? =
-            injected.paPinSecurity.getPinSecurity()
+            injected.pinSecurity.getPinSecurity()
 
 
         ///////////////////
@@ -940,7 +940,7 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.initializeScrambledPinSwitch]
          * */
         fun enableScrambledPin(enable: Boolean) =
-            injected.paSettings.setScrambledPinIsEnabled(enable)
+            injected.settings.setScrambledPinIsEnabled(enable)
 
         /**
          * Checks if scrambled pin is enabled.
@@ -950,7 +950,7 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.setScrambledPinSwitchPosition]
          * */
         fun isScrambledPinEnabled(): Boolean =
-            injected.paSettings.getScrambledPinIsEnabled()
+            injected.settings.getScrambledPinIsEnabled()
 
     }
 

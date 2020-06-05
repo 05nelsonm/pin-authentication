@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 /**
  * @suppress
  * */
-internal class PAInitialAppLogin {
+internal class InitialAppLogin {
 
     ///////////////////////////////
     // Initial Application Login //
