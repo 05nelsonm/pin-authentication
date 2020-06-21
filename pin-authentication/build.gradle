@@ -17,6 +17,7 @@ android {
         versionName VERSION_NAME
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments disableAnalytics: 'true'
         consumerProguardFiles "consumer-rules.pro"
     }
 
