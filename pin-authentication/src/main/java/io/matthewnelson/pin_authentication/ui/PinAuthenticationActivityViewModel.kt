@@ -10,8 +10,7 @@ import io.matthewnelson.pin_authentication.service.PinAuthentication
 import io.matthewnelson.pin_authentication.service.components.Coroutines
 import io.matthewnelson.pin_authentication.service.components.ViewColors
 import io.matthewnelson.pin_authentication.service.components.ViewData
-import io.matthewnelson.pin_authentication.util.definitions.PAConfirmPinStatus
-import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates
+import io.matthewnelson.pin_authentication.util.definitions.ConfirmPinStatuss.ConfirmPinStatus
 import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -168,15 +167,15 @@ internal class PinAuthenticationActivityViewModel @Inject constructor(
         if (::lockoutJob.isInitialized && lockoutJob.isActive) return false
 
         return when (authenticationActivityAP.confirmPin(hashedPin)) {
-            PAConfirmPinStatus.LOCKED_OUT -> {
+            ConfirmPinStatus.LOCKED_OUT -> {
                 launchWrongPinLockoutCountdown(authenticationActivityAP.getLockoutDurationSeconds())
                 false
             }
-            PAConfirmPinStatus.ONE_MORE_ATTEMPT -> {
+            ConfirmPinStatus.ONE_MORE_ATTEMPT -> {
                 authenticationActivityAP.showToast(viewData.getOneMoreAttemptMessage(), viewColors.getTextColor())
                 false
             }
-            PAConfirmPinStatus.WRONG_PIN -> {
+            ConfirmPinStatus.WRONG_PIN -> {
                 authenticationActivityAP.showToast(viewData.getWrongPinMessage(), viewColors.getTextColor())
                 false
             }

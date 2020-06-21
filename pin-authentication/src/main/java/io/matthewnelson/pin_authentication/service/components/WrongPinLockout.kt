@@ -1,7 +1,7 @@
 package io.matthewnelson.pin_authentication.service.components
 
 import io.matthewnelson.pin_authentication.util.PrefsKeys
-import io.matthewnelson.pin_authentication.util.definitions.PAConfirmPinStatus
+import io.matthewnelson.pin_authentication.util.definitions.ConfirmPinStatuss.ConfirmPinStatus
 import io.matthewnelson.pin_authentication.service.PinAuthentication
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 
@@ -57,16 +57,16 @@ internal class WrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
 
         return when {
             wrongPinAttempts < maxPinAttempts -> {
-                PAConfirmPinStatus.WRONG_PIN
+                ConfirmPinStatus.WRONG_PIN
             }
             wrongPinAttempts == maxPinAttempts -> {
-                PAConfirmPinStatus.ONE_MORE_ATTEMPT
+                ConfirmPinStatus.ONE_MORE_ATTEMPT
             }
             wrongPinAttempts > maxPinAttempts -> {
-                PAConfirmPinStatus.LOCKED_OUT
+                ConfirmPinStatus.LOCKED_OUT
             }
             else -> {
-                PAConfirmPinStatus.WRONG_PIN
+                ConfirmPinStatus.WRONG_PIN
             }
         }
     }

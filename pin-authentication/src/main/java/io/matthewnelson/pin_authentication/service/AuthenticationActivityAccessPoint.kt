@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.service.components.*
 import io.matthewnelson.pin_authentication.util.PrefsKeys
-import io.matthewnelson.pin_authentication.util.definitions.PAConfirmPinStatus
+import io.matthewnelson.pin_authentication.util.definitions.ConfirmPinStatuss.ConfirmPinStatus
 import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 import io.matthewnelson.pin_authentication.model.HashedPin
@@ -55,9 +55,9 @@ internal class AuthenticationActivityAccessPoint(
      *
      * @param [hashedPin] HashedPin
      *
-     * @return [PAConfirmPinStatus.ConfirmPinStatus]
+     * @return [ConfirmPinStatuss.ConfirmPinStatus]
      * */
-    fun confirmPin(hashedPin: HashedPin): @PAConfirmPinStatus.ConfirmPinStatus Int {
+    fun confirmPin(hashedPin: HashedPin): @ConfirmPinStatus Int {
 
         @OptIn(UnsafePinHash::class)
         if (encryptedPrefs.read(
@@ -68,14 +68,14 @@ internal class AuthenticationActivityAccessPoint(
             if (wrongPinLockout.isWrongPinLockoutEnabled()) {
                 wrongPinLockout.removeLockoutData()
             }
-            return PAConfirmPinStatus.CORRECT_PIN
+            return ConfirmPinStatus.CORRECT_PIN
         } else {
 
             return if (wrongPinLockout.isWrongPinLockoutEnabled()) {
                 wrongPinLockout.variablyDecrementAttemptsCounter()
                 wrongPinLockout.updateDataAndGetReturnString()
             } else {
-                PAConfirmPinStatus.WRONG_PIN
+                ConfirmPinStatus.WRONG_PIN
             }
 
         }
