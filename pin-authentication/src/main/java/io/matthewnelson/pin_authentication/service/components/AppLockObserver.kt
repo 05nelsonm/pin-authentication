@@ -2,7 +2,7 @@ package io.matthewnelson.pin_authentication.service.components
 
 import android.content.Intent
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
-import io.matthewnelson.pin_authentication.util.definitions.PAAuthenticationState
+import io.matthewnelson.pin_authentication.util.definitions.AuthenticationStates.AuthenticationState
 import io.matthewnelson.pin_authentication.util.definitions.LockApplicationEvents.LockApplicationEvent
 import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 import kotlinx.coroutines.Job
@@ -36,14 +36,14 @@ internal class AppLockObserver(
     //////////////////////////
     // Authentication State //
     //////////////////////////
-    private var authenticationState = PAAuthenticationState.REQUIRED
+    private var authenticationState = AuthenticationState.REQUIRED
     private var backgroundLogoutTimer = 0L
 
     init {
         appLifecycleWatcher.getPALockApplicationEvent().observeForever {
             when (it) {
                 LockApplicationEvent.LOCK -> {
-                    if (authenticationState == PAAuthenticationState.NOT_REQUIRED) {
+                    if (authenticationState == AuthenticationState.NOT_REQUIRED) {
                         if (backgroundLogoutTimer > 0L) {
                             launchAuthInvalidationJobIfInactive()
                         }
@@ -59,7 +59,7 @@ internal class AppLockObserver(
     }
 
     fun setAuthenticationStateNotRequired() {
-        authenticationState = PAAuthenticationState.NOT_REQUIRED
+        authenticationState = AuthenticationState.NOT_REQUIRED
     }
 
     /**
@@ -112,7 +112,7 @@ internal class AppLockObserver(
 
                 // Inhibit launching into LOGIN or SET_PIN_FIRST_TIME configuration if
                 // authentication state is not required.
-                if (authenticationState != PAAuthenticationState.REQUIRED) {
+                if (authenticationState != AuthenticationState.REQUIRED) {
                     return
                 }
 
@@ -156,7 +156,7 @@ internal class AppLockObserver(
 
         authInvalidationJob = coroutines.getScopeUI().launch {
             delay(backgroundLogoutTimer)
-            authenticationState = PAAuthenticationState.REQUIRED
+            authenticationState = AuthenticationState.REQUIRED
         }
     }
 
