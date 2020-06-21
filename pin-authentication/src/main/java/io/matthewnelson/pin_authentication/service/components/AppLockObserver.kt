@@ -3,7 +3,7 @@ package io.matthewnelson.pin_authentication.service.components
 import android.content.Intent
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
 import io.matthewnelson.pin_authentication.util.definitions.PAAuthenticationState
-import io.matthewnelson.pin_authentication.util.definitions.PALockApplicationEvent
+import io.matthewnelson.pin_authentication.util.definitions.LockApplicationEvents.LockApplicationEvent
 import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -42,14 +42,14 @@ internal class AppLockObserver(
     init {
         appLifecycleWatcher.getPALockApplicationEvent().observeForever {
             when (it) {
-                PALockApplicationEvent.LOCK -> {
+                LockApplicationEvent.LOCK -> {
                     if (authenticationState == PAAuthenticationState.NOT_REQUIRED) {
                         if (backgroundLogoutTimer > 0L) {
                             launchAuthInvalidationJobIfInactive()
                         }
                     }
                 }
-                PALockApplicationEvent.UNLOCK -> {
+                LockApplicationEvent.UNLOCK -> {
                     cancelAuthInvalidationJobIfNotComplete()
                     hijackApp(PinEntryState.LOGIN)
                 }

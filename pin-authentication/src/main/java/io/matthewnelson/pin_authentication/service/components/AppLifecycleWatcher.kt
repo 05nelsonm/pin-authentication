@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.os.PowerManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.matthewnelson.pin_authentication.util.definitions.PALockApplicationEvent
+import io.matthewnelson.pin_authentication.util.definitions.LockApplicationEvents.LockApplicationEvent
 
 /**
  * @suppress
@@ -27,9 +27,9 @@ internal class AppLifecycleWatcher(
     // Lock Application //
     //////////////////////
     private val paLockApplicationEvent =
-        MutableLiveData<@PALockApplicationEvent.LockApplicationEvent Int>(PALockApplicationEvent.LOCK)
+        MutableLiveData<@LockApplicationEvent Int>(LockApplicationEvent.LOCK)
 
-    fun getPALockApplicationEvent(): LiveData<@PALockApplicationEvent.LockApplicationEvent Int> =
+    fun getPALockApplicationEvent(): LiveData<@LockApplicationEvent Int> =
         paLockApplicationEvent
 
 
@@ -85,8 +85,8 @@ internal class AppLifecycleWatcher(
         if (screenRotationOccurring) {
             screenRotationOccurring = false
         }
-        if (paLockApplicationEvent.value == PALockApplicationEvent.LOCK) {
-            paLockApplicationEvent.value = PALockApplicationEvent.UNLOCK
+        if (paLockApplicationEvent.value == LockApplicationEvent.LOCK) {
+            paLockApplicationEvent.value = LockApplicationEvent.UNLOCK
         }
     }
 
@@ -103,8 +103,8 @@ internal class AppLifecycleWatcher(
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
         val pm = activity.getSystemService(Context.POWER_SERVICE) as PowerManager?
         if (pm?.isInteractive == false
-            && paLockApplicationEvent.value == PALockApplicationEvent.UNLOCK) {
-            paLockApplicationEvent.value = PALockApplicationEvent.LOCK
+            && paLockApplicationEvent.value == LockApplicationEvent.UNLOCK) {
+            paLockApplicationEvent.value = LockApplicationEvent.LOCK
         }
     }
 
@@ -119,7 +119,7 @@ internal class AppLifecycleWatcher(
 
     override fun onTrimMemory(level: Int) {
         if (level == ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN) {
-            paLockApplicationEvent.value = PALockApplicationEvent.LOCK
+            paLockApplicationEvent.value = LockApplicationEvent.LOCK
         }
     }
 }

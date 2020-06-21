@@ -5,20 +5,17 @@ import androidx.annotation.IntDef
 /**
  * @suppress
  * */
-internal abstract class PALockApplicationEvent {
+internal abstract class LockApplicationEvents {
     @Target(AnnotationTarget.TYPE, AnnotationTarget.PROPERTY_GETTER)
     @IntDef(
-        LOCK,
-        UNLOCK
+        LockApplicationEvent.LOCK,
+        LockApplicationEvent.UNLOCK
     )
     @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
-    annotation class LockApplicationEvent
-
-    @get:LockApplicationEvent
-    abstract var paLockApplicationEvent: Int
-
-    companion object {
-        const val LOCK = 0
-        const val UNLOCK = 1
+    annotation class LockApplicationEvent {
+        companion object {
+            const val LOCK = 0
+            const val UNLOCK = 1
+        }
     }
 }

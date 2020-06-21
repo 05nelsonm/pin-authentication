@@ -8,7 +8,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.PowerManager
 import androidx.test.core.app.ApplicationProvider
-import io.matthewnelson.pin_authentication.util.definitions.PALockApplicationEvent
+import io.matthewnelson.pin_authentication.util.definitions.LockApplicationEvents.LockApplicationEvent
 import org.junit.Before
 import org.junit.FixMethodOrder
 import org.junit.Test
@@ -47,8 +47,8 @@ class AppLifecycleWatcherUnitTest {
     @Test
     fun a_testClassInitializationValues() {
         val paLockApplicationEventValue = appLifecycleWatcher.getPALockApplicationEvent().value
-        assertEquals(PALockApplicationEvent.LOCK, paLockApplicationEventValue)
-        assertNotEquals(PALockApplicationEvent.UNLOCK, paLockApplicationEventValue)
+        assertEquals(LockApplicationEvent.LOCK, paLockApplicationEventValue)
+        assertNotEquals(LockApplicationEvent.UNLOCK, paLockApplicationEventValue)
         assertEquals(null, appLifecycleWatcher.getCurrentActivity())
     }
 
@@ -77,65 +77,65 @@ class AppLifecycleWatcherUnitTest {
     @Test
     fun d_testOnActivityStarted_fromLocked() {
         val preSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
-        assertEquals(PALockApplicationEvent.LOCK, preSimulationValue)
-        assertNotEquals(PALockApplicationEvent.UNLOCK, preSimulationValue)
+        assertEquals(LockApplicationEvent.LOCK, preSimulationValue)
+        assertNotEquals(LockApplicationEvent.UNLOCK, preSimulationValue)
 
         simulateOnActivityStarted(roboActivity)
 
         var postSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
-        assertEquals(PALockApplicationEvent.UNLOCK, postSimulationValue)
-        assertNotEquals(PALockApplicationEvent.LOCK, postSimulationValue)
+        assertEquals(LockApplicationEvent.UNLOCK, postSimulationValue)
+        assertNotEquals(LockApplicationEvent.LOCK, postSimulationValue)
 
         simulateOnActivityStarted(roboActivity)
 
         postSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
-        assertEquals(PALockApplicationEvent.UNLOCK, postSimulationValue)
-        assertNotEquals(PALockApplicationEvent.LOCK, postSimulationValue)
+        assertEquals(LockApplicationEvent.UNLOCK, postSimulationValue)
+        assertNotEquals(LockApplicationEvent.LOCK, postSimulationValue)
     }
 
     @Test
     fun e_testOnActivitySaveInstanceState() {
         var preSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
-        if (preSimulationValue == PALockApplicationEvent.LOCK) {
+        if (preSimulationValue == LockApplicationEvent.LOCK) {
             simulateOnActivityStarted(roboActivity)
             preSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
         }
-        assertEquals(PALockApplicationEvent.UNLOCK, preSimulationValue)
-        assertNotEquals(PALockApplicationEvent.LOCK, preSimulationValue)
+        assertEquals(LockApplicationEvent.UNLOCK, preSimulationValue)
+        assertNotEquals(LockApplicationEvent.LOCK, preSimulationValue)
 
         simulateOnActivitySaveInstanceState(roboActivity, false)
 
         var postSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
-        assertEquals(PALockApplicationEvent.LOCK, postSimulationValue)
-        assertNotEquals(PALockApplicationEvent.UNLOCK, postSimulationValue)
+        assertEquals(LockApplicationEvent.LOCK, postSimulationValue)
+        assertNotEquals(LockApplicationEvent.UNLOCK, postSimulationValue)
 
         simulateOnActivityStarted(roboActivity)
 
         postSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
-        assertEquals(PALockApplicationEvent.UNLOCK, postSimulationValue)
-        assertNotEquals(PALockApplicationEvent.LOCK, postSimulationValue)
+        assertEquals(LockApplicationEvent.UNLOCK, postSimulationValue)
+        assertNotEquals(LockApplicationEvent.LOCK, postSimulationValue)
 
         simulateOnActivitySaveInstanceState(roboActivity, true)
 
         postSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
-        assertEquals(PALockApplicationEvent.UNLOCK, postSimulationValue)
-        assertNotEquals(PALockApplicationEvent.LOCK, postSimulationValue)
+        assertEquals(LockApplicationEvent.UNLOCK, postSimulationValue)
+        assertNotEquals(LockApplicationEvent.LOCK, postSimulationValue)
     }
 
     @Test
     fun f_testOnTrimMemory() {
         var preSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
-        if (preSimulationValue == PALockApplicationEvent.LOCK) {
+        if (preSimulationValue == LockApplicationEvent.LOCK) {
             simulateOnActivityStarted(roboActivity)
             preSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
         }
-        assertEquals(PALockApplicationEvent.UNLOCK, preSimulationValue)
-        assertNotEquals(PALockApplicationEvent.LOCK, preSimulationValue)
+        assertEquals(LockApplicationEvent.UNLOCK, preSimulationValue)
+        assertNotEquals(LockApplicationEvent.LOCK, preSimulationValue)
 
         simulateOnTrimMemory()
         val postSimulationValue = appLifecycleWatcher.getPALockApplicationEvent().value
-        assertEquals(PALockApplicationEvent.LOCK, postSimulationValue)
-        assertNotEquals(PALockApplicationEvent.UNLOCK, postSimulationValue)
+        assertEquals(LockApplicationEvent.LOCK, postSimulationValue)
+        assertNotEquals(LockApplicationEvent.UNLOCK, postSimulationValue)
     }
 
     @Test
