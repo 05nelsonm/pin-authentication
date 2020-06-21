@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.databinding.ActivityPinAuthenticationBinding
 import io.matthewnelson.pin_authentication.service.PinAuthentication
-import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
+import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 import io.matthewnelson.pin_authentication.viewmodel.ActivityViewModelFactory
 import javax.inject.Inject
 
@@ -60,22 +60,22 @@ internal class PinAuthenticationActivity : AppCompatActivity() {
 
         viewModel.getPinEntryState().observe(this, Observer {
             when (it) {
-                PAPinEntryState.CONFIRM_PIN -> {
+                PinEntryState.CONFIRM_PIN -> {
                     viewModel.setPinEntryStateConfirmPin()
                 }
-                PAPinEntryState.ENABLE_PIN_SECURITY -> {
+                PinEntryState.ENABLE_PIN_SECURITY -> {
                     viewModel.setPinEntryStateSetPin(it)
                 }
-                PAPinEntryState.LOGIN -> {
+                PinEntryState.LOGIN -> {
                     viewModel.setPinEntryStateLogin()
                 }
-                PAPinEntryState.RESET_PIN -> {
+                PinEntryState.RESET_PIN -> {
                     viewModel.setPinEntryStateResetPin()
                 }
-                PAPinEntryState.SET_PIN -> {
+                PinEntryState.SET_PIN -> {
                     viewModel.setPinEntryStateSetPin(it)
                 }
-                PAPinEntryState.SET_PIN_FIRST_TIME -> {
+                PinEntryState.SET_PIN_FIRST_TIME -> {
                     viewModel.setPinEntryStateSetPin(it)
                 }
                 else -> {
@@ -91,7 +91,7 @@ internal class PinAuthenticationActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         when (viewModel.getCurrentPinEntryState()) {
-            PAPinEntryState.LOGIN, PAPinEntryState.SET_PIN_FIRST_TIME -> {
+            PinEntryState.LOGIN, PinEntryState.SET_PIN_FIRST_TIME -> {
                 val intent = Intent(Intent.ACTION_MAIN)
                 intent.addCategory(Intent.CATEGORY_HOME)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

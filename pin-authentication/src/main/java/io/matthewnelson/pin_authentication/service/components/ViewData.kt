@@ -5,7 +5,8 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.matthewnelson.pin_authentication.R
-import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
+import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates
+import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 
 /**
  * @suppress
@@ -31,8 +32,8 @@ internal class ViewData(
 
     // LiveData
     private val headerText: MutableLiveData<String> = MutableLiveData()
-    private val pinEntryState: MutableLiveData<@PAPinEntryState.PinEntryState Int> =
-        MutableLiveData(PAPinEntryState.IDLE)
+    private val pinEntryState: MutableLiveData<@PinEntryStates.PinEntryState Int> =
+        MutableLiveData(PinEntryState.IDLE)
     private val pinLength: MutableLiveData<Int> = MutableLiveData(0)
     private val pinPadIntegers: MutableLiveData<MutableList<Int>> = MutableLiveData()
     private val showSetPinHelpInfo: MutableLiveData<String> = MutableLiveData("")
@@ -66,10 +67,10 @@ internal class ViewData(
     }
 
     // Pin Entry Event
-    fun getPinEntryState(): LiveData<@PAPinEntryState.PinEntryState Int> =
+    fun getPinEntryState(): LiveData<@PinEntryState Int> =
         pinEntryState
 
-    fun setPinEntryState(pinEntryState: @PAPinEntryState.PinEntryState Int) {
+    fun setPinEntryState(pinEntryState: @PinEntryState Int) {
         this.pinEntryState.value = pinEntryState
     }
 

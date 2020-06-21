@@ -12,9 +12,10 @@ import io.matthewnelson.pin_authentication.di.application.ApplicationComponent
 import io.matthewnelson.pin_authentication.service.components.*
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
 import io.matthewnelson.pin_authentication.util.BindingAdapters
-import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
+import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 import io.matthewnelson.pin_authentication.util.definitions.ScreenTypes.ScreenType
 import io.matthewnelson.pin_authentication.di.application.DaggerApplicationComponent
+import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates
 import io.matthewnelson.pin_authentication.util.definitions.ScreenTypes
 
 sealed class PinAuthentication {
@@ -527,7 +528,7 @@ sealed class PinAuthentication {
         fun completeOnBoardProcess() {
             injected.settings.setOnBoardProcessIsComplete()
             if (injected.pinSecurity.isPinSecurityEnabled()) {
-                injected.appLockObserver.hijackApp(PAPinEntryState.LOGIN)
+                injected.appLockObserver.hijackApp(PinEntryState.LOGIN)
             } else {
                 injected.initialAppLogin.initialAppLoginIsSatisfied()
             }
@@ -635,7 +636,7 @@ sealed class PinAuthentication {
          * [Controller.registerPinConfirmationToProceedRequestKey].
          *
          * This will launch [PinAuthenticationActivity] in
-         * [PAPinEntryState.CONFIRM_PIN] configuration. If the
+         * [PinEntryState.CONFIRM_PIN] configuration. If the
          * [requestKey] is not registered, it does nothing.
          *
          * @param [requestKey] String
@@ -655,7 +656,7 @@ sealed class PinAuthentication {
 
             if (injected.confirmPinToProceed.isRequestKeyRegistered(requestKey)) {
                 injected.confirmPinToProceed.setCurrentRequestKey(requestKey)
-                injected.appLockObserver.hijackApp(PAPinEntryState.CONFIRM_PIN)
+                injected.appLockObserver.hijackApp(PinEntryState.CONFIRM_PIN)
             }
         }
 
@@ -862,7 +863,7 @@ sealed class PinAuthentication {
         ///////////////
         /**
          * Launches [PinAuthenticationActivity] in
-         * [PAPinEntryState.RESET_PIN] configuration for
+         * [PinEntryStates.RESET_PIN] configuration for
          * the user to reset their PIN.
          *
          * @see [AppLockObserver.hijackApp]
@@ -870,7 +871,7 @@ sealed class PinAuthentication {
          * @sample [io.matthewnelson.pin_authentication_demo.ui.SettingsFragment.initializeResetPinButton]
          * */
         fun resetPin() =
-            injected.appLockObserver.hijackApp(PAPinEntryState.RESET_PIN)
+            injected.appLockObserver.hijackApp(PinEntryState.RESET_PIN)
 
 
         //////////////////
@@ -913,9 +914,9 @@ sealed class PinAuthentication {
             injected.pinSecurity.setCurrentRequestKeyToPinSecurity()
 
             if (enable) {
-                injected.appLockObserver.hijackApp(PAPinEntryState.ENABLE_PIN_SECURITY)
+                injected.appLockObserver.hijackApp(PinEntryState.ENABLE_PIN_SECURITY)
             } else {
-                injected.appLockObserver.hijackApp(PAPinEntryState.CONFIRM_PIN)
+                injected.appLockObserver.hijackApp(PinEntryState.CONFIRM_PIN)
             }
         }
 

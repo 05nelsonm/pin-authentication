@@ -11,7 +11,8 @@ import io.matthewnelson.pin_authentication.service.components.Coroutines
 import io.matthewnelson.pin_authentication.service.components.ViewColors
 import io.matthewnelson.pin_authentication.service.components.ViewData
 import io.matthewnelson.pin_authentication.util.definitions.PAConfirmPinStatus
-import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
+import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates
+import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -125,36 +126,36 @@ internal class PinAuthenticationActivityViewModel @Inject constructor(
 
         toggleHapticFeedback()
         when (currentPinEntryState) {
-            PAPinEntryState.CONFIRM_PIN -> {
+            PinEntryState.CONFIRM_PIN -> {
                 if (confirmPin(hashedPin)) {
                     authenticationActivityAP.confirmPinToProceedSuccess()
-                    viewData.setPinEntryState(PAPinEntryState.IDLE)
+                    viewData.setPinEntryState(PinEntryState.IDLE)
                 } else {
                     pinHintContainerShakeAnimation()
                     pinEntry.clear()
                 }
             }
-            PAPinEntryState.ENABLE_PIN_SECURITY -> {
+            PinEntryState.ENABLE_PIN_SECURITY -> {
                 setUsersPin(hashedPin)
             }
-            PAPinEntryState.RESET_PIN -> {
+            PinEntryState.RESET_PIN -> {
                 if (confirmPin(hashedPin)) {
-                    viewData.setPinEntryState(PAPinEntryState.SET_PIN)
+                    viewData.setPinEntryState(PinEntryState.SET_PIN)
                 } else {
                     pinHintContainerShakeAnimation()
                 }
                 pinEntry.clear()
             }
-            PAPinEntryState.SET_PIN -> {
+            PinEntryState.SET_PIN -> {
                 setUsersPin(hashedPin)
             }
-            PAPinEntryState.SET_PIN_FIRST_TIME -> {
+            PinEntryState.SET_PIN_FIRST_TIME -> {
                 setUsersPin(hashedPin)
             }
             else -> {
                 if (confirmPin(hashedPin)) {
                     authenticationActivityAP.authProcessComplete(!pinResetFlowInterrupted)
-                    viewData.setPinEntryState(PAPinEntryState.IDLE)
+                    viewData.setPinEntryState(PinEntryState.IDLE)
                 } else {
                     pinHintContainerShakeAnimation()
                     pinEntry.clear()
@@ -195,7 +196,7 @@ internal class PinAuthenticationActivityViewModel @Inject constructor(
             if (pinEntry.doPinsMatch()) {
                 authenticationActivityAP.setUserPin(hashedPin)
                 authenticationActivityAP.authProcessComplete(true)
-                viewData.setPinEntryState(PAPinEntryState.IDLE)
+                viewData.setPinEntryState(PinEntryState.IDLE)
             } else {
                 authenticationActivityAP.showToast(viewData.getPinDoesNotMatchMessage(), viewColors.getTextColor())
                 pinEntry.clear(clearPinEntryCompare = false)
@@ -350,8 +351,8 @@ internal class PinAuthenticationActivityViewModel @Inject constructor(
      * It ensures that if the user is doing something with [PinAuthentication] while the
      * app is sent to the background that no information is compromised.
      *
-     * It will also send the user back to [PAPinEntryState.RESET_PIN] configuration if they are
-     * in the middle of the [PAPinEntryState.SET_PIN] process in the event that the app is sent
+     * It will also send the user back to [PinEntryState.RESET_PIN] configuration if they are
+     * in the middle of the [PinEntryState.SET_PIN] process in the event that the app is sent
      * to the background.
      * */
     fun launchProtectUserDataJobIfInactive() {
@@ -363,8 +364,8 @@ internal class PinAuthenticationActivityViewModel @Inject constructor(
     }
 
     private fun protectUserData() {
-        if (currentPinEntryState == PAPinEntryState.SET_PIN && authenticationActivityAP.isUserPinSet()) {
-            viewData.setPinEntryState(PAPinEntryState.RESET_PIN)
+        if (currentPinEntryState == PinEntryState.SET_PIN && authenticationActivityAP.isUserPinSet()) {
+            viewData.setPinEntryState(PinEntryState.RESET_PIN)
             pinEntry.clear()
         } else {
             pinEntry.clear(clearPinEntryCompare = false)
@@ -375,33 +376,33 @@ internal class PinAuthenticationActivityViewModel @Inject constructor(
     //////////////////////////////
     // Override On Back Pressed //
     //////////////////////////////
-    fun getCurrentPinEntryState(): @PAPinEntryState.PinEntryState Int =
+    fun getCurrentPinEntryState(): @PinEntryState Int =
         currentPinEntryState
 
     fun onBackPressed() {
-        if (currentPinEntryState == PAPinEntryState.CONFIRM_PIN) {
+        if (currentPinEntryState == PinEntryState.CONFIRM_PIN) {
             authenticationActivityAP.confirmPinToProceedFailure()
         }
-        if (currentPinEntryState == PAPinEntryState.ENABLE_PIN_SECURITY) {
+        if (currentPinEntryState == PinEntryState.ENABLE_PIN_SECURITY) {
             authenticationActivityAP.enablePinSecurityFailure()
         }
-        viewData.setPinEntryState(PAPinEntryState.IDLE)
+        viewData.setPinEntryState(PinEntryState.IDLE)
     }
 
 
     /////////////////////
     // Pin Entry Event //
     /////////////////////
-    private var currentPinEntryState: @PAPinEntryState.PinEntryState Int = PAPinEntryState.IDLE
+    private var currentPinEntryState: @PinEntryState Int = PinEntryState.IDLE
     private var pinResetFlowInterrupted = false
     private var pinConfirmationFlowInterrupted = false
 
-    fun getPinEntryState(): LiveData<@PAPinEntryState.PinEntryState Int> =
+    fun getPinEntryState(): LiveData<@PinEntryState Int> =
         viewData.getPinEntryState()
 
     fun setPinEntryStateConfirmPin() {
-        if (currentPinEntryState != PAPinEntryState.CONFIRM_PIN) {
-            currentPinEntryState = PAPinEntryState.CONFIRM_PIN
+        if (currentPinEntryState != PinEntryState.CONFIRM_PIN) {
+            currentPinEntryState = PinEntryState.CONFIRM_PIN
 
             if (!pinConfirmationFlowInterrupted) {
                 viewData.setHeaderTextConfirmPin()
@@ -412,19 +413,19 @@ internal class PinAuthenticationActivityViewModel @Inject constructor(
     }
 
     fun setPinEntryStateLogin() {
-        if (currentPinEntryState != PAPinEntryState.LOGIN) {
+        if (currentPinEntryState != PinEntryState.LOGIN) {
             pinEntry.clear()
 
-            if (currentPinEntryState == PAPinEntryState.RESET_PIN ||
-                currentPinEntryState == PAPinEntryState.SET_PIN) {
+            if (currentPinEntryState == PinEntryState.RESET_PIN ||
+                currentPinEntryState == PinEntryState.SET_PIN) {
                 pinResetFlowInterrupted = true
             }
 
-            if (currentPinEntryState == PAPinEntryState.CONFIRM_PIN) {
+            if (currentPinEntryState == PinEntryState.CONFIRM_PIN) {
                 pinConfirmationFlowInterrupted = true
             }
 
-            currentPinEntryState = PAPinEntryState.LOGIN
+            currentPinEntryState = PinEntryState.LOGIN
             viewData.setHeaderTextLogin()
             viewData.setShowSetPinHelpInfo(false)
             viewData.setPinPadIntegers(authenticationActivityAP.isScrambledPinEnabled())
@@ -432,15 +433,15 @@ internal class PinAuthenticationActivityViewModel @Inject constructor(
     }
 
     fun setPinEntryStateResetPin() {
-        if (currentPinEntryState != PAPinEntryState.RESET_PIN) {
-            currentPinEntryState = PAPinEntryState.RESET_PIN
+        if (currentPinEntryState != PinEntryState.RESET_PIN) {
+            currentPinEntryState = PinEntryState.RESET_PIN
             viewData.setHeaderTextResetPin()
             viewData.setShowSetPinHelpInfo(false)
             viewData.setPinPadIntegers(authenticationActivityAP.isScrambledPinEnabled())
         }
     }
 
-    fun setPinEntryStateSetPin(pinEntryState: @PAPinEntryState.PinEntryState Int) {
+    fun setPinEntryStateSetPin(pinEntryState: @PinEntryState Int) {
         if (currentPinEntryState != pinEntryState) {
             currentPinEntryState = pinEntryState
             viewData.setHeaderTextSetPinStep1()
@@ -450,14 +451,14 @@ internal class PinAuthenticationActivityViewModel @Inject constructor(
     }
 
     fun setPinEntryStateIdle() {
-        if (currentPinEntryState != PAPinEntryState.IDLE) {
-            currentPinEntryState = PAPinEntryState.IDLE
+        if (currentPinEntryState != PinEntryState.IDLE) {
+            currentPinEntryState = PinEntryState.IDLE
             pinEntry.clear()
 
             when {
                 pinResetFlowInterrupted -> {
                     pinResetFlowInterrupted = false
-                    viewData.setPinEntryState(PAPinEntryState.SET_PIN)
+                    viewData.setPinEntryState(PinEntryState.SET_PIN)
                 }
                 pinConfirmationFlowInterrupted -> {
                     pinConfirmationFlowInterrupted = false

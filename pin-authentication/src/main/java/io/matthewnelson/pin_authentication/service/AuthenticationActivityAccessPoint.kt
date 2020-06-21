@@ -10,7 +10,7 @@ import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.service.components.*
 import io.matthewnelson.pin_authentication.util.PrefsKeys
 import io.matthewnelson.pin_authentication.util.definitions.PAConfirmPinStatus
-import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
+import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 import io.matthewnelson.pin_authentication.model.HashedPin
 import io.matthewnelson.pin_authentication.model.UnsafePinHash
@@ -82,7 +82,7 @@ internal class AuthenticationActivityAccessPoint(
     }
 
     /**
-     * Used during [PAPinEntryState.CONFIRM_PIN] configuration. Will be triggered if the
+     * Used during [PinEntryState.CONFIRM_PIN] configuration. Will be triggered if the
      * user hits the back button.
      * */
     fun confirmPinToProceedFailure() {
@@ -94,7 +94,7 @@ internal class AuthenticationActivityAccessPoint(
     }
 
     /**
-     * Used during [PAPinEntryState.CONFIRM_PIN] configuration. Will be triggered if the
+     * Used during [PinEntryState.CONFIRM_PIN] configuration. Will be triggered if the
      * user successfully confirms their pin.
      * */
     fun confirmPinToProceedSuccess() {
@@ -110,7 +110,7 @@ internal class AuthenticationActivityAccessPoint(
     }
 
     /**
-     * Used during [PAPinEntryState.ENABLE_PIN_SECURITY] configuration. Will be triggered
+     * Used during [PinEntryState.ENABLE_PIN_SECURITY] configuration. Will be triggered
      * if the user hits the back button.
      * */
     fun enablePinSecurityFailure() =

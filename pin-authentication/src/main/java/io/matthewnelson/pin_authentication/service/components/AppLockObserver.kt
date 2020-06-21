@@ -4,7 +4,7 @@ import android.content.Intent
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
 import io.matthewnelson.pin_authentication.util.definitions.PAAuthenticationState
 import io.matthewnelson.pin_authentication.util.definitions.PALockApplicationEvent
-import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
+import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -51,7 +51,7 @@ internal class AppLockObserver(
                 }
                 PALockApplicationEvent.UNLOCK -> {
                     cancelAuthInvalidationJobIfNotComplete()
-                    hijackApp(PAPinEntryState.LOGIN)
+                    hijackApp(PinEntryState.LOGIN)
                 }
                 else -> {}
             }
@@ -68,7 +68,7 @@ internal class AppLockObserver(
      *
      * @param [pinEntryState] @PAPinEntryState.PinEntryState Int
      * */
-    fun hijackApp(pinEntryState: @PAPinEntryState.PinEntryState Int) {
+    fun hijackApp(pinEntryState: @PinEntryState Int) {
 
         // Inhibit calls if the app on-board process is not satisfied.
         if (!settings.hasAppOnBoardProcessBeenSatisfied()) {
@@ -84,27 +84,27 @@ internal class AppLockObserver(
         // Inhibit alteration of LiveData multiple times if configuration has already been
         // set to SET_PIN_FIRST_TIME. Will allow for a first time pass because
         // paViewData.pinEntryState resets to IDLE after completion of the Activity.
-        if (viewData.getPinEntryState().value == PAPinEntryState.SET_PIN_FIRST_TIME) {
+        if (viewData.getPinEntryState().value == PinEntryState.SET_PIN_FIRST_TIME) {
             return
         }
 
         // Inhibit alteration of LiveData multiple times if configuration has already been
         // set to ENABLE_PIN_SECURITY. Will allow for a first time pass because
         // paViewData.pinEntryState resets to IDLE after completion of the Activity.
-        if (viewData.getPinEntryState().value == PAPinEntryState.ENABLE_PIN_SECURITY) {
+        if (viewData.getPinEntryState().value == PinEntryState.ENABLE_PIN_SECURITY) {
             return
         }
 
         when (pinEntryState) {
-            PAPinEntryState.CONFIRM_PIN -> {
+            PinEntryState.CONFIRM_PIN -> {
                 viewData.setPinEntryState(pinEntryState)
                 startPinAuthenticationActivity()
             }
-            PAPinEntryState.ENABLE_PIN_SECURITY -> {
+            PinEntryState.ENABLE_PIN_SECURITY -> {
                 viewData.setPinEntryState(pinEntryState)
                 startPinAuthenticationActivity()
             }
-            PAPinEntryState.RESET_PIN -> {
+            PinEntryState.RESET_PIN -> {
                 viewData.setPinEntryState(pinEntryState)
                 startPinAuthenticationActivity()
             }
@@ -118,9 +118,9 @@ internal class AppLockObserver(
 
                 val setPinEntryState =
                     if (settings.getUserPinIsSet()) {
-                        PAPinEntryState.LOGIN
+                        PinEntryState.LOGIN
                     } else {
-                        PAPinEntryState.SET_PIN_FIRST_TIME
+                        PinEntryState.SET_PIN_FIRST_TIME
                     }
                 viewData.setPinEntryState(setPinEntryState)
                 startPinAuthenticationActivity()
