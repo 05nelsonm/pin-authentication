@@ -4,7 +4,7 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import io.matthewnelson.pin_authentication.util.definitions.PAScreenType
+import io.matthewnelson.pin_authentication.util.definitions.ScreenTypes.ScreenType
 import kotlinx.coroutines.*
 
 /**
@@ -30,7 +30,7 @@ internal class ConfirmPinToProceed(
     fun registerRequestKey(
         requestKey: String,
         value: Boolean,
-        screenType: @PAScreenType.ScreenType Int = PAScreenType.NONE,
+        screenType: @ScreenType Int = ScreenType.NONE,
         fragmentClassName: String? = null,
         @IdRes fragmentID: Int? = null,
         addToBlacklist: Boolean = false
@@ -53,7 +53,7 @@ internal class ConfirmPinToProceed(
     }
 
     private inner class RequestKeyData(
-        val screenType: @PAScreenType.ScreenType Int,
+        val screenType: @ScreenType Int,
         val activityClassName: String,
         val fragmentClassName: String?,
         @IdRes val fragmentID: Int?,
@@ -123,7 +123,7 @@ internal class ConfirmPinToProceed(
     private val requestKeysToBeUnregistered = mutableListOf<String>()
 
     fun unregisterRequestKey(requestKey: String) {
-        if (mapRequestKeys[requestKey]?.screenType == PAScreenType.NONE) {
+        if (mapRequestKeys[requestKey]?.screenType == ScreenType.NONE) {
             requestKeysToBeUnregistered.add(requestKey)
             launchRequestKeyRemovalJobIfInactive()
         } else
@@ -153,14 +153,14 @@ internal class ConfirmPinToProceed(
             var remove = false
 
             when (mapRequestKeys[requestKey]?.screenType) {
-                PAScreenType.ACTIVITY -> {
+                ScreenType.ACTIVITY -> {
                     val activityClassName = mapRequestKeys[requestKey]?.activityClassName
 
                     if (activityClassName != appLifecycleWatcher.getCurrentActivityName()) {
                         remove = true
                     }
                 }
-                PAScreenType.FRAGMENT -> {
+                ScreenType.FRAGMENT -> {
                     val activityClassName = mapRequestKeys[requestKey]?.activityClassName
 
                     if (activityClassName != appLifecycleWatcher.getCurrentActivityName()) {

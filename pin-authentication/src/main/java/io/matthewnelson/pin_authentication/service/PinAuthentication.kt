@@ -13,8 +13,9 @@ import io.matthewnelson.pin_authentication.service.components.*
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
 import io.matthewnelson.pin_authentication.util.BindingAdapters
 import io.matthewnelson.pin_authentication.util.definitions.PAPinEntryState
-import io.matthewnelson.pin_authentication.util.definitions.PAScreenType
+import io.matthewnelson.pin_authentication.util.definitions.ScreenTypes.ScreenType
 import io.matthewnelson.pin_authentication.di.application.DaggerApplicationComponent
+import io.matthewnelson.pin_authentication.util.definitions.ScreenTypes
 
 sealed class PinAuthentication {
 
@@ -575,7 +576,7 @@ sealed class PinAuthentication {
             @Suppress("UNUSED_PARAMETER") activity: Activity,
             requestKey: String
         ): LiveData<Boolean>? =
-            registerRequestKey(requestKey, PAScreenType.ACTIVITY)
+            registerRequestKey(requestKey, ScreenType.ACTIVITY)
 
         /**
          * Adds a requestKey to [ConfirmPinToProceed.mapRequestKeys]
@@ -604,14 +605,14 @@ sealed class PinAuthentication {
         ): LiveData<Boolean>? =
             registerRequestKey(
                 requestKey,
-                PAScreenType.FRAGMENT,
+                ScreenType.FRAGMENT,
                 fragment.javaClass.name,
                 fragment.id
             )
 
         private fun registerRequestKey(
             requestKey: String,
-            screenType: @PAScreenType.ScreenType Int,
+            screenType: @ScreenTypes.ScreenType Int,
             fragmentClassName: String? = null,
             @IdRes fragmentID: Int? = null
         ): LiveData<Boolean>? {
