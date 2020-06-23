@@ -17,7 +17,7 @@ extra:
       link: https://medium.com/@matthewnelson.io
 
 site_name: PinAuthentication
-site_url: https://05nelsonm.github.io/pin-authentication
+site_url: https://pin-authentication.matthewnelson.io
 repo_name: PinAuthentication
 repo_url: https://github.com/05nelsonm/pin-authentication
 site_description: "An Android library to provide local PIN authentication for your application."
