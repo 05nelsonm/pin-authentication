@@ -23,9 +23,6 @@ import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.util.PrefsKeys
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 
-/**
- * @suppress
- * */
 internal class ViewColors(
     private val context: Context,
     private val prefs: EncryptedStorage.Prefs

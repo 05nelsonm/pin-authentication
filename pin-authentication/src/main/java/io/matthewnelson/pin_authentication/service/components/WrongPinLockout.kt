@@ -21,9 +21,6 @@ import io.matthewnelson.pin_authentication.util.definitions.ConfirmPinStatuss.Co
 import io.matthewnelson.pin_authentication.service.PinAuthentication
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 
-/**
- * @suppress
- * */
 internal class WrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
 
     ///////////////////////

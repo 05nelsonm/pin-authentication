@@ -21,7 +21,6 @@ import io.matthewnelson.pin_authentication.util.PrefsKeys
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 
 /**
- * @suppress
  * Wrapper class for [ConfirmPinToProceed] that handles everything to do with PinSecurity
  *
  * @param [confirmPinToProceed] [ConfirmPinToProceed]

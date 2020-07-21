@@ -26,9 +26,6 @@ import io.matthewnelson.pin_authentication.service.components.*
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Named
 
-/**
- * @suppress
- * */
 @Module
 internal object ApplicationModule {
 

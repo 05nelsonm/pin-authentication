@@ -23,9 +23,6 @@ import androidx.lifecycle.MutableLiveData
 import io.matthewnelson.pin_authentication.util.definitions.ScreenTypes.ScreenType
 import kotlinx.coroutines.*
 
-/**
- * @suppress
- * */
 internal class ConfirmPinToProceed(
     private val appLifecycleWatcher: AppLifecycleWatcher,
     private val coroutines: Coroutines

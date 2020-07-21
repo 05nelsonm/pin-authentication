@@ -34,7 +34,6 @@ import java.math.BigInteger
 import java.security.SecureRandom
 
 /**
- * @suppress
  * Methods utilized by [PinAuthentication]'s UI, _not_ needed by the Application
  * that's implementing [PinAuthentication]
  *

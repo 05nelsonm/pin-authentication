@@ -25,9 +25,6 @@ import io.matthewnelson.pin_authentication.service.AuthenticationActivityAccessP
 import io.matthewnelson.pin_authentication.service.components.*
 import javax.inject.Named
 
-/**
- * @suppress
- * */
 @Module
 internal object ActivityModule {
 

@@ -24,9 +24,6 @@ import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates
 import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
 
-/**
- * @suppress
- * */
 internal class ViewData(
     private val context: Context,
     private val settings: Settings,

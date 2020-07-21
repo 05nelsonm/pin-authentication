@@ -18,9 +18,6 @@ package io.matthewnelson.pin_authentication.util.definitions
 
 import androidx.annotation.IntDef
 
-/**
- * @suppress
- * */
 internal abstract class AuthenticationStates {
     @Target(AnnotationTarget.TYPE, AnnotationTarget.PROPERTY_GETTER)
     @IntDef(

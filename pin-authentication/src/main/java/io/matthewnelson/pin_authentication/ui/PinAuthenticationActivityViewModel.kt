@@ -35,9 +35,6 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import javax.inject.Inject
 
-/**
- * @suppress
- * */
 internal class PinAuthenticationActivityViewModel @Inject constructor(
     private val authenticationActivityAP: AuthenticationActivityAccessPoint,
     private val viewColors: ViewColors,

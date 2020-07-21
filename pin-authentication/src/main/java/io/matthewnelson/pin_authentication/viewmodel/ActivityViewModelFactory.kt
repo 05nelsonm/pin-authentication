@@ -26,9 +26,6 @@ import io.matthewnelson.pin_authentication.di.activity.PAActivityScope
 import javax.inject.Inject
 import javax.inject.Provider
 
-/**
- * @suppress
- * */
 @PAActivityScope
 internal class ActivityViewModelFactory @Inject constructor(
     private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>

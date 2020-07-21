@@ -25,8 +25,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 /**
- * @suppress
- * Used in [PinAuthentication] to inject the Classes into a private companion objects
+ * Used in [PinAuthentication] to inject the Classes into a private companion object
  * which is then used by the open classes which are to be accessed by the Application, as needed.
  * @see [PinAuthentication.Companion.injected]
  *

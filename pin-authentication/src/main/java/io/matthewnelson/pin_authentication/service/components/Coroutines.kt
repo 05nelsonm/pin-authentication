@@ -18,9 +18,6 @@ package io.matthewnelson.pin_authentication.service.components
 
 import kotlinx.coroutines.*
 
-/**
- * @suppress
- * */
 internal class Coroutines(
     private val dispatcherDefault: CoroutineDispatcher,
     private val dispatcherMain: CoroutineDispatcher

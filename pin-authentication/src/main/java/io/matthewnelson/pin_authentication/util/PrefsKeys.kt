@@ -16,9 +16,6 @@
 * */
 package io.matthewnelson.pin_authentication.util
 
-/**
- * @suppress
- * */
 internal object PrefsKeys {
 
     // Settings

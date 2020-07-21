@@ -19,9 +19,6 @@ package io.matthewnelson.pin_authentication.service.components
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-/**
- * @suppress
- * */
 internal class InitialAppLogin {
 
     ///////////////////////////////

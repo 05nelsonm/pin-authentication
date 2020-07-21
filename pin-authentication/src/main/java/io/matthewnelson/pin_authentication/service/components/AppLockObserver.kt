@@ -27,7 +27,6 @@ import kotlinx.coroutines.launch
 
 
 /**
- * @suppress
  * This class observes when to lock the application due to it being sent to the background, or
  * if the user locks their device while the application is open.
  *

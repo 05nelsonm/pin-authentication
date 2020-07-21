@@ -31,9 +31,6 @@ import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEn
 import io.matthewnelson.pin_authentication.viewmodel.ActivityViewModelFactory
 import javax.inject.Inject
 
-/**
- * @suppress
- * */
 internal class PinAuthenticationActivity : AppCompatActivity() {
 
     private fun injectPinAuthenticationActivity() {

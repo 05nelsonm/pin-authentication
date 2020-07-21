@@ -24,9 +24,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 
-/**
- * @suppress
- * */
 internal object BindingAdapters {
 
     @JvmStatic

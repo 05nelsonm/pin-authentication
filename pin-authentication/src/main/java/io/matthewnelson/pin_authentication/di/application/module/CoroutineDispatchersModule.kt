@@ -22,9 +22,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Named
 
-/**
- * @suppress
- * */
 @Module
 internal object CoroutineDispatchersModule {
 

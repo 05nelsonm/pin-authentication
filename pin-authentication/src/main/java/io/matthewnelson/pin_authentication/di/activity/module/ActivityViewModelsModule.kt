@@ -26,9 +26,6 @@ import io.matthewnelson.pin_authentication.di.activity.PAActivityViewModelKey
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivityViewModel
 import io.matthewnelson.pin_authentication.viewmodel.ActivityViewModelFactory
 
-/**
- * @suppress
- * */
 @Module
 internal abstract class ActivityViewModelsModule {
 

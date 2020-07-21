@@ -23,9 +23,6 @@ import io.matthewnelson.pin_authentication.di.application.PAApplicationScope
 import io.matthewnelson.encrypted_storage.EncryptedStorage
 import javax.inject.Named
 
-/**
- * @suppress
- * */
 @Module
 internal object PrefsModule {
 

@@ -22,9 +22,6 @@ import io.matthewnelson.pin_authentication.di.activity.module.ActivityModule
 import io.matthewnelson.pin_authentication.di.activity.module.ActivityViewModelsModule
 import io.matthewnelson.pin_authentication.ui.PinAuthenticationActivity
 
-/**
- * @suppress
- * */
 @PAActivityScope
 @Subcomponent(
     modules = [

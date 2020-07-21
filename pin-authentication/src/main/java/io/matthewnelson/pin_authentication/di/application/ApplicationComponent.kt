@@ -25,9 +25,6 @@ import io.matthewnelson.pin_authentication.di.application.module.ApplicationModu
 import io.matthewnelson.pin_authentication.di.application.module.CoroutineDispatchersModule
 import io.matthewnelson.pin_authentication.di.application.module.PrefsModule
 
-/**
- * @suppress
- * */
 @PAApplicationScope
 @Component(
     modules = [

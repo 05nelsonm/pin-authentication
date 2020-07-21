@@ -28,7 +28,6 @@ import androidx.lifecycle.MutableLiveData
 import io.matthewnelson.pin_authentication.util.definitions.LockApplicationEvents.LockApplicationEvent
 
 /**
- * @suppress
  * Monitors the Application's Activity and Component life-cycles such that when the user
  * sends the application to the background, or locks their device while the app is open,
  * it will update LiveData which is being observed by [AppLockObserver]
