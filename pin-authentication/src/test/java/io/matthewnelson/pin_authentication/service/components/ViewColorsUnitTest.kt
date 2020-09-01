@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.util.PrefsKeys
 import org.junit.Before
@@ -22,7 +22,7 @@ class ViewColorsUnitTest {
     private val app: Application by lazy {
         ApplicationProvider.getApplicationContext() as Application
     }
-    private lateinit var prefs: EncryptedStorage.Prefs
+    private lateinit var prefs: Prefs
     private lateinit var viewColors: ViewColors
 
     @ColorRes private val defaultBackspaceButtonImageColorRes: Int = R.color.pa_white
@@ -50,7 +50,7 @@ class ViewColorsUnitTest {
 
     @Before
     fun setup() {
-        prefs = EncryptedStorage.Prefs.createUnencrypted("AMViewColors Test", app)
+        prefs = Prefs.createUnencrypted("AMViewColors Test", app)
         viewColors = ViewColors(app, prefs)
 
         backspaceButtonImageHexString = colorResToHexString(defaultBackspaceButtonImageColorRes)
@@ -106,40 +106,40 @@ class ViewColorsUnitTest {
         // Nothing was written to Prefs
         assertEquals(false, prefs.contains(PrefsKeys.CUSTOM_COLORS_ARE_SET))
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.PIN_HINT_CONTAINER_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.PIN_HINT_CONTAINER_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.PIN_HINT_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.PIN_HINT_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.SCREEN_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.SCREEN_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.TEXT_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.TEXT_COLOR, Prefs.INVALID_STRING)
         )
 
         // Setting custom colors (after AuthenticationManager initialized Application Colors)
@@ -159,39 +159,39 @@ class ViewColorsUnitTest {
         assertEquals(true, prefs.contains(PrefsKeys.CUSTOM_COLORS_ARE_SET))
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.PIN_HINT_CONTAINER_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.PIN_HINT_CONTAINER_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.PIN_HINT_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.PIN_HINT_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.SCREEN_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.SCREEN_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.TEXT_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.TEXT_COLOR, Prefs.INVALID_STRING)
         )
 
         // Resetting colors back to application specified colors
@@ -211,40 +211,40 @@ class ViewColorsUnitTest {
         // Custom Colors were removed from Prefs
         assertEquals(false, prefs.contains(PrefsKeys.CUSTOM_COLORS_ARE_SET))
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.PIN_HINT_CONTAINER_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.PIN_HINT_CONTAINER_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.PIN_HINT_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.PIN_HINT_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.SCREEN_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.SCREEN_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
-            EncryptedStorage.Prefs.INVALID_STRING,
-            prefs.read(PrefsKeys.TEXT_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            Prefs.INVALID_STRING,
+            prefs.read(PrefsKeys.TEXT_COLOR, Prefs.INVALID_STRING)
         )
 
     }
@@ -285,39 +285,39 @@ class ViewColorsUnitTest {
         assertEquals(true, prefs.contains(PrefsKeys.CUSTOM_COLORS_ARE_SET))
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.PIN_HINT_CONTAINER_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.PIN_HINT_CONTAINER_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.PIN_HINT_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.PIN_HINT_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.SCREEN_BACKGROUND_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.SCREEN_BACKGROUND_COLOR, Prefs.INVALID_STRING)
         )
         assertEquals(
             testColor2HexString,
-            prefs.read(PrefsKeys.TEXT_COLOR, EncryptedStorage.Prefs.INVALID_STRING)
+            prefs.read(PrefsKeys.TEXT_COLOR, Prefs.INVALID_STRING)
         )
 
         // Colors from Prefs should NOT be loaded

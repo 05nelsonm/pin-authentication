@@ -44,7 +44,7 @@ class PinAuthenticationUnitTest {
         optionsBuilder.enablePinSecurityByDefault()
             .build()
         assertEquals(paSettings.isPinSecurityEnabled()?.value, true) // Passes (expected)
-//        assertEquals(amSettings.isPinSecurityEnabled()?.value, false) // Fails (expected)
+//        assertEquals(paSettings.isPinSecurityEnabled()?.value, false) // Fails (expected)
     }
 
 }

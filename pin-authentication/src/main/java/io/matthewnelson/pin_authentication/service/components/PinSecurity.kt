@@ -18,21 +18,21 @@ package io.matthewnelson.pin_authentication.service.components
 
 import androidx.lifecycle.LiveData
 import io.matthewnelson.pin_authentication.util.PrefsKeys
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 
 /**
  * Wrapper class for [ConfirmPinToProceed] that handles everything to do with PinSecurity
  *
  * @param [confirmPinToProceed] [ConfirmPinToProceed]
  * @param [settings] [Settings]
- * @param [encryptedPrefs] [EncryptedStorage.Prefs]
- * @param [prefs] [EncryptedStorage.Prefs]
+ * @param [encryptedPrefs] [Prefs]
+ * @param [prefs] [Prefs]
  * */
 internal class PinSecurity(
     private val confirmPinToProceed: ConfirmPinToProceed,
     private val settings: Settings,
-    private val encryptedPrefs: EncryptedStorage.Prefs,
-    private val prefs: EncryptedStorage.Prefs
+    private val encryptedPrefs: Prefs,
+    private val prefs: Prefs
 ) {
 
     init {

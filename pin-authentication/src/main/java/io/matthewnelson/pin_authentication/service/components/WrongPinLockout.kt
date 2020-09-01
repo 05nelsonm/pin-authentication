@@ -19,9 +19,9 @@ package io.matthewnelson.pin_authentication.service.components
 import io.matthewnelson.pin_authentication.util.PrefsKeys
 import io.matthewnelson.pin_authentication.util.definitions.ConfirmPinStatuss.ConfirmPinStatus
 import io.matthewnelson.pin_authentication.service.PinAuthentication
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 
-internal class WrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
+internal class WrongPinLockout(private val prefs: Prefs) {
 
     ///////////////////////
     // Wrong Pin Lockout //
@@ -118,9 +118,8 @@ internal class WrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
 
     private fun readNumberOfAttempts(): Int {
         var attempts = 1
-        prefs.read(PrefsKeys.WRONG_PIN_ATTEMPT_COUNTER, EncryptedStorage.Prefs.INVALID_INT)
-            .let {
-                if (it != EncryptedStorage.Prefs.INVALID_INT) {
+        prefs.read(PrefsKeys.WRONG_PIN_ATTEMPT_COUNTER, Prefs.INVALID_INT).let {
+                if (it != Prefs.INVALID_INT) {
                     attempts = it
                 }
             }
@@ -128,9 +127,8 @@ internal class WrongPinLockout(private val prefs: EncryptedStorage.Prefs) {
     }
 
     private fun readTimeOfLastAttempt(): Long {
-        prefs.read(PrefsKeys.WRONG_PIN_OCCURRENCE, EncryptedStorage.Prefs.INVALID_LONG)
-            .let { previousAttempt ->
-                return if (previousAttempt != EncryptedStorage.Prefs.INVALID_LONG) {
+        prefs.read(PrefsKeys.WRONG_PIN_OCCURRENCE, Prefs.INVALID_LONG).let { previousAttempt ->
+                return if (previousAttempt != Prefs.INVALID_LONG) {
                     previousAttempt
                 } else {
                     0

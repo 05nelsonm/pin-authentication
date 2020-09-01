@@ -20,7 +20,7 @@ import android.app.Application
 import dagger.Module
 import dagger.Provides
 import io.matthewnelson.pin_authentication.di.application.PAApplicationScope
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 import javax.inject.Named
 
 @Module
@@ -34,13 +34,13 @@ internal object PrefsModule {
     @Provides
     @Named(ENCRYPTED_PREFS)
     @JvmStatic
-    fun providePrefsEncrypted(application: Application): EncryptedStorage.Prefs =
-        EncryptedStorage.Prefs.createEncrypted(ENCRYPTED_PREFS, application.applicationContext)
+    fun providePrefsEncrypted(application: Application): Prefs =
+        Prefs.createEncrypted(ENCRYPTED_PREFS, application.applicationContext)
 
     @PAApplicationScope
     @Provides
     @Named(PREFS)
     @JvmStatic
-    fun providePrefsUnencrypted(application: Application): EncryptedStorage.Prefs =
-        EncryptedStorage.Prefs.createUnencrypted(PREFS, application.applicationContext)
+    fun providePrefsUnencrypted(application: Application): Prefs =
+        Prefs.createUnencrypted(PREFS, application.applicationContext)
 }

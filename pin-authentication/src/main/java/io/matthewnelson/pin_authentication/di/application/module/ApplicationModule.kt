@@ -19,7 +19,7 @@ package io.matthewnelson.pin_authentication.di.application.module
 import android.app.Application
 import dagger.Module
 import dagger.Provides
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.di.application.PAApplicationScope
 import io.matthewnelson.pin_authentication.service.components.*
@@ -83,8 +83,8 @@ internal object ApplicationModule {
     fun providePinSecurity(
         confirmPinToProceed: ConfirmPinToProceed,
         settings: Settings,
-        @Named(PrefsModule.ENCRYPTED_PREFS) encryptedPrefs: EncryptedStorage.Prefs,
-        @Named(PrefsModule.PREFS) prefs: EncryptedStorage.Prefs
+        @Named(PrefsModule.ENCRYPTED_PREFS) encryptedPrefs: Prefs,
+        @Named(PrefsModule.PREFS) prefs: Prefs
     ): PinSecurity =
         PinSecurity(
             confirmPinToProceed,
@@ -96,7 +96,7 @@ internal object ApplicationModule {
     @PAApplicationScope
     @Provides
     @JvmStatic
-    fun provideSettings(@Named(PrefsModule.PREFS) prefs: EncryptedStorage.Prefs): Settings =
+    fun provideSettings(@Named(PrefsModule.PREFS) prefs: Prefs): Settings =
         Settings(prefs)
 
     @PAApplicationScope
@@ -104,7 +104,7 @@ internal object ApplicationModule {
     @JvmStatic
     fun provideViewColors(
         application: Application,
-        @Named(PrefsModule.PREFS) prefs: EncryptedStorage.Prefs
+        @Named(PrefsModule.PREFS) prefs: Prefs
     ): ViewColors =
         ViewColors(application.applicationContext, prefs)
 

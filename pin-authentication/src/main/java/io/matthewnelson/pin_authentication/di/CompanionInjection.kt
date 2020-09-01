@@ -20,7 +20,7 @@ import io.matthewnelson.pin_authentication.di.application.ApplicationComponent
 import io.matthewnelson.pin_authentication.di.application.module.PrefsModule
 import io.matthewnelson.pin_authentication.service.components.*
 import io.matthewnelson.pin_authentication.service.PinAuthentication
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -44,7 +44,7 @@ internal class CompanionInjection(private val applicationComponent: ApplicationC
     @Inject lateinit var settings: Settings
     @Inject lateinit var viewColors: ViewColors
     @Inject lateinit var appLifecycleWatcher: AppLifecycleWatcher
-    @Inject @Named(PrefsModule.ENCRYPTED_PREFS) lateinit var encryptedPrefs: EncryptedStorage.Prefs
-    @Inject @Named(PrefsModule.PREFS) lateinit var prefs: EncryptedStorage.Prefs
+    @Inject @Named(PrefsModule.ENCRYPTED_PREFS) lateinit var encryptedPrefs: Prefs
+    @Inject @Named(PrefsModule.PREFS) lateinit var prefs: Prefs
 
 }

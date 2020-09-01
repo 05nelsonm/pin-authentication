@@ -27,7 +27,7 @@ import io.matthewnelson.pin_authentication.service.components.*
 import io.matthewnelson.pin_authentication.util.PrefsKeys
 import io.matthewnelson.pin_authentication.util.definitions.ConfirmPinStatuss.ConfirmPinStatus
 import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEntryState
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 import io.matthewnelson.pin_authentication.model.HashedPin
 import io.matthewnelson.pin_authentication.model.UnsafePinHash
 import java.math.BigInteger
@@ -44,7 +44,7 @@ import java.security.SecureRandom
  * @param [pinSecurity] [PinSecurity]
  * @param [settings] [Settings]
  * @param [wrongPinLockout] [WrongPinLockout]
- * @param [encryptedPrefs] [EncryptedStorage.Prefs]
+ * @param [encryptedPrefs] [Prefs]
  * */
 internal class AuthenticationActivityAccessPoint(
     private val appLifecycleWatcher: AppLifecycleWatcher,
@@ -54,7 +54,7 @@ internal class AuthenticationActivityAccessPoint(
     private val pinSecurity: PinSecurity,
     private val settings: Settings,
     private val wrongPinLockout: WrongPinLockout,
-    private val encryptedPrefs: EncryptedStorage.Prefs
+    private val encryptedPrefs: Prefs
 ) {
 
     fun authProcessComplete(finishActivity: Boolean) {
@@ -75,10 +75,7 @@ internal class AuthenticationActivityAccessPoint(
     fun confirmPin(hashedPin: HashedPin): @ConfirmPinStatus Int {
 
         @OptIn(UnsafePinHash::class)
-        if (encryptedPrefs.read(
-                PrefsKeys.USER_PIN,
-                EncryptedStorage.Prefs.INVALID_STRING) == hashedPin.hashedPin
-        ) {
+        if (encryptedPrefs.read(PrefsKeys.USER_PIN, Prefs.INVALID_STRING) == hashedPin.hashedPin) {
 
             if (wrongPinLockout.isWrongPinLockoutEnabled()) {
                 wrongPinLockout.removeLockoutData()
@@ -132,8 +129,8 @@ internal class AuthenticationActivityAccessPoint(
         pinSecurity.enablePinSecurityFailure()
 
     fun getPinAuthenticationSalt(): String {
-        encryptedPrefs.read(PrefsKeys.PIN_AUTHENTICATION_SALT, EncryptedStorage.Prefs.INVALID_STRING).let {
-            return if (it == null || it == EncryptedStorage.Prefs.INVALID_STRING) {
+        encryptedPrefs.read(PrefsKeys.PIN_AUTHENTICATION_SALT, Prefs.INVALID_STRING).let {
+            return if (it == null || it == Prefs.INVALID_STRING) {
                 createAuthenticationManagerSalt()
             } else {
                 it

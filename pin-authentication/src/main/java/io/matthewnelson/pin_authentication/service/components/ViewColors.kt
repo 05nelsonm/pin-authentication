@@ -21,12 +21,9 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import io.matthewnelson.pin_authentication.R
 import io.matthewnelson.pin_authentication.util.PrefsKeys
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 
-internal class ViewColors(
-    private val context: Context,
-    private val prefs: EncryptedStorage.Prefs
-) {
+internal class ViewColors(private val context: Context, private val prefs: Prefs) {
 
     //////////////////////////////////
     // AuthenticationManager Colors //
@@ -263,73 +260,73 @@ internal class ViewColors(
 
             prefs.read(
                 PrefsKeys.BACKSPACE_BUTTON_IMAGE_COLOR,
-                EncryptedStorage.Prefs.INVALID_STRING
+                Prefs.INVALID_STRING
             )?.let {
-                if (it != EncryptedStorage.Prefs.INVALID_STRING) {
+                if (it != Prefs.INVALID_STRING) {
                     currentColors.backspaceButtonImage = it
                 }
             }
             prefs.read(
                 PrefsKeys.CONFIRM_BUTTON_BACKGROUND_COLOR,
-                EncryptedStorage.Prefs.INVALID_STRING
+                Prefs.INVALID_STRING
             )?.let {
-                if (it != EncryptedStorage.Prefs.INVALID_STRING) {
+                if (it != Prefs.INVALID_STRING) {
                     currentColors.confirmButtonBackground = it
                 }
             }
             prefs.read(
                 PrefsKeys.CONFIRM_BUTTON_IMAGE_COLOR,
-                EncryptedStorage.Prefs.INVALID_STRING
+                Prefs.INVALID_STRING
             )?.let {
-                if (it != EncryptedStorage.Prefs.INVALID_STRING) {
+                if (it != Prefs.INVALID_STRING) {
                     currentColors.confirmButtonImage = it
                 }
             }
             prefs.read(
                 PrefsKeys.PIN_HINT_CONTAINER_COLOR,
-                EncryptedStorage.Prefs.INVALID_STRING
+                Prefs.INVALID_STRING
             )?.let {
-                if (it != EncryptedStorage.Prefs.INVALID_STRING) {
+                if (it != Prefs.INVALID_STRING) {
                     currentColors.pinHintContainer = it
                 }
             }
             prefs.read(
                 PrefsKeys.PIN_HINT_IMAGE_COLOR,
-                EncryptedStorage.Prefs.INVALID_STRING
+                Prefs.INVALID_STRING
             )?.let {
-                if (it != EncryptedStorage.Prefs.INVALID_STRING) {
+                if (it != Prefs.INVALID_STRING) {
                     currentColors.pinHintImage = it
                 }
             }
             prefs.read(
                 PrefsKeys.PIN_PAD_BUTTON_BACKGROUND_COLOR,
-                EncryptedStorage.Prefs.INVALID_STRING
+                Prefs.INVALID_STRING
             )?.let {
-                if (it != EncryptedStorage.Prefs.INVALID_STRING) {
+                if (it != Prefs.INVALID_STRING) {
                     currentColors.pinPadButtonBackground = it
                 }
             }
             prefs.read(
                 PrefsKeys.PIN_RESET_INFO_IMAGE_COLOR,
-                EncryptedStorage.Prefs.INVALID_STRING
+                Prefs.INVALID_STRING
             )?.let {
-                if (it != EncryptedStorage.Prefs.INVALID_STRING) {
+                if (it != Prefs.INVALID_STRING) {
                     currentColors.pinResetInfoImage = it
                 }
             }
             prefs.read(
                 PrefsKeys.SCREEN_BACKGROUND_COLOR,
-                EncryptedStorage.Prefs.INVALID_STRING
+                Prefs.INVALID_STRING
             )?.let {
-                if (it != EncryptedStorage.Prefs.INVALID_STRING) {
+                if (it != Prefs.INVALID_STRING) {
                     currentColors.screenBackground = it
                 }
             }
             prefs.read(
                 PrefsKeys.TEXT_COLOR,
-                EncryptedStorage.Prefs.INVALID_STRING
+                Prefs.INVALID_STRING
             )?.let {
-                if (it != EncryptedStorage.Prefs.INVALID_STRING) {
+                if (it != Prefs.INVALID_STRING) {
                     currentColors.text = it
                 }
             }

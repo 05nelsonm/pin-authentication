@@ -18,7 +18,7 @@ package io.matthewnelson.pin_authentication.di.activity.module
 
 import dagger.Module
 import dagger.Provides
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 import io.matthewnelson.pin_authentication.di.activity.PAActivityScope
 import io.matthewnelson.pin_authentication.di.application.module.PrefsModule
 import io.matthewnelson.pin_authentication.service.AuthenticationActivityAccessPoint
@@ -39,7 +39,7 @@ internal object ActivityModule {
         pinSecurity: PinSecurity,
         settings: Settings,
         wrongPinLockout: WrongPinLockout,
-        @Named(PrefsModule.ENCRYPTED_PREFS) encryptedPrefs: EncryptedStorage.Prefs
+        @Named(PrefsModule.ENCRYPTED_PREFS) encryptedPrefs: Prefs
     ): AuthenticationActivityAccessPoint =
         AuthenticationActivityAccessPoint(
             appLifecycleWatcher,
@@ -56,7 +56,7 @@ internal object ActivityModule {
     @Provides
     @JvmStatic
     fun provideWrongPinLockout(
-        @Named(PrefsModule.PREFS) prefs: EncryptedStorage.Prefs
+        @Named(PrefsModule.PREFS) prefs: Prefs
     ): WrongPinLockout =
         WrongPinLockout(prefs)
 

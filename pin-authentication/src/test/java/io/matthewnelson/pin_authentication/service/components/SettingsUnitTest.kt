@@ -2,7 +2,7 @@ package io.matthewnelson.pin_authentication.service.components
 
 import android.app.Application
 import androidx.test.core.app.ApplicationProvider
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 import io.matthewnelson.pin_authentication.util.PrefsKeys
 import org.junit.Before
 import org.junit.Test
@@ -18,7 +18,7 @@ class SettingsUnitTest {
     private val app: Application by lazy {
         ApplicationProvider.getApplicationContext() as Application
     }
-    private lateinit var prefs: EncryptedStorage.Prefs
+    private lateinit var prefs: Prefs
     private lateinit var settings: Settings
 
     private val buildConfigDebugDefault = false
@@ -31,7 +31,7 @@ class SettingsUnitTest {
 
     @Before
     fun setup() {
-        prefs = EncryptedStorage.Prefs.createUnencrypted("TestPrefs", app)
+        prefs = Prefs.createUnencrypted("TestPrefs", app)
         settings = Settings(prefs)
     }
 

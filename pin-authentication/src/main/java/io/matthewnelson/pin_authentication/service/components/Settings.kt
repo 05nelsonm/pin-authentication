@@ -17,9 +17,9 @@
 package io.matthewnelson.pin_authentication.service.components
 
 import io.matthewnelson.pin_authentication.util.PrefsKeys
-import io.matthewnelson.encrypted_storage.EncryptedStorage
+import io.matthewnelson.encrypted_storage.Prefs
 
-internal class Settings(private val prefs: EncryptedStorage.Prefs) {
+internal class Settings(private val prefs: Prefs) {
 
     //////////////
     // Settings //
