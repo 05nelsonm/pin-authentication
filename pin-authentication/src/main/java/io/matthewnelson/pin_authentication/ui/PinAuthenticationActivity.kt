@@ -31,14 +31,14 @@ import io.matthewnelson.pin_authentication.util.definitions.PinEntryStates.PinEn
 import io.matthewnelson.pin_authentication.viewmodel.ActivityViewModelFactory
 import javax.inject.Inject
 
-internal class PinAuthenticationActivity : AppCompatActivity() {
+class PinAuthenticationActivity internal constructor() : AppCompatActivity() {
 
     private fun injectPinAuthenticationActivity() {
         PinAuthentication.PinAuthenticationActivityInjection(this).inject()
     }
 
     @Inject
-    lateinit var activityViewModelFactory: ActivityViewModelFactory
+    internal lateinit var activityViewModelFactory: ActivityViewModelFactory
     private lateinit var binding: ActivityPinAuthenticationBinding
     private lateinit var viewModel: PinAuthenticationActivityViewModel
 
