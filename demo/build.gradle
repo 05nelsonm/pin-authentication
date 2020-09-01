@@ -23,6 +23,15 @@ android {
         testInstrumentationRunnerArguments disableAnalytics: 'true'
     }
 
+    // Gradle 4.0's introduction of Google analytics to Android App Developers.
+    // https://developer.android.com/studio/releases/gradle-plugin
+    dependenciesInfo {
+        // Disables dependency metadata when building APKs.
+        includeInApk = false
+        // Disables dependency metadata when building Android App Bundles.
+        includeInBundle = false
+    }
+
     buildTypes {
         release {
             resValue "string", "app_name", "PinAuthentication Demo"
