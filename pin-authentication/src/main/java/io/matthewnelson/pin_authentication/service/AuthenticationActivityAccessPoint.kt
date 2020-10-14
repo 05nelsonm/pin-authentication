@@ -193,6 +193,7 @@ internal class AuthenticationActivityAccessPoint(
      * Shows a toast using the current Activity.
      * @param [message] String
      * */
+    @Suppress("DEPRECATION")
     fun showToast(message: String, textColorHex: String) {
 
         appLifecycleWatcher.getCurrentActivity()?.apply {
@@ -200,13 +201,13 @@ internal class AuthenticationActivityAccessPoint(
 
             val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
 
-            toast.view.setBackgroundColor(backgroundColorValue)
-            toast.view.findViewById<TextView>(android.R.id.message).setTextColor(Color.parseColor(textColorHex))
-            val toastIcon = toast.view.findViewById<ImageView>(android.R.id.icon)
+            toast.view?.setBackgroundColor(backgroundColorValue)
+            toast.view?.findViewById<TextView>(android.R.id.message)?.setTextColor(Color.parseColor(textColorHex))
+            val toastIcon = toast.view?.findViewById<ImageView>(android.R.id.icon)
             if (toastIcon != null) {
                 toastIcon.visibility = View.GONE
             }
-            if (::previousToast.isInitialized && previousToast.view.isShown) {
+            if (::previousToast.isInitialized && previousToast.view?.isShown == true) {
                 previousToast.cancel()
             }
             previousToast = toast

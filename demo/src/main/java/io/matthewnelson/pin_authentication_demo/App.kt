@@ -43,6 +43,7 @@ class App: Application() {
          * @param [imageBackground]
          * @param [image]
          * */
+        @Suppress("DEPRECATION")
         fun showToast(message: String,
                       toastLengthLong: Boolean = false,
                       @DrawableRes toastBackground: Int = R.drawable.toast_background,
@@ -96,7 +97,7 @@ class App: Application() {
                 }
             toast.setGravity(Gravity.BOTTOM, 0, yOffsetPx + 8.dpToPx)
 
-            if (::previousToast.isInitialized && previousToast.view.isShown) {
+            if (::previousToast.isInitialized && previousToast.view?.isShown == true) {
                 previousToast.cancel()
             }
             previousToast = toast

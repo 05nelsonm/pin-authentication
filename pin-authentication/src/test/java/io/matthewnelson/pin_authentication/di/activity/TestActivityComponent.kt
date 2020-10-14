@@ -22,7 +22,7 @@ internal interface TestActivityComponent: ActivityComponent {
             pinAuthenticationActivity: PinAuthenticationActivity
         ): Builder
 
-        override fun build(): ActivityComponent
+        override fun build(): TestActivityComponent
     }
 
     override fun inject(pinAuthenticationActivity: PinAuthenticationActivity)
